@@ -31,9 +31,10 @@ return {
         },
         {
           filetype = "NvimTree",
-          text = "File Explorer",
+          text = "Nvim-Tree",
           highlight = "Directory",
-          text_align = "left",
+          text_align = "center",
+          padding = 1,
         },
         {
           filetype = "aerial",
@@ -73,7 +74,7 @@ return {
     { "<leader>bP", "<Cmd>BufferLineGroupClose ungrouped<CR>", desc = "Delete non-pinned buffers" },
     {
       "<c-q>",
-      "<cmd>bdelete<cr>",
+      "<cmd>BufferDelete<CR>",
       desc = "Close current buffer",
     },
     {

@@ -1,7 +1,7 @@
 return {
   "nvim-lualine/lualine.nvim",
   event = "VeryLazy",
-  opts = function(plugin)
+  opts = function()
     local icons = require("lazyvim.config").icons
 
     local function fg(name)
@@ -15,7 +15,10 @@ return {
     return {
       options = {
         theme = "auto",
-        globalstatus = true,
+        icons_enabled = true,
+        component_separators = { left = "", right = "" },
+        section_separators = { left = "", right = "" },
+        globalstatus = false,
         disabled_filetypes = { statusline = { "dashboard", "lazy", "alpha" } },
       },
       sections = {
@@ -63,7 +66,8 @@ return {
           },
         },
         lualine_y = {
-          { "progress", separator = " ", padding = { left = 1, right = 0 } },
+          { "encoding" },
+          { "progress", separator = "  ", padding = { left = 1, right = 0 } },
           { "location", padding = { left = 0, right = 1 } },
         },
         lualine_z = {
