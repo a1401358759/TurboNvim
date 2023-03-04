@@ -1,3 +1,4 @@
+---@diagnostic disable: unused-local
 local ignore_list = {
   "W391",
   "E701",
@@ -48,103 +49,60 @@ return {
     },
   },
   ---@class PluginLspOpts
-  opts = {
-    -- options for vim.diagnostic.config()
-    diagnostics = {
-      underline = true,
-      update_in_insert = false,
-      virtual_text = { spacing = 4, prefix = "●" },
-      severity_sort = true,
-    },
-    -- Automatically format on save
-    autoformat = false,
-    -- options for vim.lsp.buf.format
-    -- `bufnr` and `filter` is handled by the LazyVim formatter,
-    -- but can be also overridden when specified
-    format = {
-      formatting_options = nil,
-      timeout_ms = nil,
-    },
-    -- LSP Server Settings
-    ---@type lspconfig.options
-    servers = {
-      jsonls = {
-        mason = true,
+  opts = function()
+    local mason_lspconfig = require("mason-lspconfig")
+    local configs_dir_path = "server_configs/"
+    local lsp_servers = {}
+    for _, server_name in ipairs(mason_lspconfig.get_installed_servers()) do
+      local require_path = string.format("%s%s", configs_dir_path, server_name)
+      local ok, settings = pcall(require, require_path)
+
+      if not ok then
+        settings = {}
+      end
+
+      settings.on_attach = function(client, bufnr)
+        client.server_capabilities.documentFormattingProvider = false
+        -- close semantic tokens
+        client.server_capabilities.semanticTokensProvider = nil
+      end
+      settings.mason = true
+      lsp_servers[server_name] = settings
+    end
+
+    return {
+      diagnostics = {
+        underline = true,
+        update_in_insert = false,
+        virtual_text = { spacing = 4, prefix = "●" },
+        severity_sort = true,
       },
-      lua_ls = {
-        mason = true, -- set to false if you don't want this server to be installed with mason
-        settings = {
-          Lua = {
-            workspace = {
-              checkThirdParty = false,
-            },
-            completion = {
-              callSnippet = "Replace",
-            },
-          },
-        },
+      -- Automatically format on save
+      autoformat = false,
+      -- options for vim.lsp.buf.format
+      -- `bufnr` and `filter` is handled by the LazyVim formatter,
+      -- but can be also overridden when specified
+      format = {
+        formatting_options = nil,
+        timeout_ms = nil,
       },
-      gopls = {
-        mason = true,
-        settings = {
-          cmd = { "gopls" },
-          single_file_support = true,
-          filetypes = { "go", "gomod", "gotmpl" },
-        },
+      -- LSP Server Settings
+      ---@type lspconfig.options
+      servers = lsp_servers,
+      -- you can do any additional lsp server setup here
+      -- return true if you don't want this server to be setup with lspconfig
+      ---@type table<string, fun(server:string, opts:_.lspconfig.options):boolean?>
+      setup = {
+        -- example to setup with typescript.nvim
+        -- tsserver = function(_, opts)
+        --   require("typescript").setup({ server = opts })
+        --   return true
+        -- end,
+        -- Specify * to use this function as a fallback for any server
+        -- ["*"] = function(server, opts) end,
       },
-      pylsp = {
-        mason = true,
-        settings = {
-          pylsp = {
-            configurationSources = { "flake8" },
-            plugins = {
-              flake8 = {
-                enabled = true,
-                ignore = ignore_list,
-                maxLineLength = 140,
-              },
-              pycodestyle = {
-                enable = false,
-                ignore = ignore_list,
-                maxLineLength = 140,
-              },
-              autopep8 = {
-                enable = false,
-                ignore = ignore_list,
-                maxLineLength = 140,
-              },
-              pyflakes = {
-                enable = false,
-                ignore = ignore_list,
-                maxLineLength = 140,
-              },
-              mccabe = {
-                enable = false,
-                threshold = 100,
-              },
-              pylint = {
-                enable = false,
-                ignore = ignore_list,
-                maxLineLength = 140,
-              },
-            },
-          },
-        },
-      },
-    },
-    -- you can do any additional lsp server setup here
-    -- return true if you don't want this server to be setup with lspconfig
-    ---@type table<string, fun(server:string, opts:_.lspconfig.options):boolean?>
-    setup = {
-      -- example to setup with typescript.nvim
-      -- tsserver = function(_, opts)
-      --   require("typescript").setup({ server = opts })
-      --   return true
-      -- end,
-      -- Specify * to use this function as a fallback for any server
-      -- ["*"] = function(server, opts) end,
-    },
-  },
+    }
+  end,
   ---@param opts PluginLspOpts
   config = function(plugin, opts)
     -- setup autoformat

@@ -27,7 +27,7 @@ return {
           filetype = "neo-tree",
           text = "Neo-tree",
           highlight = "Directory",
-          text_align = "left",
+          text_align = "center",
         },
         {
           filetype = "NvimTree",
@@ -40,7 +40,7 @@ return {
           filetype = "aerial",
           text = "Outline Explorer",
           highlight = "Directory",
-          text_align = "left",
+          text_align = "center",
         },
         {
           filetype = "undotree",
