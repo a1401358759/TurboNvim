@@ -125,7 +125,7 @@ return {
             default = "",
             symlink = "",
             git = {
-              unstaged = "",
+              unstaged = "",
               staged = "",
               unmerged = "",
               renamed = "",
