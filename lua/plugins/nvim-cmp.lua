@@ -10,9 +10,28 @@ return {
     "hrsh7th/vim-vsnip",
     "hrsh7th/cmp-vsnip",
     "friendly-snippets",
+    "tzachar/cmp-tabnine",
   },
   opts = function()
     local cmp = require("cmp")
+    cmp.setup.cmdline("/", {
+      sources = {
+        { name = "buffer" },
+      },
+    })
+
+    cmp.setup.cmdline("?", {
+      sources = {
+        { name = "buffer" },
+      },
+    })
+
+    cmp.setup.cmdline(":", {
+      sources = cmp.config.sources({
+        { name = "path" },
+        { name = "cmdline" },
+      }),
+    })
     return {
       completion = {
         completeopt = "menu,menuone,noinsert",
@@ -36,9 +55,11 @@ return {
       sorting = {
         priority_weight = 2,
         comparators = {
+          require('cmp_tabnine.compare'),
           cmp.config.compare.offset,
           cmp.config.compare.exact,
           cmp.config.compare.score,
+          cmp.config.compare.recently_used,
           cmp.config.compare.kind,
           cmp.config.compare.sort_text,
           cmp.config.compare.length,
@@ -57,10 +78,12 @@ return {
         { name = "nvim_lsp_signature_help" },
       }),
       formatting = {
-        format = function(_, item)
+        format = function(entry, item)
           local icons = require("lazyvim.config").icons.kinds
+          local source = entry.source.name
           if icons[item.kind] then
             item.kind = icons[item.kind] .. item.kind
+            item.menu = string.format("  [%s]", string.upper(source))
           end
           return item
         end,
