@@ -6,6 +6,7 @@ return {
     "hrsh7th/cmp-nvim-lsp",
     "hrsh7th/cmp-buffer",
     "hrsh7th/cmp-path",
+    "hrsh7th/cmp-cmdline",
     "saadparwaiz1/cmp_luasnip",
     "hrsh7th/vim-vsnip",
     "hrsh7th/cmp-vsnip",
@@ -14,25 +15,29 @@ return {
   },
   opts = function()
     local cmp = require("cmp")
-    cmp.setup.cmdline("/", {
-      sources = {
-        { name = "buffer" },
-      },
-    })
-
-    cmp.setup.cmdline("?", {
-      sources = {
-        { name = "buffer" },
-      },
-    })
-
-    cmp.setup.cmdline(":", {
-      sources = cmp.config.sources({
-        { name = "path" },
-        { name = "cmdline" },
-      }),
-    })
+    -- cmp.setup.cmdline("/", {
+    --   sources = {
+    --     { name = "buffer" },
+    --   },
+    -- })
+    --
+    -- cmp.setup.cmdline("?", {
+    --   sources = {
+    --     { name = "buffer" },
+    --   },
+    -- })
+    --
+    -- cmp.setup.cmdline(":", {
+    --   sources = cmp.config.sources({
+    --     { name = "path" },
+    --     { name = "cmdline" },
+    --   }),
+    -- })
     return {
+      -- Insert or Replace
+      confirmation = {
+        default_behavior = cmp.ConfirmBehavior.Insert,
+      },
       completion = {
         completeopt = "menu,menuone,noinsert",
       },
@@ -55,7 +60,7 @@ return {
       sorting = {
         priority_weight = 2,
         comparators = {
-          require('cmp_tabnine.compare'),
+          require("cmp_tabnine.compare"),
           cmp.config.compare.offset,
           cmp.config.compare.exact,
           cmp.config.compare.score,

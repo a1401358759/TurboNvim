@@ -4,7 +4,7 @@ return {
   event = "VeryLazy",
   opts = {
     cmdline = {
-      enabled = true, -- enables the Noice cmdline UI
+      enabled = false, -- enables the Noice cmdline UI
       view = "cmdline_popup", -- `cmdline_popup`, view for rendering the cmdline. Change to `cmdline` to get a classic cmdline at the bottom
       opts = { -- global options for the cmdline. See section on views
         border = { text = { top = "", top_align = "left" } },
@@ -190,7 +190,7 @@ return {
     presets = {
       -- you can enable a preset by setting it to true, or a table that will override the preset config
       -- you can also add custom presets that you can enable/disable with enabled=true
-      bottom_search = false, -- use a classic bottom cmdline for search
+      bottom_search = true, -- use a classic bottom cmdline for search
       command_palette = true, -- position the cmdline and popupmenu together
       long_message_to_split = true, -- long messages will be sent to a split
       inc_rename = false, -- enables an input dialog for inc-rename.nvim
@@ -243,38 +243,6 @@ return {
           winhighlight = { Normal = "", IncSearch = "", Search = "" },
         },
       },
-    },
-
-    routes = { --- @see section on routes
-      { -- Hide written messages
-        filter = { event = "msg_show", kind = "", find = "written" },
-        opts = { skip = true },
-      },
-
-      { -- Hide read messages
-        filter = { event = "msg_show", kind = "", find = '^".+"  ?%d+ lines? %-%-%d+%%%-%-$' },
-        opts = { skip = true },
-      },
-
-      { -- Hide read messages
-        filter = { event = "msg_show", kind = "", find = '^".+"  ?%[.+%] %d+ lines? %-%-%d+%%%-%-$' },
-        opts = { skip = true },
-      },
-
-      { -- Hide read messages
-        filter = { event = "msg_show", kind = "", find = '^".+"  ?%d+L, %d+B$' },
-        opts = { skip = true },
-      },
-
-      { -- Hide read messages
-        filter = { event = "msg_show", kind = "", find = '^".+"  ?%[.+%] %d+L, %d+B$' },
-        opts = { skip = true },
-      },
-
-      -- Hide Search
-      { filter = { event = "msg_show", kind = "search_count" }, opts = { skip = true } },
-
-      { filter = { event = "msg_show", kind = "", find = "^<" }, opts = { skip = true } },
     },
 
     status = {}, --- @see section on statusline components
