@@ -25,7 +25,11 @@ return {
         -- 当输入时 展示所有匹配项(模糊匹配)
         wilder.cmdline_pipeline({
           fuzzy = 1,
+          set_pcre2_pattern = 1,
           fuzzy_filter = wilder.vim_fuzzy_filter(),
+        }),
+        wilder.python_search_pipeline({
+          pattern = "fuzzy",
         }),
         -- pipeline for search
         wilder.search_pipeline()
