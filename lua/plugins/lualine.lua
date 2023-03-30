@@ -12,13 +12,25 @@ return {
       end
     end
 
+    local function diff_source()
+      ---@diagnostic disable-next-line: undefined-field
+      local gitsigns = vim.b.gitsigns_status_dict
+      if gitsigns then
+        return {
+          added = gitsigns.added,
+          modified = gitsigns.changed,
+          removed = gitsigns.removed,
+        }
+      end
+    end
+
     return {
       options = {
         theme = "auto",
         icons_enabled = true,
         component_separators = { left = "", right = "" },
         section_separators = { left = "", right = "" },
-        globalstatus = false,
+        globalstatus = true,
         disabled_filetypes = { statusline = { "dashboard", "lazy", "alpha" } },
       },
       sections = {
@@ -34,6 +46,16 @@ return {
               hint = icons.diagnostics.Hint,
             },
           },
+          {
+            "diff",
+            colored = true, -- Displays a colored diff status if set to true
+            symbols = {
+              added = icons.git.added,
+              modified = icons.git.modified,
+              removed = icons.git.removed,
+            },
+            source = diff_source,
+          },
           { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
           { "filename", path = 1, symbols = { modified = "  ", readonly = "", unnamed = "" } },
           -- stylua: ignore
@@ -43,27 +65,8 @@ return {
           -- },
         },
         lualine_x = {
-          -- stylua: ignore
-          -- {
-          --   function() return require("noice").api.status.command.get() end,
-          --   cond = function() return package.loaded["noice"] and require("noice").api.status.command.has() end,
-          --   color = fg("Statement")
-          -- },
-          -- stylua: ignore
-          -- {
-          --   function() return require("noice").api.status.mode.get() end,
-          --   cond = function() return package.loaded["noice"] and require("noice").api.status.mode.has() end,
-          --   color = fg("Constant") ,
-          -- },
-          { require("lazy.status").updates, cond = require("lazy.status").has_updates, color = fg("Special") },
-          {
-            "diff",
-            symbols = {
-              added = icons.git.added,
-              modified = icons.git.modified,
-              removed = icons.git.removed,
-            },
-          },
+          -- { require("lazy.status").updates, cond = require("lazy.status").has_updates, color = fg("Special") },
+          { "searchcount" },
         },
         lualine_y = {
           { "encoding" },
@@ -71,9 +74,14 @@ return {
           { "location", padding = { left = 0, right = 1 } },
         },
         lualine_z = {
-          function()
-            return " " .. os.date("%R")
-          end,
+          -- function()
+          --   return " " .. os.date("%R")
+          -- end,
+          {
+            "datetime",
+            -- options: default, us, uk, iso, or your own format string ("%H:%M", etc..)
+            style = "default", -- '%A, %B %d | %H:%M' '%Y-%m-%d'
+          },
         },
       },
       extensions = { "nvim-tree", "aerial", "toggleterm", "nvim-dap-ui" },
