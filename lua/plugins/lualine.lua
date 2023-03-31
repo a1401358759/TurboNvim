@@ -80,7 +80,7 @@ return {
           {
             "datetime",
             -- options: default, us, uk, iso, or your own format string ("%H:%M", etc..)
-            style = "default", -- '%A, %B %d | %H:%M' '%Y-%m-%d'
+            style = "%A, %b%d %H:%M", -- '%A, %B %d | %H:%M' '%Y-%m-%d'
           },
         },
       },
