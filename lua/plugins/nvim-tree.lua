@@ -8,6 +8,8 @@ return {
   opts = function()
     local icons = require("lazyvim.config").icons
     return {
+      sync_root_with_cwd = true,
+      respect_buf_cwd = true,
       auto_reload_on_write = true,
       create_in_closed_folder = false,
       disable_netrw = false,
@@ -18,16 +20,14 @@ return {
       open_on_setup = false,
       open_on_setup_file = false,
       open_on_tab = false,
-      respect_buf_cwd = false,
       sort_by = "name",
-      sync_root_with_cwd = true,
       notify = {
         threshold = vim.log.levels.WARN,
       },
       update_focused_file = {
         enable = true,
         update_cwd = false,
-        update_root = false,
+        update_root = true,
         ignore_list = {},
       },
       view = {

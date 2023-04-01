@@ -68,6 +68,7 @@ return {
         },
       },
     })
+    require("telescope").load_extension("projects")
     require("telescope").load_extension("file_browser")
   end,
   opts = {},
@@ -82,6 +83,7 @@ return {
     { "<leader>fb", ":Telescope buffers<CR>", desc = "Find all buffers" },
     { "<leader>f/", ":Telescope search_history<CR>", desc = "Find all search history" },
     { "<leader>f:", ":Telescope command_history<CR>", desc = "Find all command history" },
-    { "<leader>fB", ":Telescope file_browser<CR>", desc = "Telescope file_browser" },
+    { "<leader>fB", ":Telescope file_browser<CR>", desc = "File browser" },
+    { "<leader>fp", ":Telescope projects<CR>", desc = "Find projects" },
   },
 }
