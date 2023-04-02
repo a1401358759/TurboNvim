@@ -118,15 +118,8 @@ if vim.fn.has("nvim-0.9.0") == 1 then
 end
 
 -- floating terminal
--- map("n", "<leader>fT", function() Util.float_term(nil, { cwd = Util.get_root() }) end, { desc = "Terminal (root dir)" })
--- map("n", "<leader>tf", function() Util.float_term() end, { desc = "Terminal (cwd)" })
--- map("t", "<esc>", "<c-\\><c-n><cmd>close<cr>", {desc = "Enter Normal Mode"})
--- map("t", "<esc><esc>", "<c-\\><c-n><cmd>close<cr>", {desc = "Enter Normal Mode"})
-
--- lazygit
--- map("n", "<leader>tg", function() Util.float_term({ "lazygit" }, { cwd = Util.get_root() }) end, { desc = "Lazygit (root dir)" })
--- map("n", "<leader>tG", function() Util.float_term({ "lazygit" }) end, { desc = "Lazygit (cwd)" })
-
+map("t", "<esc>", "<c-\\><c-n><cmd>close<cr>", {desc = "Enter Normal Mode"})
+map("t", "<esc><esc>", "<c-\\><c-n><cmd>close<cr>", {desc = "Enter Normal Mode"})
 
 -- windows
 map("n", "<leader>ww", "<C-W>p", { desc = "Other window" })
