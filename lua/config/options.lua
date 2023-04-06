@@ -3,9 +3,6 @@
 -- Add any additional options here
 -- -- This file is automatically loaded by plugins.config
 
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
-
 local opt = vim.opt
 
 opt.autowrite = true -- Enable auto write
@@ -67,6 +64,11 @@ end
 
 -- Fix markdown indentation settings
 vim.g.markdown_recommended_style = 0
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+-- disable netrw at the very start of your init.lua (strongly advised)
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
 
 -- custmo config
 local options = {}

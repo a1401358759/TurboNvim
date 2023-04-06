@@ -52,6 +52,7 @@
   "sniprun": { "branch": "master", "commit": "52ecf6ad06304e46722118af2aaea5647b157ab8" },
   "surround.nvim": { "branch": "master", "commit": "36c253d6470910692491b13382f54c9bab2811e1" },
   "switch.vim": { "branch": "main", "commit": "a3fd7bf4d61fdbe00356a646744b2fe6f97524b6" },
+  "telescope-file-browser.nvim": { "branch": "master", "commit": "e0fcb12702ad0d2873544a31730f9aaef04fd032" },
   "telescope.nvim": { "branch": "master", "commit": "942fe5faef47b21241e970551eba407bc10d9547" },
   "tmux.nvim": { "branch": "main", "commit": "9ba03cc5dfb30f1dc9eb50d0796dfdd52c5f454e" },
   "todo-comments.nvim": { "branch": "main", "commit": "8febc60a76feefd8203077ef78b6a262ea1a41f9" },

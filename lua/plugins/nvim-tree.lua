@@ -24,6 +24,12 @@ return {
       notify = {
         threshold = vim.log.levels.WARN,
       },
+      ui = {
+        confirm = {
+          remove = true,
+          trash = true,
+        },
+      },
       update_focused_file = {
         enable = true,
         update_cwd = false,
@@ -87,6 +93,11 @@ return {
       trash = {
         cmd = "trash",
         require_confirm = true,
+      },
+      experimental = {
+        git = {
+          async = true,
+        },
       },
       filters = {
         dotfiles = false,
