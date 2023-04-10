@@ -1,7 +1,6 @@
 return {
   "williamboman/mason.nvim",
   cmd = "Mason",
-  keys = { { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" } },
   opts = {
     ensure_installed = {
       -- lsp
@@ -38,8 +37,20 @@ return {
       "shellcheck",
     },
     max_concurrent_installers = 20,
+    pip = {
+      -- Whether to upgrade pip to the latest version in the virtual environment before installing packages.
+      upgrade_pip = true,
+    },
     ui = {
-      border = "rounded" or "none",
+      border = "rounded",
+      -- Width of the window. Accepts:
+      -- - Integer greater than 1 for fixed width.
+      -- - Float in the range of 0-1 for a percentage of screen width.
+      width = 0.8,
+      -- Height of the window. Accepts:
+      -- - Integer greater than 1 for fixed height.
+      -- - Float in the range of 0-1 for a percentage of screen height.
+      height = 0.8,
       icons = {
         package_installed = "",
         package_pending = "",
@@ -48,6 +59,7 @@ return {
     },
   },
   ---@param opts MasonSettings | {ensure_installed: string[]}
+  ---@diagnostic disable-next-line: unused-local
   config = function(plugin, opts)
     require("mason").setup(opts)
     local mr = require("mason-registry")

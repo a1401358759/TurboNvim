@@ -33,6 +33,15 @@ return {
           link = "FloatBorder",
         },
       },
+      float_opts = {
+        border = "curved", -- 'single' | 'double' | 'shadow' | 'curved'
+        width = function()
+          return math.ceil(vim.o.columns * 0.85)
+        end,
+        height = function()
+          return math.ceil(vim.o.lines * 0.8)
+        end,
+      },
     })
 
     M.terminals = {
@@ -64,9 +73,6 @@ return {
       hidden = true,
       count = 120,
       direction = "float",
-      float_opts = {
-        border = "curved" or "none", -- 'single' | 'double' | 'shadow' | 'curved' |
-      },
       on_open = function(term)
         M.open_callback()
         vim.keymap.set(
@@ -90,9 +96,6 @@ return {
       count = 120,
       hidden = true,
       direction = "float",
-      float_opts = {
-        border = "curved" or "none",
-      },
       on_open = function(term)
         M.open_callback()
         vim.keymap.set(
@@ -110,9 +113,6 @@ return {
       count = 120,
       hidden = true,
       direction = "float",
-      float_opts = {
-        border = "curved" or "none",
-      },
       on_open = function(term)
         M.open_callback()
         vim.keymap.set(

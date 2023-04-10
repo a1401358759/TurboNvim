@@ -44,26 +44,26 @@ return {
           maxLineLength = 140,
         },
         pycodestyle = {
-          enable = false,
+          enabled = false,
           ignore = ignore_list,
           maxLineLength = 140,
         },
         autopep8 = {
-          enable = false,
+          enabled = false,
           ignore = ignore_list,
           maxLineLength = 140,
         },
         pyflakes = {
-          enable = false,
+          enabled = false,
           ignore = ignore_list,
           maxLineLength = 140,
         },
         mccabe = {
-          enable = false,
+          enabled = false,
           threshold = 100,
         },
         pylint = {
-          enable = false,
+          enabled = false,
           ignore = ignore_list,
           maxLineLength = 140,
         },

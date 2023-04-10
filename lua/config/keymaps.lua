@@ -139,3 +139,25 @@ map("n", "<leader><tab>[", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
 
 -- find todo
 map("n", "<leader>ft", "<cmd>TodoTelescope<cr>", { desc = "Find TODO" })
+
+-- lspsaga keymaps
+map("n", "gh", "<cmd>Lspsaga lsp_finder<CR>", { desc = "Lspsaga lsp_finder" })
+map("n", "<leader>cn", "<cmd>Lspsaga rename ++project<CR>", { desc = "Lspsaga rename" })
+-- Use <C-t> to jump back
+map("n", "gp", "<cmd>Lspsaga peek_definition<CR>", { desc = "Lspsaga peek_definition" })
+-- Go to definition
+map("n","gd", "<cmd>Lspsaga goto_definition<CR>", { desc = "Lspsaga goto_definition" })
+-- Go to type definition
+map("n","gt", "<cmd>Lspsaga goto_type_definition<CR>", { desc = "Lspsaga goto_type_definition" })
+map("n", "[e", "<cmd>Lspsaga diagnostic_jump_prev<CR>", { desc = "Lspsaga diagnostic_jump_prev" })
+map("n", "]e", "<cmd>Lspsaga diagnostic_jump_next<CR>", { desc = "Lspsaga diagnostic_jump_next" })
+-- Hover Doc
+-- If there is no hover doc,
+-- there will be a notification stating that
+-- there is no information available.
+-- To disable it just use ":Lspsaga hover_doc ++quiet"
+-- Pressing the key twice will enter the hover window
+map("n", "K", "<cmd>Lspsaga hover_doc<CR>", { desc = "Lspsaga hover_doc" })
+-- Call hierarchy
+map("n", "<Leader>ci", "<cmd>Lspsaga incoming_calls<CR>", { desc = "Lspsaga incoming_calls" })
+map("n", "<Leader>co", "<cmd>Lspsaga outgoing_calls<CR>", { desc = "Lspsaga outgoing_calls" })
