@@ -32,10 +32,9 @@ return {
       },
       view = {
         side = "left",
-        -- adaptive_size = true,
+        adaptive_size = true,
         width = 30,
         centralize_selection = false,
-        hide_root_folder = false,
         preserve_window_proportions = false,
         number = false,
         relativenumber = false,

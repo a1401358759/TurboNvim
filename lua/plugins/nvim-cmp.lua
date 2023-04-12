@@ -15,13 +15,7 @@ return {
   },
   opts = function()
     local cmp = require("cmp")
-    local has_words_before = function()
-      if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then
-        return false
-      end
-      local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-      return col ~= 0 and vim.api.nvim_buf_get_text(0, line - 1, 0, line - 1, col, {})[1]:match("^%s*$") == nil
-    end
+
     return {
       -- Insert or Replace
       confirmation = {
@@ -47,19 +41,35 @@ return {
           behavior = cmp.ConfirmBehavior.Replace,
           select = false,
         }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-        ["<Tab>"] = vim.schedule_wrap(function(fallback)
-          if cmp.visible() and has_words_before() then
-            cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+        ["<Tab>"] = cmp.mapping(function(fallback)
+          if cmp.visible() then
+            cmp.select_next_item()
+          elseif require("luasnip").expand_or_jumpable() then
+            vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-expand-or-jump", true, true, true), "")
           else
             fallback()
           end
-        end),
+        end, {
+          "i",
+          "s",
+        }),
+        ["<S-Tab>"] = cmp.mapping(function(fallback)
+          if cmp.visible() then
+            cmp.select_prev_item()
+          elseif require("luasnip").jumpable(-1) then
+            vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-jump-prev", true, true, true), "")
+          else
+            fallback()
+          end
+        end, {
+          "i",
+          "s",
+        }),
       }),
       -- define sorting rules
       sorting = {
         priority_weight = 2,
         comparators = {
-          require("copilot_cmp.comparators").prioritize,
           require("cmp_tabnine.compare"),
           cmp.config.compare.offset,
           cmp.config.compare.exact,
@@ -72,7 +82,6 @@ return {
         },
       },
       sources = cmp.config.sources({
-        { name = "copilot", group_index = 2 },
         { name = "nvim_lsp" },
         { name = "luasnip" },
         { name = "buffer" },
@@ -84,20 +93,14 @@ return {
         { name = "nvim_lsp_signature_help" },
       }),
       formatting = {
+        fields = { "abbr", "kind", "menu" },
         format = function(entry, item)
-          local icons = require("lazyvim.config").icons.kinds
+          local icons = require("config.icons").icons.lspkind
           local source = entry.source.name
-          if icons[item.kind] then
-            item.kind = icons[item.kind] .. item.kind
-            item.menu = string.format("  [%s]", string.upper(source))
-          end
+          item.kind = string.format("%s %s", icons[item.kind], item.kind or "")
+          item.menu = string.format("  [%s]", string.upper(source))
           return item
         end,
-      },
-      experimental = {
-        ghost_text = {
-          hl_group = "LspCodeLens",
-        },
       },
       window = {
         completion = cmp.config.window.bordered(),
