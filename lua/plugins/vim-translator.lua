@@ -27,7 +27,7 @@ return {
       desc = "Display translation in a window",
     },
     {
-      "<leader>tr",
+      "<leader>tR",
       "<cmd>TranslateR<cr>",
       desc = "Replace the text with translation",
     },

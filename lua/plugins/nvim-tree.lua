@@ -5,49 +5,49 @@ return {
   dependencies = {
     "nvim-tree/nvim-web-devicons",
   },
-  opts = function()
+  config = function()
     local icons = require("lazyvim.config").icons
-    return {
-      sync_root_with_cwd = true,
-      respect_buf_cwd = true,
+    require("nvim-tree").setup({
       auto_reload_on_write = true,
-      create_in_closed_folder = false,
-      disable_netrw = false,
-      hijack_cursor = true,
+      disable_netrw = true,
       hijack_netrw = true,
-      hijack_unnamed_buffer_when_opening = true,
-      ignore_buffer_on_setup = false,
-      open_on_setup = false,
-      open_on_setup_file = false,
-      open_on_tab = false,
+      hijack_cursor = true,
+      hijack_unnamed_buffer_when_opening = false,
+      sync_root_with_cwd = true,
       sort_by = "name",
+      root_dirs = {},
+      prefer_startup_root = false,
+      reload_on_bufenter = false,
+      respect_buf_cwd = false,
+      on_attach = "disable",
+      remove_keymaps = false,
+      select_prompts = false,
+      update_cwd = true,
       notify = {
         threshold = vim.log.levels.WARN,
-      },
-      ui = {
-        confirm = {
-          remove = true,
-          trash = true,
-        },
       },
       update_focused_file = {
         enable = true,
         update_cwd = false,
-        update_root = true,
-        ignore_list = {},
       },
       view = {
-        adaptive_size = true,
-        centralize_selection = false,
-        width = 30,
         side = "left",
+        -- adaptive_size = true,
+        width = 30,
+        centralize_selection = false,
+        hide_root_folder = false,
         preserve_window_proportions = false,
         number = false,
         relativenumber = false,
         signcolumn = "yes",
-        hide_root_folder = false,
+        mappings = {
+          list = {
+            { key = "?", action = "toggle_help" },
+          },
+        },
         float = {
           enable = false,
+          quit_on_focus_loss = true,
           open_win_config = {
             relative = "editor",
             border = "rounded",
@@ -72,32 +72,19 @@ return {
         use_system_clipboard = true,
         change_dir = {
           enable = true,
-          global = false,
+          global = true,
+          restrict_above_cwd = false,
         },
         open_file = {
-          quit_on_open = false,
-          resize_window = false,
+          resize_window = true,
           window_picker = {
             enable = true,
-            chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890",
-            exclude = {
-              filetype = { "notify", "qf", "diff", "fugitive", "fugitiveblame" },
-              buftype = { "terminal", "help" },
-            },
           },
-        },
-        remove_file = {
-          close_window = true,
         },
       },
       trash = {
         cmd = "trash",
         require_confirm = true,
-      },
-      experimental = {
-        git = {
-          async = true,
-        },
       },
       filters = {
         dotfiles = false,
@@ -106,19 +93,18 @@ return {
       },
       renderer = {
         add_trailing = true,
-        group_empty = true,
         highlight_git = true,
-        full_name = true,
         highlight_opened_files = "none",
-        special_files = { "Cargo.toml", "Makefile", "README.md", "readme.md", "CMakeLists.txt" },
-        symlink_destination = true,
+        indent_width = 2,
         indent_markers = {
           enable = true,
+          inline_arrows = true,
           icons = {
-            corner = "└ ",
-            edge = "│ ",
-            item = "│ ",
-            none = "  ",
+            corner = "└",
+            edge = "│",
+            item = "│",
+            bottom = "─",
+            none = " ",
           },
         },
         icons = {
@@ -157,12 +143,7 @@ return {
           },
         },
       },
-      hijack_directories = {
-        enable = true,
-        auto_open = true,
-      },
-      ignore_ft_on_setup = {},
-    }
+    })
   end,
   keys = {
     {
