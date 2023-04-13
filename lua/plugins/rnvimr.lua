@@ -8,7 +8,7 @@ return {
   config = function() end,
   keys = {
     {
-      "<leader>tr",
+      "<leader>tR",
       "<cmd>RnvimrToggle<CR>",
       desc = "Rnvimr Toggle",
     },

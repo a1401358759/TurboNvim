@@ -26,11 +26,11 @@ return {
       "<cmd>TranslateW<cr>",
       desc = "Display translation in a window",
     },
-    {
-      "<leader>tR",
-      "<cmd>TranslateR<cr>",
-      desc = "Replace the text with translation",
-    },
+    -- {
+    --   "<leader>tR",
+    --   "<cmd>TranslateR<cr>",
+    --   desc = "Replace the text with translation",
+    -- },
     {
       "<leader>tx",
       "<cmd>TranslateX<cr>",

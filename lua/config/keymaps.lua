@@ -159,5 +159,7 @@ map("n", "]e", "<cmd>Lspsaga diagnostic_jump_next<CR>", { desc = "Lspsaga diagno
 -- Pressing the key twice will enter the hover window
 map("n", "K", "<cmd>Lspsaga hover_doc<CR>", { desc = "Lspsaga hover_doc" })
 -- Call hierarchy
-map("n", "<Leader>ci", "<cmd>Lspsaga incoming_calls<CR>", { desc = "Lspsaga incoming_calls" })
-map("n", "<Leader>co", "<cmd>Lspsaga outgoing_calls<CR>", { desc = "Lspsaga outgoing_calls" })
+map("n", "<leader>ci", "<cmd>Lspsaga incoming_calls<CR>", { desc = "Lspsaga incoming_calls" })
+map("n", "<leader>co", "<cmd>Lspsaga outgoing_calls<CR>", { desc = "Lspsaga outgoing_calls" })
+-- change colorscheme
+map("n", "<leader>cs", "<cmd>Telescope colorscheme<CR>", { desc = "Telescope colorscheme" })

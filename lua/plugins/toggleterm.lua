@@ -125,6 +125,23 @@ return {
       on_close = M.close_callback,
     })
 
+    M.terminals.ranger = terms:new({
+      cmd = "ranger",
+      count = 120,
+      hidden = true,
+      direction = "float",
+      on_open = function(term)
+        M.open_callback()
+        vim.keymap.set(
+          "i",
+          "q",
+          "<cmd>close<cr>",
+          { silent = true, buffer = term.bufnr, desc = "Escape ranger terminal" }
+        )
+      end,
+      on_close = M.close_callback,
+    })
+
     toggleterm.horizontal_toggle = function()
       ---@diagnostic disable-next-line: missing-parameter
       M.terminals.horizontal:toggle()
@@ -148,6 +165,11 @@ return {
     toggleterm.lazydocker_toggle = function()
       ---@diagnostic disable-next-line: missing-parameter
       M.terminals.lazydocker:toggle()
+    end
+
+    toggleterm.ranger_toggle = function()
+      ---@diagnostic disable-next-line: missing-parameter
+      M.terminals.ranger:toggle()
     end
   end,
   keys = {
@@ -185,6 +207,13 @@ return {
         require("toggleterm").lazydocker_toggle()
       end,
       desc = "Toggle lazydocker terminal",
+    },
+    {
+      "<leader>tr",
+      function()
+        require("toggleterm").ranger_toggle()
+      end,
+      desc = "Toggle ranger terminal",
     },
   },
 }

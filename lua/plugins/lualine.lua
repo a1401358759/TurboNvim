@@ -34,8 +34,20 @@ return {
         disabled_filetypes = { statusline = { "dashboard", "lazy", "alpha" } },
       },
       sections = {
-        lualine_a = { "mode" },
-        lualine_b = { "branch" },
+        lualine_a = {
+          {
+            "mode",
+            fmt = function(str)
+              return " " .. str
+            end,
+          },
+        },
+        lualine_b = {
+          {
+            "branch",
+            icon = "",
+          },
+        },
         lualine_c = {
           {
             "diagnostics",
@@ -69,14 +81,14 @@ return {
           { "location", padding = { left = 0, right = 1 } },
         },
         lualine_z = {
-          -- function()
-          --   return " " .. os.date("%R")
-          -- end,
-          {
-            "datetime",
-            -- options: default, us, uk, iso, or your own format string ("%H:%M", etc..)
-            style = "%A, %b%d %H:%M", -- '%A, %B %d | %H:%M' '%Y-%m-%d'
-          },
+          function()
+            return " " .. os.date("%R")
+          end,
+          -- {
+          --   "datetime",
+          --   -- options: default, us, uk, iso, or your own format string ("%H:%M", etc..)
+          --   style = "%A, %b%d %H:%M", -- '%A, %B %d | %H:%M' '%Y-%m-%d'
+          -- },
         },
       },
       extensions = { "nvim-tree", "aerial", "toggleterm", "nvim-dap-ui" },
