@@ -5,7 +5,7 @@ return {
     ensure_installed = {
       -- lsp
       "gopls",
-      -- "pyright",
+      "pyright",
       "css-lsp",
       "json-lsp",
       "html-lsp",

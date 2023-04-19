@@ -137,11 +137,6 @@ M.devicons = {
     name = "png",
   },
 
-  py = {
-    icon = "",
-    name = "py",
-  },
-
   ["robots.txt"] = {
     icon = "ﮧ",
     name = "robots",

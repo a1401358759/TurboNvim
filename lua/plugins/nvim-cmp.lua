@@ -87,7 +87,6 @@ return {
         { name = "buffer" },
         { name = "path" },
         { name = "vsnip" },
-        { name = "nvim_lsp" },
         { name = "cmp_tabnine" },
         { name = "vim-dadbod-completion" },
         { name = "nvim_lsp_signature_help" },
