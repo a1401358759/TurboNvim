@@ -1,10 +1,5 @@
 return {
   {
-    "ellisonleao/gruvbox.nvim",
-    lazy = true,
-    name = "gruvbox",
-  },
-  {
     "folke/tokyonight.nvim",
     lazy = true,
     opts = { style = "moon" },

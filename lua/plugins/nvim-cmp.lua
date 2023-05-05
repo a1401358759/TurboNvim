@@ -88,6 +88,7 @@ return {
         { name = "path" },
         { name = "vsnip" },
         { name = "cmp_tabnine" },
+        { name = "treesitter" },
         { name = "vim-dadbod-completion" },
         { name = "nvim_lsp_signature_help" },
       }),

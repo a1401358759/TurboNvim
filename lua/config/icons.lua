@@ -52,7 +52,7 @@ M.icons = {
     Package = "",
     Copilot = "",
     Codeium = "",
-    TabNine = "",
+    TabNine = "",
   },
 }
 

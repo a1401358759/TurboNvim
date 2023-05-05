@@ -3,14 +3,8 @@
 local util = require("lspconfig.util")
 
 local root_files = {
-  "pyproject.toml",
-  "setup.py",
-  "setup.cfg",
-  "requirements.txt",
-  "Pipfile",
-  "pyrightconfig.json",
-  -- customize
-  "manage.py",
+  ".git",
+  ".gitignore",
 }
 
 local ignore_diagnostic_message = {

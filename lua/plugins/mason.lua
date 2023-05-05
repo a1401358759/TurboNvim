@@ -25,7 +25,7 @@ return {
       -- linter
       -- "pylint",
       -- "mypy",
-      "flake8",
+      -- "flake8",
 
       -- formatter
       "shfmt",

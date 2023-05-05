@@ -33,13 +33,26 @@ local ignore_list = {
   "E203",
 }
 
+local util = require("lspconfig.util")
+
+local root_files = {
+  ".git",
+  ".gitignore",
+}
+
 return {
+  cmd = { "pylsp" },
+  filetypes = { "python" },
+  single_file_support = true,
+  root_dir = function(fname)
+    return util.root_pattern(unpack(root_files))(fname)
+  end,
   settings = {
     pylsp = {
       configurationSources = { "flake8" },
       plugins = {
         flake8 = {
-          enabled = true,
+          enabled = false,
           ignore = ignore_list,
           maxLineLength = 140,
         },
