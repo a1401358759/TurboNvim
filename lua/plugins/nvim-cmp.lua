@@ -12,8 +12,15 @@ return {
     "hrsh7th/cmp-vsnip",
     "friendly-snippets",
     "tzachar/cmp-tabnine",
+    { "roobert/tailwindcss-colorizer-cmp.nvim", config = true },
   },
-  opts = function()
+  opts = function(_, opts)
+    -- original LazyVim kind icon formatter
+    local format_kinds = opts.formatting.format
+    opts.formatting.format = function(entry, item)
+      format_kinds(entry, item) -- add icons
+      return require("tailwindcss-colorizer-cmp").formatter(entry, item)
+    end
     local cmp = require("cmp")
 
     return {

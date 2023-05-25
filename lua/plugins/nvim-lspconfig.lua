@@ -1,3 +1,4 @@
+---@diagnostic disable: unused-local
 return {
   "neovim/nvim-lspconfig",
   lazy = true,
@@ -13,6 +14,8 @@ return {
         return require("lazyvim.util").has("nvim-cmp")
       end,
     },
+    "b0o/SchemaStore.nvim",
+    version = false, -- last release is way too old
   },
   ---@class PluginLspOpts
   opts = function()
@@ -35,6 +38,7 @@ return {
       settings.mason = true
       lsp_servers[server_name] = settings
     end
+    lsp_servers.tailwindcss = { filetypes_exclude = { "markdown" } }
 
     return {
       diagnostics = {
@@ -66,6 +70,14 @@ return {
         -- end,
         -- Specify * to use this function as a fallback for any server
         -- ["*"] = function(server, opts) end,
+        tailwindcss = function(_, opts)
+          local tw = require("lspconfig.server_configurations.tailwindcss")
+          --- @param ft string
+          opts.filetypes = vim.tbl_filter(function(ft)
+            ---@diagnostic disable-next-line: undefined-field
+            return not vim.tbl_contains(opts.filetypes_exclude, ft)
+          end, tw.default_config.filetypes)
+        end,
       },
     }
   end,
