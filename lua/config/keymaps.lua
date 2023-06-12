@@ -163,3 +163,9 @@ map("n", "<leader>ci", "<cmd>Lspsaga incoming_calls<CR>", { desc = "Lspsaga inco
 map("n", "<leader>co", "<cmd>Lspsaga outgoing_calls<CR>", { desc = "Lspsaga outgoing_calls" })
 -- change colorscheme
 map("n", "<leader>cs", "<cmd>Telescope colorscheme<CR>", { desc = "Telescope colorscheme" })
+
+-- ai.vim maps
+
+map("n", "<c-e>", ":AI ", { desc = "AI Complete" })
+map("v", "<c-e>", ":AI ", { desc = "AI Complete" })
+map("i", "<c-e>", "<Esc>:AI<CR>a", { desc = "AI Complete" })

@@ -56,7 +56,7 @@ return {
         typeCheckingMode = "off", -- off, basic, strict
         autoSearchPaths = true,
         useLibraryCodeForTypes = true,
-        autoImportCompletions = true,
+        autoImportCompletions = false,
         diagnosticMode = "openFilesOnly",
         -- https://github.com/microsoft/pyright/blob/main/docs/configuration.md#type-check-diagnostics-settings
         diagnosticSeverityOverrides = {

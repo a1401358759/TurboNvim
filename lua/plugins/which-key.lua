@@ -16,6 +16,7 @@ return {
       ["<leader>a"] = { name = "+AI" },
       ["<leader>b"] = { name = "+buffer" },
       ["<leader>c"] = { name = "+code" },
+      ["<leader>d"] = { name = "+debug" },
       ["<leader>f"] = { name = "+file/find" },
       ["<leader>g"] = { name = "+git" },
       ["<leader>q"] = { name = "+quit/session" },

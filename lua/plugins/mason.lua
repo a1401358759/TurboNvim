@@ -7,6 +7,7 @@ return {
       "gopls",
       "pyright",
       "css-lsp",
+      "cssmodules-language-server",
       "json-lsp",
       "html-lsp",
       "emmet-ls",

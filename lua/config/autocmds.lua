@@ -73,6 +73,14 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
+-- Disable autoformat for lua files
+vim.api.nvim_create_autocmd({ "FileType" }, {
+  pattern = { "python" },
+  callback = function()
+    vim.b.autoformat = false
+  end,
+})
+
 -- auto save buffer
 if options.auto_save then
   vim.api.nvim_create_autocmd({ "InsertLeave", "TextChanged" }, {
