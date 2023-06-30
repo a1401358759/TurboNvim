@@ -4,5 +4,5 @@ return {
   { "echasnovski/mini.surround", enabled = false },
   { "echasnovski/mini.ai", enabled = false },
   { "echasnovski/mini.bufremove", enabled = false },
-  { "SmiteshP/nvim-navic", enabled = false },
+  -- { "SmiteshP/nvim-navic", enabled = false },
 }

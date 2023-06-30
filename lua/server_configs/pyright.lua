@@ -11,6 +11,7 @@ local ignore_diagnostic_message = {
   '"self" is not accessed',
   '"args" is not accessed',
   '"kwargs" is not accessed',
+  '"cls" is not accessed',
 }
 
 local filter_publish_diagnostics = function(a, params, client_info, extra_message, config)

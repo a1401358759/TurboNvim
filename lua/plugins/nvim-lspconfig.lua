@@ -15,6 +15,20 @@ return {
       end,
     },
     "b0o/SchemaStore.nvim",
+    {
+      "SmiteshP/nvim-navbuddy",
+      dependencies = {
+        "SmiteshP/nvim-navic",
+        "MunifTanjim/nui.nvim",
+      },
+      opts = {
+        lsp = { auto_attach = true },
+        window = {
+          border = "rounded",
+          size = "70%",
+        },
+      },
+    },
     version = false, -- last release is way too old
   },
   ---@class PluginLspOpts
@@ -58,9 +72,6 @@ return {
       capabilities = {},
       -- Automatically format on save
       autoformat = false,
-      -- Enable this to show formatters used in a notification
-      -- Useful for debugging formatter issues
-      format_notify = false,
       -- options for vim.lsp.buf.format
       -- `bufnr` and `filter` is handled by the LazyVim formatter,
       -- but can be also overridden when specified

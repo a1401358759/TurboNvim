@@ -41,5 +41,6 @@ return {
     { "<leader>fb", ":Telescope buffers<CR>", desc = "Find all buffers" },
     { "<leader>f/", ":Telescope search_history<CR>", desc = "Find all search history" },
     { "<leader>f:", ":Telescope command_history<CR>", desc = "Find all command history" },
+    { "<leader>fe", ":Telescope diagnostics<CR>", desc = "Find diagnostics in the current workspace" },
   },
 }
