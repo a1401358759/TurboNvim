@@ -62,6 +62,8 @@ return {
       "gitignore",
       "go",
       "gomod",
+      "gowork",
+      "gosum",
       "hjson",
       "html",
       "http",

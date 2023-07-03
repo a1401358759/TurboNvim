@@ -1,20 +1,40 @@
 -- https://github.com/golang/tools/tree/master/gopls
 
-local util = require("lspconfig.util")
-
-local root_files = {
-  "go.work",
-  "go.mod",
-  ".git",
-}
-
 return {
   settings = {
-    cmd = { "gopls" },
-    single_file_support = true,
-    filetypes = { "go", "gomod", "gotmpl" },
-    root_dir = function(fname)
-      return util.root_pattern(unpack(root_files))(fname)
-    end,
+    gopls = {
+      gofumpt = true,
+      codelenses = {
+        gc_details = false,
+        generate = true,
+        regenerate_cgo = true,
+        run_govulncheck = true,
+        test = true,
+        tidy = true,
+        upgrade_dependency = true,
+        vendor = true,
+      },
+      hints = {
+        assignVariableTypes = true,
+        compositeLiteralFields = true,
+        compositeLiteralTypes = true,
+        constantValues = true,
+        functionTypeParameters = true,
+        parameterNames = true,
+        rangeVariableTypes = true,
+      },
+      analyses = {
+        fieldalignment = true,
+        nilness = true,
+        unusedparams = true,
+        unusedwrite = true,
+        useany = true,
+      },
+      usePlaceholders = true,
+      completeUnimported = true,
+      staticcheck = true,
+      directoryFilters = { "-.git", "-.vscode", "-.idea", "-.vscode-test", "-node_modules" },
+      semanticTokens = true,
+    },
   },
 }
