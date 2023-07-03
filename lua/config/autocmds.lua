@@ -161,9 +161,21 @@ vim.api.nvim_create_autocmd({ "User" }, {
   pattern = "PersistedTelescopeLoadPre",
   group = group,
   callback = function()
----@diagnostic disable-next-line: param-type-mismatch
+    ---@diagnostic disable-next-line: param-type-mismatch
     pcall(vim.cmd, "SessionSave")
     vim.api.nvim_input("<ESC>:%bd<CR>")
+  end,
+})
+
+-- Auto create dir when saving a file, in case some intermediate directory does not exist
+vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+  group = augroup("auto_create_dir"),
+  callback = function(event)
+    if event.match:match("^%w%w+://") then
+      return
+    end
+    local file = vim.loop.fs_realpath(event.match) or event.match
+    vim.fn.mkdir(vim.fn.fnamemodify(file, ":p:h"), "p")
   end,
 })
 
@@ -181,6 +193,7 @@ end, { desc = "Create directory if it doesn't exist" })
 vim.api.nvim_create_user_command("BufferDelete", function()
   ---@diagnostic disable-next-line: missing-parameter
   local file_exists = vim.fn.filereadable(vim.fn.expand("%p"))
+  ---@diagnostic disable-next-line: redundant-parameter
   local modified = vim.api.nvim_buf_get_option(0, "modified")
 
   if file_exists == 0 and modified then
