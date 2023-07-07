@@ -1,3 +1,70 @@
+local setCompHL = function()
+  local fgdark = "#2E3440"
+
+  vim.api.nvim_set_hl(0, "CmpItemAbbrMatch", { fg = "#82AAFF", bg = "NONE", bold = true })
+  vim.api.nvim_set_hl(0, "CmpItemAbbrMatchFuzzy", { fg = "#82AAFF", bg = "NONE", bold = true })
+  vim.api.nvim_set_hl(0, "CmpItemAbbrDeprecated", { fg = "#7E8294", bg = "NONE", strikethrough = true })
+
+  vim.api.nvim_set_hl(0, "CmpItemMenu", { fg = "#808080", bg = "NONE", italic = true })
+  vim.api.nvim_set_hl(0, "CmpItemKindField", { fg = fgdark, bg = "#B5585F" })
+  vim.api.nvim_set_hl(0, "CmpItemKindProperty", { fg = fgdark, bg = "#B5585F" })
+  vim.api.nvim_set_hl(0, "CmpItemKindEvent", { fg = fgdark, bg = "#B5585F" })
+
+  vim.api.nvim_set_hl(0, "CmpItemKindText", { fg = fgdark, bg = "#9FBD73" })
+  vim.api.nvim_set_hl(0, "CmpItemKindEnum", { fg = fgdark, bg = "#9FBD73" })
+  vim.api.nvim_set_hl(0, "CmpItemKindKeyword", { fg = fgdark, bg = "#9FBD73" })
+
+  vim.api.nvim_set_hl(0, "CmpItemKindConstant", { fg = fgdark, bg = "#D4BB6C" })
+  vim.api.nvim_set_hl(0, "CmpItemKindConstructor", { fg = fgdark, bg = "#D4BB6C" })
+  vim.api.nvim_set_hl(0, "CmpItemKindReference", { fg = fgdark, bg = "#D4BB6C" })
+
+  vim.api.nvim_set_hl(0, "CmpItemKindFunction", { fg = fgdark, bg = "#A377BF" })
+  vim.api.nvim_set_hl(0, "CmpItemKindStruct", { fg = fgdark, bg = "#A377BF" })
+  vim.api.nvim_set_hl(0, "CmpItemKindClass", { fg = fgdark, bg = "#A377BF" })
+  vim.api.nvim_set_hl(0, "CmpItemKindModule", { fg = fgdark, bg = "#A377BF" })
+  vim.api.nvim_set_hl(0, "CmpItemKindOperator", { fg = fgdark, bg = "#A377BF" })
+
+  vim.api.nvim_set_hl(0, "CmpItemKindVariable", { fg = fgdark, bg = "#7E8294" })
+  vim.api.nvim_set_hl(0, "CmpItemKindFile", { fg = fgdark, bg = "#7E8294" })
+
+  vim.api.nvim_set_hl(0, "CmpItemKindUnit", { fg = fgdark, bg = "#D4A959" })
+  vim.api.nvim_set_hl(0, "CmpItemKindSnippet", { fg = fgdark, bg = "#D4A959" })
+  vim.api.nvim_set_hl(0, "CmpItemKindFolder", { fg = fgdark, bg = "#D4A959" })
+  vim.api.nvim_set_hl(0, "CmpItemKindTabNine", { fg = fgdark, bg = "#D4A959" })
+
+  vim.api.nvim_set_hl(0, "CmpItemKindMethod", { fg = fgdark, bg = "#6C8ED4" })
+  vim.api.nvim_set_hl(0, "CmpItemKindValue", { fg = fgdark, bg = "#6C8ED4" })
+  vim.api.nvim_set_hl(0, "CmpItemKindEnumMember", { fg = fgdark, bg = "#6C8ED4" })
+
+  vim.api.nvim_set_hl(0, "CmpItemKindInterface", { fg = fgdark, bg = "#58B5A8" })
+  vim.api.nvim_set_hl(0, "CmpItemKindColor", { fg = fgdark, bg = "#58B5A8" })
+  vim.api.nvim_set_hl(0, "CmpItemKindTypeParameter", { fg = fgdark, bg = "#58B5A8" })
+
+  -- 防止 dropbar 显示 cmp 的背景颜色
+  local dropbar_groups = {
+    "DropBarIconKindVariable",
+    "DropBarIconKindClass",
+    "DropBarIconKindConstructor",
+    "DropBarIconKindDeclaration",
+    "DropBarIconKindEnum",
+    "DropBarIconKindEnumMember",
+    "DropBarIconKindEvent",
+    "DropBarIconKindField",
+    "DropBarIconKindIdentifier",
+    "DropBarIconKindInterface",
+    "DropBarIconKindMethod",
+    "DropBarIconKindModule",
+    "DropBarIconKindPackage",
+    "DropBarIconKindProperty",
+    "DropBarIconKindReference",
+    "DropBarIconKindStruct",
+    "DropBarIconKindTypeParameter",
+  }
+  for _, v in pairs(dropbar_groups) do
+    vim.api.nvim_set_hl(0, v, { link = "" })
+  end
+end
+
 return {
   "hrsh7th/nvim-cmp",
   version = false, -- last release is way too old
@@ -15,6 +82,7 @@ return {
     { "roobert/tailwindcss-colorizer-cmp.nvim", config = true },
   },
   opts = function(_, opts)
+    setCompHL()
     -- original LazyVim kind icon formatter
     local format_kinds = opts.formatting.format
     opts.formatting.format = function(entry, item)
@@ -22,6 +90,7 @@ return {
       return require("tailwindcss-colorizer-cmp").formatter(entry, item)
     end
     local cmp = require("cmp")
+    local icons = require("config.icons").icons.lspkind
 
     return {
       -- Insert or Replace
@@ -77,7 +146,7 @@ return {
       sorting = {
         priority_weight = 2,
         comparators = {
-          require("cmp_tabnine.compare"),
+          -- require("cmp_tabnine.compare"),
           cmp.config.compare.offset,
           cmp.config.compare.exact,
           cmp.config.compare.score,
@@ -94,23 +163,25 @@ return {
         { name = "buffer" },
         { name = "path" },
         { name = "vsnip" },
-        { name = "cmp_tabnine" },
+        -- { name = "cmp_tabnine" },
         { name = "treesitter" },
         { name = "vim-dadbod-completion" },
         { name = "nvim_lsp_signature_help" },
       }),
       formatting = {
-        fields = { "abbr", "kind", "menu" },
+        fields = { "kind", "abbr", "menu" },
         format = function(entry, item)
-          local icons = require("config.icons").icons.lspkind
           local source = entry.source.name
-          item.kind = string.format("%s %s", icons[item.kind], item.kind or "")
-          item.menu = string.format("  [%s]", string.upper(source))
+          item.kind = " " .. (icons[item.kind] or "") .. " "
+          item.menu = string.format(" [%s]", string.upper(source))
           return item
         end,
       },
       window = {
-        completion = cmp.config.window.bordered(),
+        completion = cmp.config.window.bordered({
+          col_offset = -3,
+          side_padding = 0,
+        }),
         documentation = cmp.config.window.bordered(),
       },
     }
