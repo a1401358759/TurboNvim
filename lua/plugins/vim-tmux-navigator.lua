@@ -1,5 +1,5 @@
 return {
   "christoomey/vim-tmux-navigator",
-  lazy = false,
+  lazy = true,
   config = function() end,
 }

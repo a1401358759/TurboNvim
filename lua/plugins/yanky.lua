@@ -1,5 +1,6 @@
 return {
   "gbprod/yanky.nvim",
+  lazy = true,
   dependencies = { { "kkharji/sqlite.lua", enabled = not jit.os:find("Windows") } },
   opts = function()
     local mapping = require("yanky.telescope.mapping")

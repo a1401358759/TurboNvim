@@ -12,6 +12,7 @@ return {
           aerial = true,
           dashboard = true,
           lazyterm = true,
+          toggleterm = true,
         },
         style = {
           { fg = "#806d9c" },

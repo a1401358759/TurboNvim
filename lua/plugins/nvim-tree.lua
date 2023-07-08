@@ -32,28 +32,15 @@ return {
       },
       view = {
         side = "left",
-        adaptive_size = true,
+        adaptive_size = false,
         width = 30,
-        centralize_selection = false,
-        preserve_window_proportions = false,
+        preserve_window_proportions = true,
         number = false,
         relativenumber = false,
         signcolumn = "yes",
         mappings = {
           list = {
             { key = "?", action = "toggle_help" },
-          },
-        },
-        float = {
-          enable = false,
-          quit_on_focus_loss = true,
-          open_win_config = {
-            relative = "editor",
-            border = "rounded",
-            width = 30,
-            height = 30,
-            row = 1,
-            col = 1,
           },
         },
       },

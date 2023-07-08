@@ -3,5 +3,7 @@
 return {
   "AckslD/muren.nvim",
   lazy = false,
-  config = true,
+  config = function ()
+    require("muren").setup({})
+  end,
 }

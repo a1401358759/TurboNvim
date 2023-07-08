@@ -1,5 +1,6 @@
 return {
   "ahmedkhalf/project.nvim",
+  lazy = true,
   opts = {},
   event = "VeryLazy",
   config = function(_, opts)
