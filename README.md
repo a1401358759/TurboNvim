@@ -24,8 +24,8 @@
 
 ![Dashboard Preview Image](https://img.yangsihan.com/nvim_dashboard.png)
 ![Coding Preview Image](https://img.yangsihan.com/nvim_main.png)
-![Float Term Image](https://img.yangsihan.com/nvim_float_term.png)
-![Find Files Image](https://img.yangsihan.com/nvim_telescope_find_files.png)
+![Float Term Image](https://img.yangsihan.com/nvim_toggleterm.png)
+![Find Files Image](https://img.yangsihan.com/nvim_telescope_findfiles.png)
 ![Live Grep Image](https://img.yangsihan.com/nvim_telescope_live_grep.png)
 ![Lazy Git Image](https://img.yangsihan.com/nvim_lazygit.png)
 ![Float Ranger Image](https://img.yangsihan.com/nvim_ranger.png)
@@ -33,10 +33,12 @@
 
 ## ✨ Features
 
-- File explorer with [Neo-tree](https://github.com/nvim-neo-tree/neo-tree.nvim)
+- File explorer with [Nvim-Tree](https://github.com/nvim-tree/nvim-tree.lua)
 - Autocompletion with [Cmp](https://github.com/hrsh7th/nvim-cmp)
 - Git integration with [Gitsigns](https://github.com/lewis6991/gitsigns.nvim)
-- Statusline, Winbar, and Bufferline with [Heirline](https://github.com/rebelot/heirline.nvim)
+- Statusline with [Lualine](https://github.com/nvim-lualine/lualine.nvim)
+- Winbar with [Dropbar](https://github.com/Bekaboo/dropbar.nvim)
+- Bufferline with [Bufferline](https://github.com/akinsho/bufferline.nvim)
 - Terminal with [Toggleterm](https://github.com/akinsho/toggleterm.nvim)
 - Fuzzy finding with [Telescope](https://github.com/nvim-telescope/telescope.nvim)
 - Syntax highlighting with [Treesitter](https://github.com/nvim-treesitter/nvim-treesitter)
