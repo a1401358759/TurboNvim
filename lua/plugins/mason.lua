@@ -17,6 +17,9 @@ return {
       "bash-language-server",
       "typescript-language-server",
       "tailwindcss-language-server",
+      "dockerfile-language-server",
+      "docker-compose-language-service",
+      "hadolint",
       -- "python-lsp-server",
 
       -- dap

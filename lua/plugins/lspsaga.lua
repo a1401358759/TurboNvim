@@ -2,6 +2,7 @@ return {
   "glepnir/lspsaga.nvim",
   lazy = true,
   event = "LspAttach",
+  -- commit = "2dfb17926cc20b9aa12a76bc318c141b3fe95d0e",
   dependencies = {
     { "nvim-tree/nvim-web-devicons" },
     --Please make sure you install markdown and markdown_inline parser

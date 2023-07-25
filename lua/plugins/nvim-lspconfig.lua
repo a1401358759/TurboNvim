@@ -53,6 +53,8 @@ return {
       lsp_servers[server_name] = settings
     end
     lsp_servers.tailwindcss = { filetypes_exclude = { "markdown" } }
+    lsp_servers.dockerls = {}
+    lsp_servers.docker_compose_language_service = {}
 
     return {
       diagnostics = {

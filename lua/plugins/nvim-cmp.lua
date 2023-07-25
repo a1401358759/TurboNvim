@@ -74,9 +74,10 @@ return {
     "hrsh7th/cmp-buffer",
     "hrsh7th/cmp-path",
     "hrsh7th/cmp-cmdline",
-    "saadparwaiz1/cmp_luasnip",
     "hrsh7th/vim-vsnip",
     "hrsh7th/cmp-vsnip",
+    "hrsh7th/cmp-emoji",
+    "saadparwaiz1/cmp_luasnip",
     "friendly-snippets",
     "tzachar/cmp-tabnine",
     { "roobert/tailwindcss-colorizer-cmp.nvim", config = true },
@@ -163,10 +164,11 @@ return {
         { name = "buffer" },
         { name = "path" },
         { name = "vsnip" },
+        { name = "emoji" },
         -- { name = "cmp_tabnine" },
-        { name = "treesitter" },
-        { name = "vim-dadbod-completion" },
-        { name = "nvim_lsp_signature_help" },
+        -- { name = "treesitter" },
+        -- { name = "vim-dadbod-completion" },
+        -- { name = "nvim_lsp_signature_help" },
       }),
       formatting = {
         fields = { "kind", "abbr", "menu" },
@@ -176,6 +178,9 @@ return {
           item.menu = string.format(" [%s]", string.upper(source))
           return item
         end,
+      },
+      experimental = {
+        ghost_text = true,
       },
       window = {
         completion = cmp.config.window.bordered({
