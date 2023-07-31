@@ -11,8 +11,6 @@ return {
         exclude_filetypes = {
           aerial = true,
           dashboard = true,
-          lazyterm = true,
-          toggleterm = true,
         },
         style = {
           { fg = "#806d9c" },
@@ -20,12 +18,14 @@ return {
       },
       indent = {
         enable = true,
+        notify = false,
         -- chars = { "│" },
         chars = { "│", "¦", "┆", "┊" },
         use_treesitter = false,
       },
       blank = {
         enable = false,
+        notify = false,
         chars = {
           "․",
         },
@@ -35,6 +35,7 @@ return {
       },
       line_num = {
         enable = true,
+        notify = false,
         use_treesitter = true,
         style = { fg = "#806d9c" },
       },
