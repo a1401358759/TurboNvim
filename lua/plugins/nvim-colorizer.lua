@@ -1,6 +1,7 @@
 return {
   "NvChad/nvim-colorizer.lua",
-  lazy = false,
+  lazy = true,
+  event = { "UIEnter" },
   config = function()
     require("colorizer").setup({
       filetypes = { "*" },

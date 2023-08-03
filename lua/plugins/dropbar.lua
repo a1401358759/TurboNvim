@@ -1,6 +1,7 @@
 return {
   "Bekaboo/dropbar.nvim",
-  lazy = false,
+  lazy = true,
+  event = { "UIEnter" },
   enabled = true,
   config = function()
     require("dropbar").setup({})
