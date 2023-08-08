@@ -82,14 +82,10 @@ return {
     "tzachar/cmp-tabnine",
     { "roobert/tailwindcss-colorizer-cmp.nvim", config = true },
   },
+  ---@diagnostic disable-next-line: unused-local
   opts = function(_, opts)
     setCompHL()
-    -- original LazyVim kind icon formatter
-    local format_kinds = opts.formatting.format
-    opts.formatting.format = function(entry, item)
-      format_kinds(entry, item) -- add icons
-      return require("tailwindcss-colorizer-cmp").formatter(entry, item)
-    end
+    vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
     local cmp = require("cmp")
     local icons = require("config.icons").icons.lspkind
 
@@ -180,7 +176,9 @@ return {
         end,
       },
       experimental = {
-        ghost_text = true,
+        ghost_text = {
+          hl_group = "CmpGhostText",
+        },
       },
       window = {
         completion = cmp.config.window.bordered({

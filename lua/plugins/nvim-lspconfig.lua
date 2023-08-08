@@ -1,20 +1,18 @@
----@diagnostic disable: unused-local
 return {
   "neovim/nvim-lspconfig",
   lazy = true,
   event = { "BufReadPre", "BufNewFile" },
   dependencies = {
-    { "folke/neoconf.nvim", cmd = "Neoconf", config = true },
-    { "folke/neodev.nvim", opts = { experimental = { pathStrict = true } } },
+    { "folke/neoconf.nvim", cmd = "Neoconf", config = false, dependencies = { "nvim-lspconfig" } },
+    { "folke/neodev.nvim", opts = {} },
     "mason.nvim",
     "williamboman/mason-lspconfig.nvim",
-    {
-      "hrsh7th/cmp-nvim-lsp",
-      cond = function()
-        return require("lazyvim.util").has("nvim-cmp")
-      end,
-    },
-    "b0o/SchemaStore.nvim",
+    -- {
+    --   "hrsh7th/cmp-nvim-lsp",
+    --   cond = function()
+    --     return require("lazyvim.util").has("nvim-cmp")
+    --   end,
+    -- },
     {
       "SmiteshP/nvim-navbuddy",
       dependencies = {
@@ -25,7 +23,7 @@ return {
         lsp = { auto_attach = true },
         window = {
           border = "rounded",
-          size = "70%",
+          size = "80%",
         },
       },
     },
@@ -34,17 +32,15 @@ return {
   ---@class PluginLspOpts
   opts = function()
     local mason_lspconfig = require("mason-lspconfig")
-    local configs_dir_path = "server_configs/"
     local lsp_servers = {}
     for _, server_name in ipairs(mason_lspconfig.get_installed_servers()) do
-      local require_path = string.format("%s%s", configs_dir_path, server_name)
+      local require_path = string.format("%s%s", "server_configs/", server_name)
       local ok, settings = pcall(require, require_path)
-
       if not ok then
         settings = {}
       end
 
-      settings.on_attach = function(client, bufnr)
+      settings.on_attach = function(client, _)
         client.server_capabilities.documentFormattingProvider = false
         -- close semantic tokens
         client.server_capabilities.semanticTokensProvider = nil
@@ -70,6 +66,9 @@ return {
         },
         severity_sort = true,
       },
+      inlay_hints = {
+        enabled = false,
+      },
       -- add any global capabilities here
       capabilities = {},
       -- Automatically format on save
@@ -82,11 +81,9 @@ return {
         timeout_ms = nil,
       },
       -- LSP Server Settings
-      ---@type lspconfig.options
       servers = lsp_servers,
       -- you can do any additional lsp server setup here
       -- return true if you don't want this server to be setup with lspconfig
-      ---@type table<string, fun(server:string, opts:_.lspconfig.options):boolean?>
       setup = {
         -- example to setup with typescript.nvim
         -- tsserver = function(_, opts)
@@ -103,7 +100,7 @@ return {
             return not vim.tbl_contains(opts.filetypes_exclude, ft)
           end, tw.default_config.filetypes)
         end,
-        gopls = function(_, opts)
+        gopls = function(_, _)
           -- workaround for gopls not supporting semanticTokensProvider
           -- https://github.com/golang/go/issues/54531#issuecomment-1464982242
           require("lazyvim.util").on_attach(function(client, _)
@@ -127,8 +124,14 @@ return {
     }
   end,
   ---@param opts PluginLspOpts
-  config = function(plugin, opts)
+  config = function(_, opts)
     local Util = require("lazyvim.util")
+
+    if Util.has("neoconf.nvim") then
+      ---@diagnostic disable-next-line: redefined-local
+      local plugin = require("lazy.core.config").spec.plugins["neoconf.nvim"]
+      require("neoconf").setup(require("lazy.core.plugin").values(plugin, "opts", false))
+    end
     -- setup autoformat
     require("lazyvim.plugins.lsp.format").setup(opts)
     -- setup formatting and keymaps
@@ -136,11 +139,34 @@ return {
       require("lazyvim.plugins.lsp.keymaps").on_attach(client, buffer)
     end)
 
+    local register_capability = vim.lsp.handlers["client/registerCapability"]
+    ---@diagnostic disable-next-line: duplicate-set-field
+    vim.lsp.handlers["client/registerCapability"] = function(err, res, ctx)
+      local ret = register_capability(err, res, ctx)
+      local client_id = ctx.client_id
+      ---@type lsp.Client
+      local client = vim.lsp.get_client_by_id(client_id)
+      local buffer = vim.api.nvim_get_current_buf()
+      require("lazyvim.plugins.lsp.keymaps").on_attach(client, buffer)
+      return ret
+    end
+
     -- diagnostics
     for name, icon in pairs(require("lazyvim.config").icons.diagnostics) do
       name = "DiagnosticSign" .. name
       vim.fn.sign_define(name, { text = icon, texthl = name, numhl = "" })
     end
+
+    local inlay_hint = vim.lsp.buf.inlay_hint or vim.lsp.inlay_hint
+
+    if opts.inlay_hints.enabled and inlay_hint then
+      Util.on_attach(function(client, buffer)
+        if client.supports_method("textDocument/inlayHint") then
+          inlay_hint(buffer, true)
+        end
+      end)
+    end
+
     if type(opts.diagnostics.virtual_text) == "table" and opts.diagnostics.virtual_text.prefix == "icons" then
       opts.diagnostics.virtual_text.prefix = vim.fn.has("nvim-0.10.0") == 0 and "●"
         or function(diagnostic)
@@ -156,11 +182,12 @@ return {
     vim.diagnostic.config(vim.deepcopy(opts.diagnostics))
 
     local servers = opts.servers
+    local has_cmp, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
     local capabilities = vim.tbl_deep_extend(
       "force",
       {},
       vim.lsp.protocol.make_client_capabilities(),
-      require("cmp_nvim_lsp").default_capabilities(),
+      has_cmp and cmp_nvim_lsp.default_capabilities() or {},
       opts.capabilities or {}
     )
     local function setup(server)
