@@ -20,7 +20,6 @@ return {
       reload_on_bufenter = false,
       respect_buf_cwd = false,
       on_attach = "disable",
-      remove_keymaps = false,
       select_prompts = false,
       update_cwd = true,
       notify = {
@@ -38,11 +37,6 @@ return {
         number = false,
         relativenumber = false,
         signcolumn = "yes",
-        mappings = {
-          list = {
-            { key = "?", action = "toggle_help" },
-          },
-        },
       },
       diagnostics = {
         enable = false,
