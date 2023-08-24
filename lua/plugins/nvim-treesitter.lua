@@ -1,3 +1,4 @@
+---@diagnostic disable: missing-fields
 return {
   "nvim-treesitter/nvim-treesitter",
   version = false, -- last release is way too old and doesn't work on Windows
@@ -87,6 +88,7 @@ return {
       "vim",
       "vue",
       "yaml",
+      "regex",
     },
     -- incremental selection
     incremental_selection = {

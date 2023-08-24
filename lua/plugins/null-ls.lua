@@ -8,7 +8,7 @@ return {
     return {
       sources = {
         -- nls.builtins.formatting.prettierd,
-        nls.builtins.diagnostics.flake8,
+        nls.builtins.diagnostics.flake8.with({ extra_args = { "--max-line-length", "120" } }),
         nls.builtins.formatting.gofmt,
         nls.builtins.formatting.shfmt,
         nls.builtins.formatting.prettier,

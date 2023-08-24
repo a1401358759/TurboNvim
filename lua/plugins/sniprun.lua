@@ -17,10 +17,9 @@ return {
 
     --# you can combo different display modes as desired
     display = {
-      "Classic", --# display results in the command-line  area
+      -- "Classic", --# display results in the command-line  area
       "VirtualTextOk", --# display ok results as virtual text (multiline is shortened)
-
-      -- "VirtualTextErr",          --# display error results as virtual text
+      "VirtualTextErr",          --# display error results as virtual text
       -- "TempFloatingWindow",      --# display results in a floating window
       -- "LongTempFloatingWindow",  --# same as above, but only long results. To use with VirtualText__
       "Terminal", --# display results in a vertical split
@@ -30,7 +29,7 @@ return {
     },
 
     display_options = {
-      terminal_width = 45, --# change the terminal display option width
+      terminal_width = 50, --# change the terminal display option width
       notification_timeout = 5, --# timeout for nvim_notify output
     },
 
@@ -53,7 +52,7 @@ return {
     inline_messages = 0, --# inline_message (0/1) is a one-line way to display messages
     --# to workaround sniprun not being able to display anything
 
-    borders = "rounded", --# display borders around floating windows
+    borders = "single", --# display borders around floating windows
     --# possible values are 'none', 'single', 'double', or 'shadow'
     live_mode_toggle = "off", --# live mode toggle, see Usage - Running for more info
   },
