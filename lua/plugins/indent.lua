@@ -17,18 +17,17 @@ return {
         },
         style = {
           { fg = "#806d9c" },
-          { fg = "#c21f30" }, -- this fg is used to highlight wrong chunk
         },
         textobject = "",
         max_file_size = 1024 * 1024,
-        error_sign = true,
+        error_sign = false,
       },
       indent = {
         enable = true,
         use_treesitter = false,
         notify = false,
-        -- chars = { "│" },
-        chars = { "│", "¦", "┆", "┊" },
+        chars = { "┊" },
+        -- chars = { "│", "¦", "┆", "┊" },
         style = {
           { fg = vim.fn.synIDattr(vim.fn.synIDtrans(vim.fn.hlID("Whitespace")), "fg", "gui") },
         },

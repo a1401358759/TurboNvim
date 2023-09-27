@@ -78,26 +78,6 @@ return {
       desc = "Close target buffer",
     },
     {
-      "<A-h>",
-      "<cmd>BufferLineCyclePrev<cr>",
-      desc = "Go to left buffer",
-    },
-    {
-      "<A-l>",
-      "<cmd>BufferLineCycleNext<cr>",
-      desc = "Go to right buffer",
-    },
-    {
-      "<A-e>",
-      "<cmd>BufferLineMovePrev<cr>",
-      desc = "Move current buffer to left",
-    },
-    {
-      "<A-y>",
-      "<cmd>BufferLineMoveNext<cr>",
-      desc = "Move current buffer to right",
-    },
-    {
       "<leader>bn",
       "<cmd>enew<cr>",
       desc = "Create new buffer",
@@ -183,6 +163,16 @@ return {
       "<A-9>",
       "<cmd>BufferLineGoToBuffer 9<cr>",
       desc = "Go to buffer 9",
+    },
+    {
+      "<A-h>",
+      "<cmd>BufferLineMovePrev<cr>",
+      desc = "Move current buffer to left",
+    },
+    {
+      "<A-l>",
+      "<cmd>BufferLineMoveNext<cr>",
+      desc = "Move current buffer to right",
     },
   },
 }

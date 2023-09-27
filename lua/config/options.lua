@@ -56,6 +56,7 @@ opt.iskeyword = "@,48-57,_,192-255"
 opt.linebreak = true
 opt.fileencodings = "ucs-bom,utf-8,gbk,big5,gb18030,latin1"
 opt.cmdheight = 0
+opt.fillchars = { eob = " " }
 
 if vim.fn.has("nvim-0.9.0") == 1 then
   opt.splitkeep = "screen"

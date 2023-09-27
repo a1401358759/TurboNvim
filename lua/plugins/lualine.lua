@@ -17,14 +17,26 @@ return {
     end
 
     return {
+      -- options = {
+      --   theme = "auto",
+      --   icons_enabled = true,
+      --   component_separators = { left = "", right = "" },
+      --   section_separators = { left = "", right = "" },
+      --   globalstatus = true,
+      --   disabled_filetypes = { statusline = { "dashboard", "lazy", "alpha" } },
+      -- },
       options = {
-        theme = "auto",
+        theme = "visual_studio_code",
         icons_enabled = true,
-        component_separators = { left = "", right = "" },
-        section_separators = { left = "", right = "" },
+        component_separators = { left = "", right = "" },
+        section_separators = { left = "", right = "" },
+        disabled_filetypes = {},
         globalstatus = true,
-        disabled_filetypes = { statusline = { "dashboard", "lazy", "alpha" } },
+        refresh = {
+          statusline = 100,
+        },
       },
+      -- sections = require("visual_studio_code").get_lualine_sections(),
       sections = {
         lualine_a = {
           {
@@ -68,18 +80,15 @@ return {
         },
         lualine_y = {
           { "encoding" },
-          { "progress", separator = "  ", padding = { left = 1, right = 0 } },
+          -- { "progress", separator = "  ", padding = { left = 1, right = 0 } },
+          { "progress", separator = " ", padding = { left = 1, right = 0 } },
           { "location", padding = { left = 0, right = 1 } },
         },
         lualine_z = {
-          function()
-            return " " .. os.date("%R")
-          end,
-          -- {
-          --   "datetime",
-          --   -- options: default, us, uk, iso, or your own format string ("%H:%M", etc..)
-          --   style = "%A, %b%d %H:%M", -- '%A, %B %d | %H:%M' '%Y-%m-%d'
-          -- },
+          {
+            "datetime",
+            style = " " .. "%H:%M", -- '%A, %B %d | %H:%M' '%Y-%m-%d'
+          },
         },
       },
       extensions = { "nvim-tree", "aerial", "toggleterm", "nvim-dap-ui" },
