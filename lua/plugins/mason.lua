@@ -4,8 +4,13 @@ return {
   opts = {
     ensure_installed = {
       -- lsp
-      "gopls",
       "pyright",
+      -- "python-lsp-server",
+      "gopls",
+      "impl",
+      "gofumpt",
+      "gomodifytags",
+      "goimports-reviser",
       "css-lsp",
       "cssmodules-language-server",
       "json-lsp",
@@ -20,7 +25,6 @@ return {
       "dockerfile-language-server",
       "docker-compose-language-service",
       "hadolint",
-      -- "python-lsp-server",
 
       -- dap
       "delve",

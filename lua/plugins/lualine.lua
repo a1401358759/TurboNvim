@@ -30,11 +30,8 @@ return {
         icons_enabled = true,
         component_separators = { left = "", right = "" },
         section_separators = { left = "", right = "" },
-        disabled_filetypes = {},
+        disabled_filetypes = { statusline = { "dashboard", "lazy", "alpha" } },
         globalstatus = true,
-        refresh = {
-          statusline = 100,
-        },
       },
       -- sections = require("visual_studio_code").get_lualine_sections(),
       sections = {

@@ -1,3 +1,4 @@
+---@diagnostic disable: param-type-mismatch, duplicate-set-field
 return {
   "neovim/nvim-lspconfig",
   lazy = true,
@@ -128,7 +129,6 @@ return {
     local Util = require("lazyvim.util")
 
     if Util.has("neoconf.nvim") then
-      ---@diagnostic disable-next-line: redefined-local
       local plugin = require("lazy.core.config").spec.plugins["neoconf.nvim"]
       require("neoconf").setup(require("lazy.core.plugin").values(plugin, "opts", false))
     end
@@ -140,11 +140,12 @@ return {
     end)
 
     local register_capability = vim.lsp.handlers["client/registerCapability"]
-    ---@diagnostic disable-next-line: duplicate-set-field
+
     vim.lsp.handlers["client/registerCapability"] = function(err, res, ctx)
       local ret = register_capability(err, res, ctx)
       local client_id = ctx.client_id
       ---@type lsp.Client
+      ---@diagnostic disable-next-line: assign-type-mismatch
       local client = vim.lsp.get_client_by_id(client_id)
       local buffer = vim.api.nvim_get_current_buf()
       require("lazyvim.plugins.lsp.keymaps").on_attach(client, buffer)
@@ -190,6 +191,7 @@ return {
       has_cmp and cmp_nvim_lsp.default_capabilities() or {},
       opts.capabilities or {}
     )
+
     local function setup(server)
       local server_opts = vim.tbl_deep_extend("force", {
         capabilities = vim.deepcopy(capabilities),
@@ -206,7 +208,8 @@ return {
       end
       require("lspconfig")[server].setup(server_opts)
     end
-    -- get all the servers that are available thourgh mason-lspconfig
+
+    -- get all the servers that are available through mason-lspconfig
     local have_mason, mlsp = pcall(require, "mason-lspconfig")
     local all_mslp_servers = {}
     if have_mason then
