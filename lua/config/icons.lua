@@ -2,15 +2,15 @@ local M = {}
 
 M.icons = {
   diagnostics = {
-    Error = " ",
-    Warn = " ",
-    Hint = " ",
-    Info = " ",
+    Error = "",
+    Warn = "",
+    Hint = "",
+    Info = "",
   },
   git = {
-    added = " ",
-    modified = " ",
-    removed = " ",
+    added = "",
+    modified = "",
+    removed = "",
   },
   lspkind = {
     BreakStatement = "󰙧",
@@ -20,7 +20,7 @@ M.icons = {
     Namespace = "",
     Text = "",
     Method = "",
-    Function = "",
+    Function = "󰊕",
     Constructor = "",
     Field = "",
     Variable = "󰀫",
@@ -32,7 +32,7 @@ M.icons = {
     Value = "",
     Enum = "",
     Keyword = "󰌋",
-    Snippet = "",
+    Snippet = "󰩫",
     Color = "",
     File = "",
     Reference = "",
@@ -55,7 +55,7 @@ M.icons = {
     Watch = "",
     Package = "",
     Copilot = "",
-    Codeium = "",
+    Codeium = "󰘦",
     TabNine = "󱚠",
   },
 }

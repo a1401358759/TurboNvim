@@ -31,6 +31,7 @@ local setCompHL = function()
   vim.api.nvim_set_hl(0, "CmpItemKindSnippet", { fg = fgdark, bg = "#D4A959" })
   vim.api.nvim_set_hl(0, "CmpItemKindFolder", { fg = fgdark, bg = "#D4A959" })
   vim.api.nvim_set_hl(0, "CmpItemKindTabNine", { fg = fgdark, bg = "#D4A959" })
+  vim.api.nvim_set_hl(0, "CmpItemKindCodeium", { fg = fgdark, bg = "#D4A959" })
 
   vim.api.nvim_set_hl(0, "CmpItemKindMethod", { fg = fgdark, bg = "#6C8ED4" })
   vim.api.nvim_set_hl(0, "CmpItemKindValue", { fg = fgdark, bg = "#6C8ED4" })
@@ -79,7 +80,7 @@ return {
     "hrsh7th/cmp-emoji",
     "saadparwaiz1/cmp_luasnip",
     "friendly-snippets",
-    "tzachar/cmp-tabnine",
+    -- "tzachar/cmp-tabnine",
     { "roobert/tailwindcss-colorizer-cmp.nvim", config = true },
   },
   ---@diagnostic disable-next-line: unused-local
@@ -87,7 +88,6 @@ return {
     setCompHL()
     vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
     local cmp = require("cmp")
-    local icons = require("config.icons").icons.lspkind
 
     return {
       -- Insert or Replace
@@ -156,21 +156,21 @@ return {
       },
       sources = cmp.config.sources({
         { name = "nvim_lsp" },
-        { name = "luasnip" },
+        { name = "codeium" },
         { name = "buffer" },
-        { name = "path" },
+        { name = "luasnip" },
         { name = "vsnip" },
+        { name = "path" },
         { name = "emoji" },
         -- { name = "cmp_tabnine" },
-        -- { name = "treesitter" },
-        -- { name = "vim-dadbod-completion" },
-        -- { name = "nvim_lsp_signature_help" },
       }),
       formatting = {
         fields = { "kind", "abbr", "menu" },
         format = function(entry, item)
+          -- local icons = require("lazyvim.config").icons.kinds
+          local icons = require("config.icons").icons.lspkind
           local source = entry.source.name
-          item.kind = " " .. (icons[item.kind] or "") .. " "
+          item.kind = string.format(" %s ", icons[item.kind], item.kind)
           item.menu = string.format(" [%s]", string.upper(source))
           return item
         end,
@@ -188,5 +188,11 @@ return {
         documentation = cmp.config.window.bordered(),
       },
     }
+  end,
+  config = function(_, opts)
+    for _, source in ipairs(opts.sources) do
+      source.group_index = source.group_index or 1
+    end
+    require("cmp").setup(opts)
   end,
 }
