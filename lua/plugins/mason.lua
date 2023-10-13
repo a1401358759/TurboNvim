@@ -5,6 +5,7 @@ return {
     ensure_installed = {
       -- lsp
       "pyright",
+      "ruff-lsp",
       -- "python-lsp-server",
       "gopls",
       "impl",
@@ -29,11 +30,6 @@ return {
       -- dap
       "delve",
       "debugpy",
-
-      -- linter
-      -- "pylint",
-      -- "mypy",
-      -- "flake8",
 
       -- formatter
       "shfmt",

@@ -3,6 +3,8 @@
 -- Add any additional options here
 -- This file is automatically loaded by plugins.core
 
+vim.g.autoformat = true
+
 local opt = vim.opt
 
 opt.cmdheight = 0

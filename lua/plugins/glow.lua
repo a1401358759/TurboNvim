@@ -4,7 +4,7 @@
 return {
   "ellisonleao/glow.nvim",
   cmd = "Glow",
-  config = function()
+  init = function()
     vim.g.glow_border = "rounded"
     --vim.g.glow_width = 120
     --vim.g.glow_use_pager = true
@@ -14,6 +14,8 @@ return {
     else
       vim.g.glow_style = "dark"
     end
+  end,
+  config = function()
     require("glow").setup({
       glow_binary_path = "~/.local/bin",
     })
