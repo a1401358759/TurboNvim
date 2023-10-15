@@ -80,7 +80,6 @@ return {
     "hrsh7th/cmp-emoji",
     "saadparwaiz1/cmp_luasnip",
     "friendly-snippets",
-    -- "tzachar/cmp-tabnine",
     { "roobert/tailwindcss-colorizer-cmp.nvim", config = true },
   },
   ---@diagnostic disable-next-line: unused-local
@@ -143,7 +142,6 @@ return {
       sorting = {
         priority_weight = 2,
         comparators = {
-          -- require("cmp_tabnine.compare"),
           cmp.config.compare.offset,
           cmp.config.compare.exact,
           cmp.config.compare.score,
@@ -162,7 +160,6 @@ return {
         { name = "vsnip" },
         { name = "path" },
         { name = "emoji" },
-        -- { name = "cmp_tabnine" },
       }),
       formatting = {
         fields = { "kind", "abbr", "menu" },
