@@ -80,6 +80,7 @@ return {
     "hrsh7th/cmp-emoji",
     "saadparwaiz1/cmp_luasnip",
     "friendly-snippets",
+    "tzachar/cmp-tabnine",
     { "roobert/tailwindcss-colorizer-cmp.nvim", config = true },
   },
   ---@diagnostic disable-next-line: unused-local
@@ -140,8 +141,8 @@ return {
       }),
       -- define sorting rules
       sorting = {
-        priority_weight = 2,
         comparators = {
+          require("cmp_tabnine.compare"),
           cmp.config.compare.offset,
           cmp.config.compare.exact,
           cmp.config.compare.score,
@@ -155,6 +156,7 @@ return {
       sources = cmp.config.sources({
         { name = "nvim_lsp" },
         { name = "codeium" },
+        { name = "cmp_tabnine" },
         { name = "buffer" },
         { name = "luasnip" },
         { name = "vsnip" },
@@ -167,6 +169,9 @@ return {
           -- local icons = require("lazyvim.config").icons.kinds
           local icons = require("config.icons").icons.lspkind
           local source = entry.source.name
+          if source == "cmp_tabnine" then
+            source = "tabnine"
+          end
           item.kind = string.format(" %s ", icons[item.kind], item.kind)
           item.menu = string.format(" [%s]", string.upper(source))
           return item

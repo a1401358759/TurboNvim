@@ -35,14 +35,17 @@ return {
         markdown = { { "prettier", "prettierd" } },
         graphql = { { "prettier", "prettierd" } },
         python = { "isort", "black" },
-        go = { "goimports", "gofumpt" },
+        go = { "goimports-reviser", "gofumpt" },
       },
       -- LazyVim will merge the options you set here with builtin formatters.
       -- You can also define any custom formatters here.
       formatters = {
         injected = { options = { ignore_errors = true } },
-        black = { extra_args = { "--max-line-length", "120" } },
-        isort = { extra_args = { "--max-line-length", "120" } },
+        black = { extra_args = { "--line-length", "88" } },
+        -- # Example of using shfmt with extra args
+        -- shfmt = {
+        --   extra_args = { "-i", "2", "-ci" },
+        -- },
       },
     }
   end,

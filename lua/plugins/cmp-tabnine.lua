@@ -1,7 +1,7 @@
 return {
   "tzachar/cmp-tabnine",
   event = { "UIEnter" },
-  build = "./install.sh",
+  build = require("lazyvim.util").is_win() and "pwsh -noni .\\install.ps1" or "./install.sh",
   dependencies = "hrsh7th/nvim-cmp",
   opts = {
     max_lines = 1000,
