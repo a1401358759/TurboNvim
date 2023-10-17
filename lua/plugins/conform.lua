@@ -41,7 +41,7 @@ return {
       -- You can also define any custom formatters here.
       formatters = {
         injected = { options = { ignore_errors = true } },
-        black = { extra_args = { "--line-length", "88" } },
+        black = { prepend_args = { "--line-length", "88" } },
         -- # Example of using shfmt with extra args
         -- shfmt = {
         --   extra_args = { "-i", "2", "-ci" },
