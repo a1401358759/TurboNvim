@@ -17,7 +17,9 @@ return {
     return {
       -- LazyVim will use these options when formatting with the conform.nvim formatter
       format = {
-        timeout_ms = 1000,
+        timeout_ms = 3000,
+        async = false,
+        quiet = true,
       },
       formatters_by_ft = {
         lua = { "stylua" },
@@ -41,7 +43,7 @@ return {
       -- You can also define any custom formatters here.
       formatters = {
         injected = { options = { ignore_errors = true } },
-        black = { prepend_args = { "--line-length", "88" } },
+        black = { prepend_args = { "--line-length", "88", "--fast" } },
         -- # Example of using shfmt with extra args
         -- shfmt = {
         --   extra_args = { "-i", "2", "-ci" },
