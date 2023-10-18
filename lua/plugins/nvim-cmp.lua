@@ -60,11 +60,16 @@ local setCompHL = function()
     "DropBarIconKindReference",
     "DropBarIconKindStruct",
     "DropBarIconKindTypeParameter",
+    "DropBarIconKindType",
+    "DropBarIconKindUnit",
+    "DropBarKindVariable",
+    "DropBarKindIdentifier",
   }
   for _, v in pairs(dropbar_groups) do
     vim.api.nvim_set_hl(0, v, { link = "" })
   end
 end
+setCompHL()
 
 return {
   "hrsh7th/nvim-cmp",
@@ -85,7 +90,6 @@ return {
   },
   ---@diagnostic disable-next-line: unused-local
   opts = function(_, opts)
-    setCompHL()
     vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
     local cmp = require("cmp")
 

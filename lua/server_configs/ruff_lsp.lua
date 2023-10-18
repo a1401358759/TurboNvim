@@ -5,7 +5,7 @@ return {
     cmd = { "ruff-lsp" },
     settings = {
       args = {
-        "--ignore=E501",
+        "--ignore=E402,E501",
         "--line-length=120",
       },
     },
