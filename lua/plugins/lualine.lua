@@ -17,23 +17,14 @@ return {
     end
 
     return {
-      -- options = {
-      --   theme = "auto",
-      --   icons_enabled = true,
-      --   component_separators = { left = "", right = "" },
-      --   section_separators = { left = "", right = "" },
-      --   globalstatus = true,
-      --   disabled_filetypes = { statusline = { "dashboard", "lazy", "alpha" } },
-      -- },
       options = {
-        theme = "visual_studio_code",
+        theme = "auto",
         icons_enabled = true,
-        component_separators = { left = "", right = "" },
-        section_separators = { left = "", right = "" },
-        disabled_filetypes = { statusline = { "dashboard", "lazy", "alpha" } },
+        component_separators = { left = "", right = "" },
+        section_separators = { left = "", right = "" },
         globalstatus = true,
+        disabled_filetypes = { statusline = { "dashboard", "lazy", "alpha" } },
       },
-      -- sections = require("visual_studio_code").get_lualine_sections(),
       sections = {
         lualine_a = {
           {
@@ -77,8 +68,7 @@ return {
         },
         lualine_y = {
           { "encoding" },
-          -- { "progress", separator = "  ", padding = { left = 1, right = 0 } },
-          { "progress", separator = " ", padding = { left = 1, right = 0 } },
+          { "progress", separator = "  ", padding = { left = 1, right = 0 } },
           { "location", padding = { left = 0, right = 1 } },
         },
         lualine_z = {

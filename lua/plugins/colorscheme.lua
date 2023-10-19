@@ -70,7 +70,7 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "visual_studio_code",
+      colorscheme = "tokyonight",
     },
   },
 }
