@@ -17,7 +17,20 @@ return {
     -- LazyVim extension to easily override linter options
     -- or add custom linters.
     linters = {
-      flake8 = { extra_args = { "--max-line-length", "120" } },
+      flake8 = {
+        cmd = "flake8",
+        stdin = true,
+        args = {
+          "--format=%(path)s:%(row)d:%(col)d:%(code)s:%(text)s",
+          "--no-show-source",
+          "--max-line-length",
+          "120",
+          "--extend-ignore",
+          "E121,E123,E126,E226,E24,E501,E704,W503,W504",
+          "-",
+        },
+        ignore_exitcode = true,
+      },
       -- -- Example of using selene only when a selene.toml file is present
       -- selene = {
       --   -- `condition` is another LazyVim extension that allows you to
