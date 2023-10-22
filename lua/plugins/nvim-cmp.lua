@@ -101,8 +101,8 @@ return {
           if source == "cmp_tabnine" then
             source = "tabnine"
           end
-          item.kind = string.format("%s %s", icons[item.kind], item.kind)
-          item.menu = string.format(" [%s]", string.upper(source))
+          item.kind = icons[item.kind] .. item.kind
+          item.menu = string.format(" (%s)", string.upper(source))
           return item
         end,
       },
