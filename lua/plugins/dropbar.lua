@@ -6,6 +6,36 @@ local judge_version = function()
   end
 end
 
+local remove_dropba_color = function()
+  -- 防止 dropbar 显示 cmp 的背景颜色
+  local dropbar_groups = {
+    "DropBarIconKindVariable",
+    "DropBarIconKindClass",
+    "DropBarIconKindConstructor",
+    "DropBarIconKindDeclaration",
+    "DropBarIconKindEnum",
+    "DropBarIconKindEnumMember",
+    "DropBarIconKindEvent",
+    "DropBarIconKindField",
+    "DropBarIconKindIdentifier",
+    "DropBarIconKindInterface",
+    "DropBarIconKindMethod",
+    "DropBarIconKindModule",
+    "DropBarIconKindPackage",
+    "DropBarIconKindProperty",
+    "DropBarIconKindReference",
+    "DropBarIconKindStruct",
+    "DropBarIconKindTypeParameter",
+    "DropBarIconKindType",
+    "DropBarIconKindUnit",
+    "DropBarKindVariable",
+    "DropBarKindIdentifier",
+  }
+  for _, v in pairs(dropbar_groups) do
+    vim.api.nvim_set_hl(0, v, { link = "" })
+  end
+end
+
 return {
   "Bekaboo/dropbar.nvim",
   lazy = true,
@@ -13,5 +43,6 @@ return {
   cond = judge_version(),
   config = function()
     require("dropbar").setup({})
+    remove_dropba_color()
   end,
 }
