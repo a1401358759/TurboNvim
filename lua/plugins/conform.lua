@@ -32,7 +32,7 @@ return {
         svelte = { { "prettier", "prettierd" } },
         css = { { "prettier", "prettierd" } },
         html = { { "prettier", "prettierd" } },
-        json = { { "prettier", "prettierd" } },
+        json = { { "fixjson", "prettier", "prettierd" } },
         yaml = { { "prettier", "prettierd" } },
         markdown = { { "prettier", "prettierd" } },
         graphql = { { "prettier", "prettierd" } },

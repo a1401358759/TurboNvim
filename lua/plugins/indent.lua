@@ -1,3 +1,4 @@
+---@diagnostic disable: missing-fields
 return {
   "shellRaining/hlchunk.nvim",
   event = { "UIEnter" },
@@ -8,13 +9,6 @@ return {
         enable = true,
         use_treesitter = true,
         notify = false,
-        chars = {
-          horizontal_line = "─",
-          vertical_line = "│",
-          left_top = "╭",
-          left_bottom = "╰",
-          right_arrow = ">",
-        },
         style = {
           { fg = "#806d9c" },
         },
@@ -28,30 +22,14 @@ return {
         notify = false,
         chars = { "┊" },
         -- chars = { "│", "¦", "┆", "┊" },
-        style = {
-          { fg = vim.fn.synIDattr(vim.fn.synIDtrans(vim.fn.hlID("Whitespace")), "fg", "gui") },
-        },
       },
       line_num = {
         enable = true,
         use_treesitter = false,
-        notify = false,
         style = "#806d9c",
       },
       blank = {
         enable = false,
-        use_treesitter = false,
-        notify = false,
-        chars = { "․" },
-        style = {
-          vim.fn.synIDattr(vim.fn.synIDtrans(vim.fn.hlID("Whitespace")), "fg", "gui"),
-        },
-      },
-      context = {
-        enable = false,
-        notify = false,
-        use_treesitter = false,
-        chars = {},
       },
     })
   end,

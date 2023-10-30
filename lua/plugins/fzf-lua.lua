@@ -6,19 +6,13 @@ return {
   config = function()
     -- calling `setup` is optional for customization
     require("fzf-lua").setup({
-      global_resume = true,
-      global_resume_query = true,
       winopts = {
-        height = 1,
-        width = 1,
+        border = "rounded",
         preview = {
-          layout = "vertical",
+          layout = "horizontal",
           scrollbar = "float",
         },
         fullscreen = true,
-        vertical = "down:45%", -- up|down:size
-        horizontal = "right:60%", -- right|left:size
-        hidden = "nohidden",
       },
       keymap = {
         builtin = {

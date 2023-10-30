@@ -1,15 +1,16 @@
 ---@diagnostic disable: missing-fields
 return {
   "dnlhc/glance.nvim",
-  event = { "UIEnter" },
+  event = { "BufEnter" },
   config = function()
     local glance = require("glance")
     local actions = glance.actions
     glance.setup({
+      detached = true,
       border = {
-        enable = false, -- Show window borders. Only horizontal borders allowed
-        top_char = "―",
-        bottom_char = "―",
+        enable = true, -- Show window borders. Only horizontal borders allowed
+        top_char = "─",
+        bottom_char = "─",
       },
       mappings = {
         list = {
