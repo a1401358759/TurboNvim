@@ -17,11 +17,6 @@ return {
   event = "VeryLazy",
   keys = {
     {
-      "<leader>tc",
-      "<cmd>Translate<cr>",
-      desc = "Echo translation in the cmdline",
-    },
-    {
       "<leader>tw",
       "<cmd>TranslateW<cr>",
       desc = "Display translation in a window",
@@ -31,10 +26,5 @@ return {
     --   "<cmd>TranslateR<cr>",
     --   desc = "Replace the text with translation",
     -- },
-    {
-      "<leader>tx",
-      "<cmd>TranslateX<cr>",
-      desc = "Translate the text in clipboard",
-    },
   },
 }

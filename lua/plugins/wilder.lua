@@ -4,13 +4,7 @@ return {
   event = "CmdlineEnter", -- 懒加载：首次进入cmdline时载入
   config = function()
     local wilder = require("wilder")
-    wilder.setup({
-      modes = { ":", "/", "?" },
-      next_key = 0,
-      previous_key = 0,
-      reject_key = 0,
-      accept_key = 0,
-    })
+    wilder.setup({ modes = { ":", "/", "?" } })
     vim.api.nvim_command("silent! UpdateRemotePlugins") -- 需要载入一次py依赖 不然模糊过滤等失效
     -- 设置source
     wilder.set_option("pipeline", {

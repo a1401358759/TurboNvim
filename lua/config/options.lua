@@ -3,7 +3,7 @@
 -- Add any additional options here
 -- This file is automatically loaded by plugins.core
 
-vim.g.autoformat = true
+vim.g.autoformat = false
 
 local opt = vim.opt
 
