@@ -125,9 +125,3 @@ map("n", "<leader>ft", "<cmd>TodoTelescope<cr>", { desc = "Find TODO" })
 -- change colorscheme
 map("n", "<leader>cs", "<cmd>Telescope colorscheme<CR>", { desc = "Telescope colorscheme" })
 map("n", "<leader>mp", "<cmd>MarkdownPreviewToggle<CR>", { desc = "Markdown Preview" })
-
--- tabs
-map("n", "<leader>tc", "<cmd>tabnew<CR>", { desc = "Tab Create" })
-map("n", "<leader>tp", "<cmd>tabprevious<CR>", { desc = "Tab Previous" })
-map("n", "<leader>tn", "<cmd>tabnext<CR>", { desc = "Tab Next" })
-map("n", "<leader>tx", "<cmd>tabclose<CR>", { desc = "Tab Close" })

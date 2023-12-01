@@ -31,6 +31,7 @@ local setCompHL = function()
   vim.api.nvim_set_hl(0, "CmpItemKindInterface", { fg = fgdark, bg = "#58B5A8" })
   vim.api.nvim_set_hl(0, "CmpItemKindColor", { fg = fgdark, bg = "#58B5A8" })
   vim.api.nvim_set_hl(0, "CmpItemKindTypeParameter", { fg = fgdark, bg = "#58B5A8" })
+  vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
 end
 
 return {
@@ -52,7 +53,6 @@ return {
   },
   ---@diagnostic disable-next-line: unused-local
   opts = function(_, opts)
-    vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
     local cmp = require("cmp")
 
     return {

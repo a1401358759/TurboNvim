@@ -11,6 +11,12 @@ M.icons = {
     added = "",
     modified = "",
     removed = "",
+    untracked = "",
+    ignored = "",
+    -- unstaged = "󰄱",
+    unstaged = "",
+    staged = "",
+    conflict = "",
   },
   lspkind = {
     BreakStatement = "󰙧 ",
