@@ -5,7 +5,6 @@ return {
     options = {
       themable = true,
       show_close_icon = true,
-      -- ordinal
       numbers = "ordinal",
       buffer_close_icon = "",
       modified_icon = "●",
@@ -15,17 +14,22 @@ return {
       -- separator_style = "thin",
       separator_style = { "", "" },
       always_show_bufferline = true,
+      diagnostics_indicator = function(count, level, diagnostics_dict, context)
+        return ""
+      end,
       offsets = {
         {
           filetype = "neo-tree",
           text = "EXPLORER",
           text_align = "center",
+          highlight = "Directory",
           padding = 0,
         },
         {
           filetype = "NvimTree",
           text = "EXPLORER",
           text_align = "center",
+          highlight = "Directory",
           padding = 0,
         },
         {

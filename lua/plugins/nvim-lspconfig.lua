@@ -1,4 +1,3 @@
----@diagnostic disable: param-type-mismatch, duplicate-set-field
 return {
   "neovim/nvim-lspconfig",
   lazy = true,
@@ -10,7 +9,6 @@ return {
     "williamboman/mason-lspconfig.nvim",
     version = false, -- last release is way too old
   },
-  ---@class PluginLspOpts
   opts = function()
     local mason_lspconfig = require("mason-lspconfig")
     local lsp_servers = {}

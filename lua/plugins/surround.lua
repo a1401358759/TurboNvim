@@ -1,11 +1,22 @@
+---@diagnostic disable: missing-fields
 return {
-  "ur4ltz/surround.nvim",
-  lazy = true,
-  event = "VeryLazy",
+  "kylechui/nvim-surround",
+  event = "BufReadPost",
   config = function()
-    require"surround".setup {
-      mappings_style = "surround",
-      space_on_closing_char = true,
-    }
-  end
+    require("nvim-surround").setup({
+      keymaps = {
+        insert = "<C-g>s",
+        insert_line = "<C-g>S",
+        normal = "ys",
+        normal_cur = "yss",
+        normal_line = "yS",
+        normal_cur_line = "ySS",
+        visual = "S",
+        visual_line = "gS",
+        delete = "ds",
+        change = "cs",
+        change_line = "cS",
+      },
+    })
+  end,
 }
