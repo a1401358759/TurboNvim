@@ -66,6 +66,7 @@
   "project.nvim": { "branch": "main", "commit": "8c6bad7d22eef1b71144b401c9f74ed01526a4fb" },
   "rainbow-delimiters.nvim": { "branch": "master", "commit": "cc5f3a00819b3bef2789f95443057613ed7c42f8" },
   "rayso.nvim": { "branch": "main", "commit": "debedaa7f0ed754ab16a292a45bbae8dcc3410c5" },
+  "satellite.nvim": { "branch": "main", "commit": "7911fa8137c77258ba509ba875ea52c6d59737e8" },
   "scope.nvim": { "branch": "main", "commit": "cd27af77ad61a7199af5c28d27013fb956eb0e3e" },
   "sqlite.lua": { "branch": "master", "commit": "b7e28c8463254c46a8e61c52d27d6a2040492fc3" },
   "switch.vim": { "branch": "main", "commit": "68d269301181835788dcdcb6d5bca337fb954395" },
