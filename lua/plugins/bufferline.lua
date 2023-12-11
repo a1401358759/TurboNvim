@@ -6,13 +6,13 @@ return {
       themable = true,
       show_close_icon = true,
       numbers = "ordinal",
-      buffer_close_icon = "",
+      buffer_close_icon = "",
       modified_icon = "●",
       close_icon = "",
       left_trunc_marker = "",
       right_trunc_marker = "",
-      -- separator_style = "thin",
       separator_style = { "", "" },
+      indicator_icon = " ",
       always_show_bufferline = true,
       diagnostics_indicator = function(count, level, diagnostics_dict, context)
         return ""
