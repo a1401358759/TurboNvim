@@ -2,7 +2,7 @@ return {
   "nvim-lualine/lualine.nvim",
   event = "VeryLazy",
   opts = function()
-    local icons = require("lazyvim.config").icons
+    local icons = require("config.icons").icons
 
     local function diff_source()
       ---@diagnostic disable-next-line: undefined-field
@@ -23,7 +23,7 @@ return {
         -- component_separators = { left = "", right = "" },
         -- section_separators = { left = "", right = "" },
         component_separators = "|",
-        section_separators = { left = "", right = "" },
+        section_separators = { left = icons.ui.PowerlineRightRound, right = icons.ui.PowerlineLeftRound },
         globalstatus = true,
         disabled_filetypes = { statusline = { "dashboard", "lazy", "alpha" } },
       },
