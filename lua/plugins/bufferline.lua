@@ -70,7 +70,7 @@ return {
     { "<leader>bP", "<Cmd>BufferLineGroupClose ungrouped<CR>", desc = "Delete non-pinned buffers" },
     {
       "<c-q>",
-      "<cmd>BufferDelete<CR>",
+      "<cmd>bdelete<CR>",
       desc = "Close current buffer",
     },
     {
@@ -107,7 +107,7 @@ return {
       function()
         vim.cmd("BufferLineCloseLeft")
         vim.cmd("BufferLineCloseRight")
-        vim.cmd("BufferDelete")
+        vim.cmd("bdelete")
       end,
       desc = "Close all buffers",
     },

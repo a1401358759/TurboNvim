@@ -12,9 +12,7 @@ opt.fillchars = { eob = " " }
 
 -- custmo config
 local options = {}
-options.transparent = false
-options.float_border = true
-options.show_winbar = true
+options.transparent = true
 
 -- auto command manager
 options.auto_save = true
