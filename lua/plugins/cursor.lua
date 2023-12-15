@@ -13,7 +13,7 @@ return {
       linehl = nil, -- Highlights the line under the cursor, similar to 'cursorline'. "CursorLine" is recommended. Disabled in fancy mode.
 
       fancy = {
-        enable = true, -- enable fancy mode
+        enable = false, -- enable fancy mode
         head = { cursor = "▷", texthl = "SmoothCursor", linehl = nil }, -- false to disable fancy head
         body = {
           { cursor = "󰝥", texthl = "SmoothCursorRed" },

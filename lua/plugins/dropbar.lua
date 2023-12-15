@@ -45,5 +45,6 @@ return {
     require("dropbar").setup({})
     remove_dropba_color()
     vim.cmd([[hi WinBar guibg=NONE]])
+    vim.cmd([[hi WinBarNC guibg=NONE]])
   end,
 }

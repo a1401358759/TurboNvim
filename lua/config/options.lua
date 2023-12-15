@@ -5,19 +5,20 @@
 
 vim.g.autoformat = false
 
-local opt = vim.opt
-
-opt.cmdheight = 0
-opt.fillchars = { eob = " " }
-
--- custmo config
+-- customize config
 local options = {}
 options.transparent = true
-
--- auto command manager
 options.auto_save = true
 options.auto_reload = false
 options.auto_switch_input = true
 options.auto_restore_cursor_position = true
 options.auto_remove_new_lines_comment = true
+
+local opt = vim.opt
+opt.cmdheight = 0
+opt.fillchars = { eob = " " }
+if options.transparent then
+  opt.cursorline = false
+end
+
 return options

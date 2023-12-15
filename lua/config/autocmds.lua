@@ -110,8 +110,16 @@ vim.api.nvim_create_user_command("MakeDirectory", function()
   end
 end, { desc = "Create directory if it doesn't exist" })
 
+-- set cursor word、cursorline、pumblend style
 if options.transparent then
+  vim.cmd([[ hi IlluminatedWordText guibg=#32302f gui=bold ]])
+  vim.cmd([[ hi IlluminatedWordRead guibg=#32302f gui=bold ]])
+  vim.cmd([[ hi IlluminatedWordWrite guibg=#32302f  gui=bold ]])
   vim.cmd([[ hi NotifyBackground guibg = #000000 ]])
-  vim.cmd([[ hi Cursorline guibg = NONE ]])
+  vim.cmd([[ hi Cursorline guibg=NONE ]])
   vim.cmd([[ set pumblend=0 ]])
+else
+  vim.cmd([[ hi IlluminatedWordText guibg=#504945 gui=bold ]])
+  vim.cmd([[ hi IlluminatedWordRead guibg=#504945 gui=bold ]])
+  vim.cmd([[ hi IlluminatedWordWrite guibg=#504945  gui=bold ]])
 end
