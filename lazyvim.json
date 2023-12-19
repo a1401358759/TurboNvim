@@ -1,6 +1,5 @@
 {
   "extras": [
-    "lazyvim.plugins.extras.coding.codeium",
     "lazyvim.plugins.extras.coding.tabnine",
     "lazyvim.plugins.extras.dap.core",
     "lazyvim.plugins.extras.editor.symbols-outline",

@@ -1,6 +1,5 @@
 return {
   "theniceboy/joshuto.nvim",
-  very_lazy = true,
   cmd = "Joshuto",
   config = function()
     vim.g.joshuto_floating_window_scaling_factor = 0.8
@@ -8,6 +7,6 @@ return {
     vim.g.joshuto_floating_window_winblend = 0
   end,
   keys = {
-    { "<leader>tr", ":Joshuto<cr>", desc = "Joshuto float" },
+    { "<leader>tr", "<cmd>Joshuto<cr>", desc = "Joshuto float" },
   },
 }

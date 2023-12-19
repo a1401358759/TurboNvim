@@ -9,7 +9,7 @@ return {
   },
   {
     "tamton-aquib/duck.nvim",
-    event = { "UIEnter" },
+    lazy = true,
     config = function()
       vim.keymap.set("n", "<leader>dd", function()
         require("duck").hatch()

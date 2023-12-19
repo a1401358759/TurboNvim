@@ -1,7 +1,11 @@
+local Util = require("lazyvim.util")
+
 return {
   "tzachar/cmp-tabnine",
-  event = { "UIEnter" },
-  build = require("lazyvim.util").is_win() and "pwsh -noni .\\install.ps1" or "./install.sh",
+  build = {
+    Util.is_win() and "pwsh -noni .\\install.ps1" or "./install.sh",
+    ":CmpTabnineHub",
+  },
   dependencies = "hrsh7th/nvim-cmp",
   opts = {
     max_lines = 1000,
@@ -9,7 +13,6 @@ return {
     sort = true,
   },
   config = function(_, opts)
-    local tabnine = require("cmp_tabnine.config")
-    tabnine:setup(opts)
+    require("cmp_tabnine.config"):setup(opts)
   end,
 }

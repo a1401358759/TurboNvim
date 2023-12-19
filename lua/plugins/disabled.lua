@@ -1,7 +1,6 @@
 return {
   { "ggandor/flit.nvim", enabled = false },
   { "ggandor/leap.nvim", enabled = false },
-  { "echasnovski/mini.surround", enabled = false },
   { "echasnovski/mini.ai", enabled = false },
   { "echasnovski/mini.indentscope", enabled = false },
   { "echasnovski/mini.bufremove", enabled = false },

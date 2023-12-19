@@ -1,8 +1,6 @@
 ---@diagnostic disable: missing-fields
 return {
   "akinsho/toggleterm.nvim",
-  lazy = true,
-  event = "VeryLazy",
   version = "*",
   opts = function()
     local M = {}
