@@ -17,8 +17,6 @@ options.auto_remove_new_lines_comment = true
 local opt = vim.opt
 opt.cmdheight = 0
 opt.fillchars = { eob = " " }
-if options.transparent then
-  opt.cursorline = false
-end
+opt.cursorline = true
 
 return options

@@ -49,6 +49,7 @@ return {
     "saadparwaiz1/cmp_luasnip",
     "friendly-snippets",
     "tzachar/cmp-tabnine",
+    "lukas-reineke/cmp-rg",
     { "roobert/tailwindcss-colorizer-cmp.nvim", config = true },
   },
   ---@diagnostic disable-next-line: unused-local
@@ -124,6 +125,7 @@ return {
         { name = "codeium" },
         { name = "cmp_tabnine" },
         { name = "buffer" },
+        { name = "rg", keyword_length = 3 },
         { name = "luasnip" },
         { name = "vsnip" },
         { name = "path" },

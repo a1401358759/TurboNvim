@@ -30,6 +30,6 @@ return {
     { "<leader>fb", "<cmd>Telescope buffers<CR>", desc = "Find all buffers" },
     { "<leader>f/", "<cmd>Telescope search_history<CR>", desc = "Find all search history" },
     { "<leader>f:", "<cmd>Telescope command_history<CR>", desc = "Find all command history" },
-    { "<leader>fe", "<cmd>Telescope diagnostics<CR>", desc = "Find diagnostics in the current workspace" },
+    { "<leader>fd", "<cmd>Telescope diagnostics<CR>", desc = "Find diagnostics in the current workspace" },
   },
 }

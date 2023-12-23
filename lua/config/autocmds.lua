@@ -128,16 +128,17 @@ vim.api.nvim_create_user_command("BufferDelete", function()
   vim.cmd(force and "bd!" or ("bp | bd! %s"):format(vim.api.nvim_get_current_buf()))
 end, { desc = "Delete the current Buffer while maintaining the window layout" })
 
+-- line number column is not displayed cursorline
+vim.api.nvim_create_autocmd({ "FileType" }, {
+  callback = function()
+    vim.cmd([[hi! link CursorLineNr LineNr]])
+  end,
+})
+
 -- set cursor word、cursorline、pumblend style
 if options.transparent then
-  vim.cmd([[ hi IlluminatedWordText guibg=#32302f gui=bold ]])
-  vim.cmd([[ hi IlluminatedWordRead guibg=#32302f gui=bold ]])
-  vim.cmd([[ hi IlluminatedWordWrite guibg=#32302f  gui=bold ]])
-  vim.cmd([[ hi NotifyBackground guibg = #000000 ]])
-  vim.cmd([[ hi Cursorline guibg=NONE ]])
-  vim.cmd([[ set pumblend=0 ]])
-else
-  vim.cmd([[ hi IlluminatedWordText guibg=#504945 gui=bold ]])
-  vim.cmd([[ hi IlluminatedWordRead guibg=#504945 gui=bold ]])
-  vim.cmd([[ hi IlluminatedWordWrite guibg=#504945  gui=bold ]])
+  vim.cmd([[
+    hi NotifyBackground guibg = #000000
+    set pumblend=0
+  ]])
 end
