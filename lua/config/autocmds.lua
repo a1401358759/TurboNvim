@@ -131,14 +131,9 @@ end, { desc = "Delete the current Buffer while maintaining the window layout" })
 -- line number column is not displayed cursorline
 vim.api.nvim_create_autocmd({ "FileType" }, {
   callback = function()
-    vim.cmd([[hi! link CursorLineNr LineNr]])
+    if options.transparent then
+      vim.api.nvim_set_hl(0, "NotifyBackground", { bg = "#000000" })
+    end
+    vim.api.nvim_set_hl(0, "CursorLineNr", { link = "LineNr" })
   end,
 })
-
--- set cursor word、cursorline、pumblend style
-if options.transparent then
-  vim.cmd([[
-    hi NotifyBackground guibg = #000000
-    set pumblend=0
-  ]])
-end

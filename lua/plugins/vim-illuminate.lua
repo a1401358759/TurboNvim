@@ -1,5 +1,3 @@
-local options = require("config.options")
-
 return {
   "RRethy/vim-illuminate",
   event = "LazyFile",
@@ -34,18 +32,16 @@ return {
     -- set cursorword gui
     vim.api.nvim_create_autocmd({ "FileType" }, {
       callback = function()
+        local options = require("config.options")
+        local hl_groups = { "IlluminatedWordText", "IlluminatedWordRead", "IlluminatedWordWrite" }
         if options.transparent then
-          vim.cmd([[
-            hi IlluminatedWordText guibg=#32302f gui=bold
-            hi IlluminatedWordRead guibg=#32302f gui=bold
-            hi IlluminatedWordWrite guibg=#32302f gui=bold
-          ]])
+          for _, hl_group in pairs(hl_groups) do
+            vim.api.nvim_set_hl(0, hl_group, { bg = "#32302f", bold = true })
+          end
         else
-          vim.cmd([[
-            hi IlluminatedWordText guibg=#504945 gui=bold
-            hi IlluminatedWordRead guibg=#504945 gui=bold
-            hi IlluminatedWordWrite guibg=#504945 gui=bold
-          ]])
+          for _, hl_group in pairs(hl_groups) do
+            vim.api.nvim_set_hl(0, hl_group, { bg = "#504945", bold = true })
+          end
         end
       end,
     })
