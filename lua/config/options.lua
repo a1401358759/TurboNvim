@@ -13,6 +13,7 @@ options.auto_reload = false
 options.auto_switch_input = true
 options.auto_restore_cursor_position = true
 options.auto_remove_new_lines_comment = true
+options.use_ai_plugins = true
 
 local opt = vim.opt
 opt.cmdheight = 0
