@@ -83,6 +83,24 @@ return {
     end,
   },
   {
+    "gbprod/nord.nvim",
+    config = function()
+      require("nord").setup({
+        transparent = options.transparent, -- Enable this to disable setting the background color
+        styles = {
+          comments = { italic = true },
+          keywords = {},
+          functions = {},
+          variables = {},
+        },
+        colorblind = {
+          enable = false,
+          preserve_background = false,
+        },
+      })
+    end,
+  },
+  {
     "LazyVim/LazyVim",
     opts = {
       colorscheme = "gruvbox",
