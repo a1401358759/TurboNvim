@@ -32,14 +32,14 @@ return {
           {
             "mode",
             fmt = function(str)
-              return " " .. str
+              return icons.ui.NeoVim .. str
             end,
           },
         },
         lualine_b = {
           {
             "branch",
-            icon = "",
+            icon = icons.ui.Branch,
           },
         },
         lualine_c = {
@@ -80,7 +80,20 @@ return {
           },
         },
       },
-      extensions = { "nvim-tree", "aerial", "toggleterm", "nvim-dap-ui" },
+      extensions = {
+        "nvim-tree",
+        "aerial",
+        "toggleterm",
+        "nvim-dap-ui",
+        "lazy",
+        "man",
+        "mason",
+        "overseer",
+        "quickfix",
+        "trouble",
+        "neo-tree",
+        "symbols-outline",
+      },
     }
   end,
 }

@@ -1,3 +1,4 @@
+---@diagnostic disable: missing-fields
 local setCompHL = function()
   local fgdark = "#2E3440"
   vim.api.nvim_set_hl(0, "CmpItemAbbrMatch", { fg = "#82AAFF", bg = "NONE", bold = true })
@@ -53,10 +54,16 @@ return {
     { "roobert/tailwindcss-colorizer-cmp.nvim", config = true },
   },
   ---@diagnostic disable-next-line: unused-local
-  opts = function(_, opts)
+  config = function(_, opts)
     local cmp = require("cmp")
+    local luasnip = require("luasnip")
+    local has_words_before = function()
+      unpack = unpack or table.unpack
+      local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+      return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+    end
 
-    return {
+    cmp.setup({
       -- Insert or Replace
       confirmation = {
         default_behavior = cmp.ConfirmBehavior.Insert,
@@ -84,27 +91,25 @@ return {
         ["<Tab>"] = cmp.mapping(function(fallback)
           if cmp.visible() then
             cmp.select_next_item()
-          elseif require("luasnip").expand_or_jumpable() then
-            vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-expand-or-jump", true, true, true), "")
+            -- You could replace the expand_or_jumpable() calls with expand_or_locally_jumpable()
+            -- they way you will only jump inside the snippet region
+          elseif luasnip.expand_or_jumpable() then
+            luasnip.expand_or_jump()
+          elseif has_words_before() then
+            cmp.complete()
           else
             fallback()
           end
-        end, {
-          "i",
-          "s",
-        }),
+        end, { "i", "s" }),
         ["<S-Tab>"] = cmp.mapping(function(fallback)
           if cmp.visible() then
             cmp.select_prev_item()
-          elseif require("luasnip").jumpable(-1) then
-            vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-jump-prev", true, true, true), "")
+          elseif luasnip.jumpable(-1) then
+            luasnip.jump(-1)
           else
             fallback()
           end
-        end, {
-          "i",
-          "s",
-        }),
+        end, { "i", "s" }),
       }),
       -- define sorting rules
       sorting = {
@@ -156,15 +161,7 @@ return {
         }),
         documentation = cmp.config.window.bordered(),
       },
-    }
-  end,
-  config = function(_, opts)
-    for _, source in ipairs(opts.sources) do
-      source.group_index = source.group_index or 1
-    end
-
-    local cmp = require("cmp")
-    cmp.setup(opts)
+    })
     -- Set configuration for specific filetype.
     cmp.setup.filetype("gitcommit", {
       sources = cmp.config.sources({
@@ -179,6 +176,7 @@ return {
       mapping = cmp.mapping.preset.cmdline(),
       sources = {
         { name = "buffer" },
+        { name = "rg" },
       },
     })
 
