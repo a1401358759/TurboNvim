@@ -128,7 +128,7 @@ vim.api.nvim_create_user_command("BufferDelete", function()
   vim.cmd(force and "bd!" or ("bp | bd! %s"):format(vim.api.nvim_get_current_buf()))
 end, { desc = "Delete the current Buffer while maintaining the window layout" })
 
--- line number column is not displayed cursorline
+-- line number column does not display cursorline
 vim.api.nvim_create_autocmd({ "FileType" }, {
   callback = function()
     if options.transparent then
