@@ -32,11 +32,18 @@ return {
         svelte = { { "prettier", "prettierd" } },
         css = { { "prettier", "prettierd" } },
         html = { { "prettier", "prettierd" } },
-        json = { { "fixjson", "prettier", "prettierd" } },
+        json = { { "jq", "fixjson", "prettier", "prettierd" } },
         yaml = { { "prettier", "prettierd" } },
         markdown = { { "prettier", "prettierd" } },
         graphql = { { "prettier", "prettierd" } },
-        python = { "isort", "black" },
+        python = function(bufnr)
+          if require("conform").get_formatter_info("ruff_format", bufnr).available then
+            -- return { "ruff_format" }
+            return { "isort", "black" }
+          else
+            return { "isort", "black" }
+          end
+        end,
         go = { "goimports-reviser", "gofumpt" },
       },
       -- LazyVim will merge the options you set here with builtin formatters.

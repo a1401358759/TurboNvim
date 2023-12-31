@@ -39,7 +39,7 @@ return {
         lualine_b = {
           {
             "branch",
-            icon = icons.ui.Branch,
+            icon = string.gsub(icons.ui.Branch, "%s+", ""),
           },
         },
         lualine_c = {
