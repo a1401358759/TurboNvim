@@ -110,6 +110,20 @@ return {
             fallback()
           end
         end, { "i", "s" }),
+        ["<Down>"] = cmp.mapping(function(fallback)
+          if cmp.visible() then
+            cmp.select_next_item()
+          else
+            fallback()
+          end
+        end, { "i", "s" }),
+        ["<Up>"] = cmp.mapping(function(fallback)
+          if cmp.visible() then
+            cmp.select_prev_item()
+          else
+            fallback()
+          end
+        end, { "i", "s" }),
       }),
       -- define sorting rules
       sorting = {
@@ -162,6 +176,52 @@ return {
         documentation = cmp.config.window.bordered(),
       },
     })
+
+    local cmp_mapping = {
+      ["<Tab>"] = {
+        c = function()
+          if cmp.visible() then
+            cmp.select_next_item()
+          else
+            cmp.complete()
+          end
+        end,
+      },
+      ["<S-Tab>"] = {
+        c = function()
+          if cmp.visible() then
+            cmp.select_prev_item()
+          else
+            cmp.complete()
+          end
+        end,
+      },
+      ["<Down>"] = {
+        c = function(fallback)
+          if cmp.visible() then
+            cmp.select_next_item()
+          else
+            fallback()
+          end
+        end,
+      },
+      ["<Up>"] = {
+        c = function(fallback)
+          if cmp.visible() then
+            cmp.select_prev_item()
+          else
+            fallback()
+          end
+        end,
+      },
+      ["<C-e>"] = {
+        c = cmp.mapping.abort(),
+      },
+      ["<CR>"] = {
+        c = cmp.mapping.confirm({ select = false }),
+      },
+    }
+
     -- Set configuration for specific filetype.
     cmp.setup.filetype("gitcommit", {
       sources = cmp.config.sources({
@@ -173,7 +233,7 @@ return {
 
     -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
     cmp.setup.cmdline({ "/", "?" }, {
-      mapping = cmp.mapping.preset.cmdline(),
+      mapping = cmp_mapping,
       sources = {
         { name = "buffer" },
         { name = "rg" },
@@ -182,7 +242,7 @@ return {
 
     -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
     cmp.setup.cmdline(":", {
-      mapping = cmp.mapping.preset.cmdline(),
+      mapping = cmp_mapping,
       sources = cmp.config.sources({
         { name = "path" },
       }, {
