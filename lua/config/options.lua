@@ -20,8 +20,7 @@ local opt = vim.opt
 opt.cmdheight = 0
 opt.fillchars = { eob = " " }
 opt.cursorline = options.show_cursorline
-if options.transparent then
-  opt.pumblend = 0
-end
+opt.winblend = 0
+opt.pumblend = 0
 
 return options

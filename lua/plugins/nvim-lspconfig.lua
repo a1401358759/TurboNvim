@@ -33,7 +33,7 @@ return {
     return {
       diagnostics = {
         underline = true,
-        update_in_insert = false,
+        update_in_insert = true,
         severity_sort = true,
         virtual_text = false,
       },

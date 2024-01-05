@@ -34,7 +34,7 @@ return {
       callback = function()
         local hl_groups = { "IlluminatedWordText", "IlluminatedWordRead", "IlluminatedWordWrite" }
         for _, hl_group in pairs(hl_groups) do
-          vim.api.nvim_set_hl(0, hl_group, { bg = "#504945", bold = true })
+          vim.api.nvim_set_hl(0, hl_group, { fg = "NONE", bg = "#504945" })
         end
       end,
     })
