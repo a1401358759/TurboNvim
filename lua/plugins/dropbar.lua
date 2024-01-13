@@ -34,6 +34,8 @@ local remove_dropba_color = function()
   for _, v in pairs(dropbar_groups) do
     vim.api.nvim_set_hl(0, v, { link = "" })
   end
+  vim.api.nvim_set_hl(0, "WinBar", { bg = "NONE" })
+  vim.api.nvim_set_hl(0, "WinBarNC", { bg = "NONE" })
 end
 
 return {
@@ -44,7 +46,5 @@ return {
   config = function()
     require("dropbar").setup({})
     remove_dropba_color()
-    vim.cmd([[hi WinBar guibg=NONE]])
-    vim.cmd([[hi WinBarNC guibg=NONE]])
   end,
 }

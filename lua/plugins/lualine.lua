@@ -1,7 +1,8 @@
 return {
   "nvim-lualine/lualine.nvim",
-  event = "VeryLazy",
-  opts = function()
+  dependencies = { "nvim-tree/nvim-web-devicons" },
+  config = function()
+    local lualine = require("lualine")
     local icons = require("config.icons").icons
 
     local function diff_source()
@@ -16,16 +17,61 @@ return {
       end
     end
 
-    return {
+    local colors = {
+      darkgray = "#16161d",
+      gray = "#928374",
+      innerbg = nil,
+      -- outerbg = "#16161D",
+      outerbg = nil,
+      -- normal = "#7e9cd8", -- for tokyonight
+      normal = "#a89984", -- gor gruvbox
+      insert = "#98bb6c",
+      visual = "#ffa066",
+      replace = "#e46876",
+      command = "#e6c384",
+    }
+
+    local my_lualine_theme = {
+      normal = {
+        a = { fg = colors.darkgray, bg = colors.normal, gui = "bold" },
+        b = { fg = colors.gray, bg = colors.outerbg },
+        c = { fg = colors.gray, bg = colors.innerbg },
+      },
+      inactive = {
+        a = { fg = colors.gray, bg = colors.outerbg, gui = "bold" },
+        b = { fg = colors.gray, bg = colors.outerbg },
+        c = { fg = colors.gray, bg = colors.innerbg },
+      },
+      visual = {
+        a = { fg = colors.darkgray, bg = colors.visual, gui = "bold" },
+        b = { fg = colors.gray, bg = colors.outerbg },
+        c = { fg = colors.gray, bg = colors.innerbg },
+      },
+      replace = {
+        a = { fg = colors.darkgray, bg = colors.replace, gui = "bold" },
+        b = { fg = colors.gray, bg = colors.outerbg },
+        c = { fg = colors.gray, bg = colors.innerbg },
+      },
+      insert = {
+        a = { fg = colors.darkgray, bg = colors.insert, gui = "bold" },
+        b = { fg = colors.gray, bg = colors.outerbg },
+        c = { fg = colors.gray, bg = colors.innerbg },
+      },
+      command = {
+        a = { fg = colors.darkgray, bg = colors.command, gui = "bold" },
+        b = { fg = colors.gray, bg = colors.outerbg },
+        c = { fg = colors.gray, bg = colors.innerbg },
+      },
+    }
+
+    -- configure lualine with modified theme
+    lualine.setup({
       options = {
-        theme = "auto",
-        icons_enabled = true,
-        -- component_separators = { left = "", right = "" },
-        -- section_separators = { left = "", right = "" },
+        theme = my_lualine_theme,
         component_separators = "|",
-        section_separators = { left = icons.ui.PowerlineRightRound, right = icons.ui.PowerlineLeftRound },
-        globalstatus = true,
+        section_separators = { left = icons.ui.PowerlineArrowRight, right = icons.ui.PowerlineArrowLeft },
         disabled_filetypes = { statusline = { "dashboard", "lazy", "alpha" } },
+        globalstatus = true,
       },
       sections = {
         lualine_a = {
@@ -36,13 +82,12 @@ return {
             end,
           },
         },
-        lualine_b = {
+        lualine_b = {},
+        lualine_c = {
           {
             "branch",
             icon = string.gsub(icons.ui.Branch, "%s+", ""),
           },
-        },
-        lualine_c = {
           {
             "diagnostics",
             symbols = {
@@ -62,23 +107,15 @@ return {
             },
             source = diff_source,
           },
-          { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
           { "filename", path = 1, symbols = { modified = "  ", readonly = "", unnamed = "" } },
         },
         lualine_x = {
-          { "searchcount" },
-        },
-        lualine_y = {
           { "encoding" },
-          { "progress", padding = { left = 1, right = 1 } },
-          { "location", padding = { left = 1, right = 1 } },
+          { "fileformat" },
+          { "filetype" },
+          { "progress" },
         },
-        lualine_z = {
-          {
-            "datetime",
-            style = " " .. "%H:%M", -- '%A, %B %d | %H:%M' '%Y-%m-%d'
-          },
-        },
+        lualine_y = {},
       },
       extensions = {
         "nvim-tree",
@@ -94,6 +131,6 @@ return {
         "neo-tree",
         "symbols-outline",
       },
-    }
+    })
   end,
 }

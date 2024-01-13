@@ -6,8 +6,9 @@ return {
     icons = {
       group = "",
     },
-    layout = {
-      align = "center",
+    window = {
+      border = "single", -- none, single, double, shadow
+      position = "bottom", -- bottom, top
     },
     defaults = {
       ["gp"] = { name = " Preview" },

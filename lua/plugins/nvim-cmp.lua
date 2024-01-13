@@ -39,7 +39,7 @@ end
 return {
   "hrsh7th/nvim-cmp",
   version = false, -- last release is way too old
-  event = { "InsertEnter", "CmdlineEnter" },
+  event = { "InsertEnter" },
   dependencies = {
     "hrsh7th/cmp-nvim-lsp",
     "hrsh7th/cmp-buffer",
@@ -73,11 +73,11 @@ return {
       cmp.config.compare.order,
     }
     local sources = {
-      { name = "nvim_lsp" },
+      { name = "nvim_lsp", priority = 1000 },
       { name = "buffer" },
-      { name = "rg", keyword_length = 3 },
       { name = "luasnip" },
       { name = "vsnip" },
+      { name = "rg", keyword_length = 3, max_item_count = 5 },
       { name = "path" },
       { name = "emoji" },
     }
