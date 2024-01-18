@@ -107,7 +107,7 @@ return {
             },
             source = diff_source,
           },
-          { "filename", path = 1, symbols = { modified = "  ", readonly = "", unnamed = "" } },
+          { "filename", path = 1 },
         },
         lualine_x = {
           { "encoding" },

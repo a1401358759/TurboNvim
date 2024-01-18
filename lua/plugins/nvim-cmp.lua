@@ -81,12 +81,6 @@ return {
       { name = "path" },
       { name = "emoji" },
     }
-    local options = require("config.options")
-    if options.use_ai_plugins then
-      table.insert(comparators, 0, require("cmp_tabnine.compare"))
-      table.insert(sources, 3, { name = "codeium" })
-      table.insert(sources, 4, { name = "cmp_tabnine" })
-    end
     cmp.setup({
       -- Insert or Replace
       confirmation = {
