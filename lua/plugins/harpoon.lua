@@ -1,7 +1,8 @@
 return {
   "ThePrimeagen/harpoon",
+  lazy = true,
+  event = { "BufReadPost", "BufAdd", "BufNewFile" },
   branch = "harpoon2",
-  event = "VeryLazy",
   dependencies = {
     "nvim-lua/plenary.nvim",
   },

@@ -1,27 +1,18 @@
-local Util = require("lazyvim.util")
 local icons = require("config.icons").icons
 
 return {
   "nvim-neo-tree/neo-tree.nvim",
+  lazy = true,
   branch = "v3.x",
   cmd = "Neotree",
   keys = {
     {
       "<leader>fe",
       function()
-        require("neo-tree.command").execute({ toggle = true, dir = Util.root() })
+        require("neo-tree.command").execute({ source = "filesystem", toggle = true })
       end,
-      desc = "Explorer NeoTree (root dir)",
+      desc = "Explorer NeoTree",
     },
-    {
-      "<leader>fE",
-      function()
-        require("neo-tree.command").execute({ toggle = true, dir = vim.loop.cwd() })
-      end,
-      desc = "Explorer NeoTree (cwd)",
-    },
-    { "<leader>e", "<leader>fe", desc = "Explorer NeoTree (root dir)", remap = true },
-    { "<leader>E", "<leader>fE", desc = "Explorer NeoTree (cwd)", remap = true },
     {
       "<leader>ge",
       function()
@@ -36,6 +27,7 @@ return {
       end,
       desc = "Buffer explorer",
     },
+    { "<leader>e", "<leader>fe", desc = "Explorer NeoTree", remap = true },
   },
   deactivate = function()
     vim.cmd([[Neotree close]])
@@ -66,10 +58,18 @@ return {
       bind_to_cwd = false,
       follow_current_file = { enabled = true },
       use_libuv_file_watcher = true,
+      commands = {
+        copy_file_name = function(state)
+          local node = state.tree:get_node()
+          ---@diagnostic disable-next-line: param-type-mismatch
+          vim.fn.setreg("*", node.name, "c")
+        end,
+      },
     },
     window = {
       mappings = {
         ["<space>"] = "none",
+        ["Y"] = "copy_file_name",
       },
     },
     default_component_configs = {
@@ -92,7 +92,7 @@ return {
   },
   config = function(_, opts)
     local function on_move(data)
-      Util.lsp.on_rename(data.source, data.destination)
+      require("utils.ui").on_rename(data.source, data.destination)
     end
 
     local events = require("neo-tree.events")

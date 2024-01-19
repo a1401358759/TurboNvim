@@ -1,5 +1,7 @@
 return {
   "lewis6991/gitsigns.nvim",
+  lazy = true,
+  cond = vim.fn.executable("git") == 1,
   event = { "BufReadPre", "BufNewFile" },
   opts = {
     signcolumn = true,
@@ -42,7 +44,7 @@ return {
       map("n", "<leader>gS", gs.stage_buffer, "Stage Buffer")
       map("n", "<leader>gu", gs.undo_stage_hunk, "Undo Stage Hunk")
       map("n", "<leader>gR", gs.reset_buffer, "Reset Buffer")
-      map("n", "<leader>gp", gs.preview_hunk, "Preview Hunk")
+      map("n", "<leader>gp", gs.preview_hunk_inline, "Preview Hunk Inline")
       map("n", "<leader>gb", function() gs.blame_line({ full = true }) end, "Blame Line")
       map("n", "<leader>gd", gs.diffthis, "Diff This")
       map("n", "<leader>gD", function() gs.diffthis("~") end, "Diff This ~")
@@ -50,4 +52,7 @@ return {
       map({ "n" }, "<leader>gl", "<cmd>Gitsigns toggle_current_line_blame<cr>", "Toggle current line blame")
     end,
   },
+  config = function(_, opts)
+    require("gitsigns").setup(opts)
+  end,
 }

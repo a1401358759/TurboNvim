@@ -38,7 +38,6 @@ end
 
 return {
   "hrsh7th/nvim-cmp",
-  version = false, -- last release is way too old
   event = { "InsertEnter" },
   dependencies = {
     "hrsh7th/cmp-nvim-lsp",
@@ -49,9 +48,9 @@ return {
     "hrsh7th/cmp-vsnip",
     "hrsh7th/cmp-emoji",
     "saadparwaiz1/cmp_luasnip",
-    "friendly-snippets",
+    "rafamadriz/friendly-snippets",
     "lukas-reineke/cmp-rg",
-    { "roobert/tailwindcss-colorizer-cmp.nvim", config = true },
+    { "L3MON4D3/LuaSnip", version = "v2.*", build = "make install_jsregexp" },
   },
   ---@diagnostic disable-next-line: unused-local
   config = function(_, opts)

@@ -1,5 +1,6 @@
 return {
   "theniceboy/joshuto.nvim",
+  lazy = true,
   cmd = "Joshuto",
   config = function()
     vim.g.joshuto_floating_window_scaling_factor = 0.8

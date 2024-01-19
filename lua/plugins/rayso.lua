@@ -1,6 +1,7 @@
 -- Create code snippets in Neovim using ray.so
 return {
   "TobinPalmer/rayso.nvim",
+  lazy = true,
   cmd = "Rayso",
   config = function()
     require("rayso").setup({

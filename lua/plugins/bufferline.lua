@@ -1,6 +1,7 @@
 return {
   "akinsho/bufferline.nvim",
-  event = "VeryLazy",
+  lazy = true,
+  event = { "BufEnter" },
   opts = {
     options = {
       themable = true,
@@ -65,6 +66,17 @@ return {
       },
     },
   },
+  config = function(_, opts)
+    require("bufferline").setup(opts)
+    -- Fix bufferline when restoring a session
+    vim.api.nvim_create_autocmd("BufAdd", {
+      callback = function()
+        vim.schedule(function()
+          pcall(nvim_bufferline)
+        end)
+      end,
+    })
+  end,
   keys = {
     { "<leader>bp", "<Cmd>BufferLineTogglePin<CR>", desc = "Toggle pin" },
     { "<leader>bP", "<Cmd>BufferLineGroupClose ungrouped<CR>", desc = "Delete non-pinned buffers" },

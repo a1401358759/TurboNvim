@@ -1,6 +1,7 @@
 ---@diagnostic disable: missing-fields
 return {
   "akinsho/toggleterm.nvim",
+  lazy = true,
   version = "*",
   opts = function()
     local M = {}
@@ -143,7 +144,6 @@ return {
       ---@diagnostic disable-next-line: missing-parameter
       M.terminals.lazydocker:toggle()
     end
-
   end,
   keys = {
     {

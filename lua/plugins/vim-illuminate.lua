@@ -1,6 +1,7 @@
 return {
   "RRethy/vim-illuminate",
-  event = "LazyFile",
+  lazy = true,
+  event = { "BufReadPost", "BufAdd", "BufNewFile" },
   opts = {
     delay = 200,
     large_file_cutoff = 2000,

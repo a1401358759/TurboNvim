@@ -1,7 +1,8 @@
 ---@diagnostic disable: missing-fields
 return {
   "dnlhc/glance.nvim",
-  event = { "BufEnter" },
+  lazy = true,
+  event = { "BufReadPost", "BufAdd", "BufNewFile" },
   config = function()
     local glance = require("glance")
     local actions = glance.actions

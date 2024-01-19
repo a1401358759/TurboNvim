@@ -13,9 +13,15 @@ return {
       desc = "Format Injected Langs",
     },
   },
-  opts = function()
-    return {
-      -- LazyVim will use these options when formatting with the conform.nvim formatter
+  config = function()
+    require("conform").setup({
+      format_on_save = function(bufnr)
+        -- Disable with a global or buffer-local variable
+        if not vim.g.autoformat and not vim.b[bufnr].autoformat then
+          return
+        end
+        return { timeout_ms = 500, lsp_fallback = true }
+      end,
       format = {
         timeout_ms = 3000,
         async = false,
@@ -46,8 +52,6 @@ return {
         end,
         go = { "goimports-reviser", "gofumpt" },
       },
-      -- LazyVim will merge the options you set here with builtin formatters.
-      -- You can also define any custom formatters here.
       formatters = {
         injected = { options = { ignore_errors = true } },
         black = { prepend_args = { "--line-length", "88", "--fast" } },
@@ -56,6 +60,6 @@ return {
         --   extra_args = { "-i", "2", "-ci" },
         -- },
       },
-    }
+    })
   end,
 }

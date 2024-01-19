@@ -1,7 +1,7 @@
 -- tab management
 return {
   "tiagovla/scope.nvim",
-  event = { "UIEnter" },
+  lazy = true,
   config = function()
     require("scope").setup({})
   end,

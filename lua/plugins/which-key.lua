@@ -1,16 +1,20 @@
 return {
   "folke/which-key.nvim",
-  event = "VeryLazy",
-  opts = {
-    plugins = { spelling = true },
-    icons = {
-      group = "",
-    },
-    window = {
-      border = "single", -- none, single, double, shadow
-      position = "bottom", -- bottom, top
-    },
-    defaults = {
+  lazy = true,
+  event = { "BufReadPost", "BufAdd", "BufNewFile" },
+  config = function()
+    local wk = require("which-key")
+    wk.setup({
+      plugins = { spelling = true },
+      icons = {
+        group = "",
+      },
+      window = {
+        border = "single", -- none, single, double, shadow
+        position = "bottom", -- bottom, top
+      },
+    })
+    wk.register({
       ["gp"] = { name = " Preview" },
       ["gy"] = { name = " Yank" },
       ["<leader><tab>"] = { name = "󰓩 Tabs" },
@@ -28,6 +32,6 @@ return {
       ["<leader>u"] = { name = " UI" },
       ["<leader>w"] = { name = "󱂬 Windows" },
       ["<leader>x"] = { name = "󰁨 Diagnostics/Quickfix" },
-    },
-  },
+    })
+  end,
 }

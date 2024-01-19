@@ -1,9 +1,10 @@
 ---@diagnostic disable: missing-fields
 return {
   "nvim-treesitter/nvim-treesitter",
+  lazy = true,
+  event = "BufReadPre",
   version = false, -- last release is way too old and doesn't work on Windows
   build = ":TSUpdate",
-  event = { "BufReadPost", "BufNewFile" },
   init = function(plugin)
     -- PERF: add nvim-treesitter queries to the rtp and it's custom query predicates early
     -- This is needed because a bunch of plugins no longer `require("nvim-treesitter")`, which
@@ -45,7 +46,6 @@ return {
     { "<c-space>", desc = "Increment selection" },
     { "<bs>", desc = "Schrink selection", mode = "x" },
   },
-  ---@type TSConfig
   opts = {
     highlight = {
       enable = true,
@@ -135,7 +135,6 @@ return {
       enable = true,
     },
   },
-  ---@param opts TSConfig
   config = function(_, opts)
     if type(opts.ensure_installed) == "table" then
       ---@type table<string, boolean>

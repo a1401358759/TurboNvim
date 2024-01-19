@@ -35,7 +35,17 @@ return {
       threshold = 3, -- Animate only if cursor moves more than this many lines
       disable_float_win = true, -- Disable in floating windows
       enabled_filetypes = nil, -- Enable only for specific file types, e.g., { "lua", "vim" }
-      disabled_filetypes = { "notify", "lazy", "neo-tree", "NvimTree", "glance", "dropbar", "fzf", "" }, -- Disable for these file types, ignored if enabled_filetypes is set. e.g., { "TelescopePrompt", "NvimTree" }
+      disabled_filetypes = {
+        "outline",
+        "notify",
+        "lazy",
+        "neo-tree",
+        "NvimTree",
+        "glance",
+        "dropbar",
+        "fzf",
+        "",
+      }, -- Disable for these file types, ignored if enabled_filetypes is set. e.g., { "TelescopePrompt", "NvimTree" }
     })
   end,
 }

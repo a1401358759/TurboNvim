@@ -1,6 +1,7 @@
 return {
   "sudormrfbin/cheatsheet.nvim",
-  event = "VeryLazy",
+  lazy = true,
+  event = { "BufReadPost", "BufAdd", "BufNewFile" },
   config = function()
     require("cheatsheet").setup({
       -- Whether to show bundled cheatsheets
