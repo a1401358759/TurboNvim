@@ -39,7 +39,7 @@ return {
     local mason_lspconfig = require("mason-lspconfig")
     local servers = { dockerls = {}, docker_compose_language_service = {} }
     for _, server_name in ipairs(mason_lspconfig.get_installed_servers()) do
-      local require_path = string.format("%s%s", "server_configs/", server_name)
+      local require_path = string.format("%s%s", "lspservers/", server_name)
       local ok, settings = pcall(require, require_path)
       if not ok then
         settings = {}
