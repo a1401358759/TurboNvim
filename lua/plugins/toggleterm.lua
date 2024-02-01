@@ -36,10 +36,10 @@ return {
       float_opts = {
         border = "curved", -- 'single' | 'double' | 'shadow' | 'curved'
         width = function()
-          return math.ceil(vim.o.columns * 0.85)
+          return math.ceil(vim.o.columns * 0.9)
         end,
         height = function()
-          return math.ceil(vim.o.lines * 0.8)
+          return math.ceil(vim.o.lines * 0.85)
         end,
       },
     })
@@ -162,6 +162,13 @@ return {
     },
     {
       "<leader>tf",
+      function()
+        require("toggleterm").float_toggle()
+      end,
+      desc = "Toggle floating terminal",
+    },
+    {
+      "<C-/>",
       function()
         require("toggleterm").float_toggle()
       end,

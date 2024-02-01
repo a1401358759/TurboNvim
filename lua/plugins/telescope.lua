@@ -32,6 +32,7 @@ return {
   keys = {
     { "<leader>ff", "<cmd>Telescope find_files<CR>", desc = "Find files in the current workspace" },
     { "<leader>fg", "<cmd>Telescope live_grep<CR>", desc = "Find string in the current workspace" },
+    { "<leader>/", "<cmd>Telescope live_grep<CR>", desc = "Find string in the current workspace" },
     { "<leader>fo", "<cmd>Telescope oldfiles<CR>", desc = "Find telescope history" },
     { "<leader>fh", "<cmd>Telescope resume<CR>", desc = "Find last lookup" },
     { "<leader>ft", "<cmd>Telescope help_tags<CR>", desc = "Find all help document tags" },
