@@ -128,7 +128,7 @@ return {
         vim.keymap.set("n", "gy", function()
           require("telescope.builtin").lsp_type_definitions({ reuse_win = true })
         end, { desc = "Goto T[y]pe Definition" })
-        vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Rename" })
+        vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, { desc = "Rename" })
         vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code Action" })
       end,
     })
