@@ -1,13 +1,13 @@
 -- customize config
 local options = {}
-options.transparent = true
+options.transparent = false
 options.auto_save = true
 options.auto_reload = false
 options.auto_switch_input = true
 options.auto_restore_cursor_position = true
 options.auto_remove_new_lines_comment = true
 options.use_ai_plugins = true
-options.show_cursorline = false
+options.show_cursorline = true
 
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"

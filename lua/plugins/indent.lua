@@ -6,10 +6,7 @@ return {
     lazy = true,
     event = { "BufReadPost", "BufAdd", "BufNewFile" },
     opts = {
-      indent = {
-        char = "│",
-        tab_char = "│",
-      },
+      indent = { char = "▏", tab_char = "▏" },
       scope = { enabled = false },
       exclude = {
         filetypes = {
@@ -43,14 +40,22 @@ return {
 
       require("hlchunk").setup({
         chunk = {
+          enable = false,
           notify = false,
           style = {
             { fg = cb },
             { fg = "#c21f30" }, -- this fg is used to highlight wrong chunk
           },
+          chars = {
+            horizontal_line = "─",
+            vertical_line = "▏",
+            left_top = "╭",
+            left_bottom = "╰",
+            right_arrow = ">",
+          },
         },
         indent = {
-          chars = { "│" },
+          chars = { "▏" },
           style = {
             { fg = vim.fn.synIDattr(vim.fn.synIDtrans(vim.fn.hlID("Whitespace")), "fg", "gui") },
           },
