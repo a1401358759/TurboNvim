@@ -34,7 +34,15 @@ return {
         if vim.g.colors_name == "tokyonight" then
           return "#806d9c"
         else
-          return "#00ffff"
+          return "#3c3a39"
+        end
+      end
+
+      local indent_color = function()
+        if vim.g.colors_name == "gruvbox-baby" then
+          return "#32302f"
+        else
+          return vim.fn.synIDattr(vim.fn.synIDtrans(vim.fn.hlID("Whitespace")), "fg", "gui")
         end
       end
 
@@ -57,7 +65,7 @@ return {
         indent = {
           chars = { "▏" },
           style = {
-            { fg = vim.fn.synIDattr(vim.fn.synIDtrans(vim.fn.hlID("Whitespace")), "fg", "gui") },
+            { fg = indent_color },
           },
         },
         blank = { enable = false },
