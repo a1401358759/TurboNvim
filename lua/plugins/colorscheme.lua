@@ -24,12 +24,25 @@ return {
   {
     "luisiacc/gruvbox-baby",
     lazy = false,
-    opts = {
-      transparent_mode = options.transparent_mode,
-      function_style = "NONE",
-    },
     config = function()
+      local config = require("gruvbox-baby.config")
+      local colors = require("gruvbox-baby.colors")
+      local c = colors.config(config)
+
+      vim.g.gruvbox_baby_use_original_palette = false
       vim.g.gruvbox_baby_function_style = "NONE"
+      vim.g.gruvbox_baby_background_color = "medium"
+      vim.g.gruvbox_baby_transparent_mode = options.transparent
+      vim.g.gruvbox_baby_highlights = {
+        MatchParen = { bg = "#665c54", style = c.none },
+        DiagnosticHint = { fg = "#8ec07c" },
+        DiagnosticInformation = { fg = "#076678" },
+        DiagnosticWarning = { fg = "#FFFF00" },
+        DiagnosticError = { fg = c.error_red },
+        Search = { bg = c.bright_yellow, fg = "#ffffff" },
+        IncSearch = { bg = c.orange, fg = "#ffffff" },
+        CurSearch = { link = "IncSearch" },
+      }
       vim.cmd([[colorscheme gruvbox-baby]])
     end,
   },

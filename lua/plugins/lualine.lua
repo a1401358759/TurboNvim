@@ -23,15 +23,16 @@ return {
       darkgray = "#16161d",
       gray = "#928374",
       innerbg = nil,
-      -- outerbg = "#16161D",
       outerbg = nil,
-      -- normal = "#7e9cd8", -- for tokyonight
-      normal = "#a89984", -- gor gruvbox
+      normal = "#a89984",
       insert = "#98bb6c",
       visual = "#ffa066",
       replace = "#e46876",
       command = "#e6c384",
     }
+    if vim.g.colors_name == "tokyonight" then
+      colors.normal = "#7e9cd8"
+    end
 
     local my_lualine_theme = {
       normal = {

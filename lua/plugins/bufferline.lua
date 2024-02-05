@@ -15,9 +15,7 @@ return {
       separator_style = { "", "" },
       indicator_icon = " ",
       always_show_bufferline = true,
-      diagnostics_indicator = function(count, level, diagnostics_dict, context)
-        return ""
-      end,
+      diagnostics = false,
       offsets = {
         {
           filetype = "neo-tree",
