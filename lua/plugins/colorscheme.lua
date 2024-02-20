@@ -35,10 +35,6 @@ return {
       vim.g.gruvbox_baby_transparent_mode = options.transparent
       vim.g.gruvbox_baby_highlights = {
         MatchParen = { bg = "#665c54", style = c.none },
-        DiagnosticHint = { fg = "#8ec07c" },
-        DiagnosticInformation = { fg = "#076678" },
-        DiagnosticWarning = { fg = "#FFFF00" },
-        DiagnosticError = { fg = c.error_red },
         Search = { bg = c.bright_yellow, fg = "#ffffff" },
         IncSearch = { bg = c.orange, fg = "#ffffff" },
         CurSearch = { link = "IncSearch" },
