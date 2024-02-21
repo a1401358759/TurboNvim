@@ -18,7 +18,6 @@ return {
           folds = true,
         },
       })
-      -- vim.cmd([[colorscheme gruvbox]])
     end,
   },
   {
@@ -39,7 +38,6 @@ return {
         IncSearch = { bg = c.orange, fg = "#ffffff" },
         CurSearch = { link = "IncSearch" },
       }
-      vim.cmd([[colorscheme gruvbox-baby]])
     end,
   },
   {
@@ -55,7 +53,6 @@ return {
     },
     config = function(_, opts)
       require("tokyonight").setup(opts)
-      -- vim.cmd([[colorscheme tokyonight]])
     end,
   },
 }

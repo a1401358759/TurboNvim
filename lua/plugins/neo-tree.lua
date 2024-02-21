@@ -69,7 +69,12 @@ return {
     window = {
       mappings = {
         ["<space>"] = "none",
-        ["Y"] = "copy_file_name",
+        ["Y"] = function(state)
+          local node = state.tree:get_node()
+          local path = node:get_id()
+          ---@diagnostic disable-next-line: param-type-mismatch
+          vim.fn.setreg("+", path, "c")
+        end,
       },
     },
     default_component_configs = {

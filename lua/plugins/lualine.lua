@@ -100,11 +100,36 @@ return {
       table.insert(config.sections.lualine_x, component)
     end
 
+    local mode_color = {
+      n = colors.blue,
+      i = colors.green,
+      v = colors.red,
+      [""] = colors.red,
+      V = colors.red,
+      c = colors.magenta,
+      no = colors.blue,
+      s = colors.orange,
+      S = colors.orange,
+      [""] = colors.orange,
+      ic = colors.yellow,
+      R = colors.violet,
+      Rv = colors.violet,
+      cv = colors.red,
+      ce = colors.red,
+      r = colors.cyan,
+      rm = colors.cyan,
+      ["r?"] = colors.cyan,
+      ["!"] = colors.red,
+      t = colors.red,
+    }
+
     ins_left({
       function()
         return icons.ui.Separator
       end,
-      color = { fg = colors.blue },
+      color = function()
+        return { fg = mode_color[vim.fn.mode()] }
+      end,
       padding = { left = 0, right = 2 },
     })
     ins_left({
@@ -112,28 +137,6 @@ return {
         return ""
       end,
       color = function()
-        local mode_color = {
-          n = colors.red,
-          i = colors.green,
-          v = colors.blue,
-          [""] = colors.blue,
-          V = colors.blue,
-          c = colors.magenta,
-          no = colors.red,
-          s = colors.orange,
-          S = colors.orange,
-          [""] = colors.orange,
-          ic = colors.yellow,
-          R = colors.violet,
-          Rv = colors.violet,
-          cv = colors.red,
-          ce = colors.red,
-          r = colors.cyan,
-          rm = colors.cyan,
-          ["r?"] = colors.cyan,
-          ["!"] = colors.red,
-          t = colors.red,
-        }
         return { fg = mode_color[vim.fn.mode()] }
       end,
       padding = { right = 1 },
@@ -226,7 +229,9 @@ return {
       function()
         return icons.ui.Separator
       end,
-      color = { fg = colors.blue },
+      color = function()
+        return { fg = mode_color[vim.fn.mode()] }
+      end,
       padding = { left = 1 },
     })
     lualine.setup(config)
