@@ -103,6 +103,7 @@ return {
       "vue",
       "yaml",
       "regex",
+      "xml",
     },
     -- incremental selection
     incremental_selection = {
