@@ -18,7 +18,7 @@ return {
       virtual_text = false,
     },
     inlay_hints = {
-      enabled = false,
+      enabled = true,
     },
     -- Enable this to enable the builtin LSP code lenses on Neovim >= 0.10.0
     -- Be aware that you also will need to properly configure your LSP server to
@@ -105,7 +105,7 @@ return {
         -- run manual setup if mason=false or if this is a server that cannot be installed with mason-lspconfig
         if server_opts.mason == false or not vim.tbl_contains(all_mslp_servers, server) then
           setup(server)
-        else
+        elseif server_opts.enabled ~= false then
           ensure_installed[#ensure_installed + 1] = server
         end
       end
