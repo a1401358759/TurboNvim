@@ -10,19 +10,16 @@ return {
       javascriptreact = { "eslint_d" },
       typescriptreact = { "eslint_d" },
       svelte = { "eslint_d" },
-      python = { "flake8" },
+      python = { "ruff" },
       markdown = { "markdownlint" },
       dockerfile = { "hadolint" },
     }
-    local flake8 = require("lint").linters.flake8
-    flake8.args = {
-      "--format=function%(path)s:%(row)d:%(col)d:%(code)s:%(text)s",
-      "--no-show-source",
-      "--max-line-length",
-      "120",
-      "--extend-ignore",
-      "E121,E123,E126,E226,E24,E501,E704,W503,W504",
-      "-",
+    local ruff = require("lint").linters.ruff
+    ruff.args = {
+      "--preview",
+      "--line-length=120",
+      "--extend-select=E,N,W,ARG,RUF",
+      "--ignore=E402,E501,RUF002,RUF003",
     }
     vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
       callback = function()
