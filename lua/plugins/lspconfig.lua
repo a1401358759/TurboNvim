@@ -1,5 +1,3 @@
-local icons = require("config.icons").icons
-
 return {
   "neovim/nvim-lspconfig",
   lazy = true,
@@ -116,6 +114,7 @@ return {
     end
 
     -- diagnostics
+    local icons = require("config.icons").icons
     for name, icon in pairs(icons.diagnostics) do
       name = "DiagnosticSign" .. name
       vim.fn.sign_define(name, { text = icon, texthl = name, numhl = "" })

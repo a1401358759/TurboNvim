@@ -67,7 +67,6 @@ opt.wrap = false -- Disable line wrap
 opt.fillchars = {
   foldopen = "",
   foldclose = "",
-  -- fold = "⸱",
   fold = " ",
   foldsep = " ",
   diff = "╱",
@@ -83,13 +82,8 @@ if vim.fn.has("nvim-0.10") == 1 then
 end
 
 -- Folding
-opt.foldlevel = 99
-opt.foldenable = true -- enable fold for nvim-ufo
-opt.foldlevelstart = 99 -- start with all code unfolded
----@diagnostic disable-next-line: assign-type-mismatch
-opt.foldcolumn = vim.fn.has("nvim-0.9") == 1 and "1" or nil -- show foldcolumn in nvim 0.9
-opt.foldtext = "v:lua.vim.treesitter.foldtext()"
-opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+vim.opt.foldlevel = 99
+vim.opt.foldtext = "v:lua.require'utils.ui'.foldtext()"
 
 if vim.fn.has("nvim-0.9.0") == 1 then
   opt.statuscolumn = [[%!v:lua.require'utils.ui'.statuscolumn()]]
@@ -98,8 +92,11 @@ end
 -- HACK: causes freezes on <= 0.9, so only enable on >= 0.10 for now
 if vim.fn.has("nvim-0.10") == 1 then
   opt.foldmethod = "expr"
+  vim.opt.foldexpr = "v:lua.require'utils.ui'.foldexpr()"
+  vim.opt.fillchars = "fold: "
 else
   opt.foldmethod = "indent"
 end
 
+vim.o.formatexpr = "v:lua.require'utils.ui'.formatexpr()"
 return options
