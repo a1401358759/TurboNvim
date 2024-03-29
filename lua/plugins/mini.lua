@@ -3,14 +3,7 @@ return {
     "echasnovski/mini.comment",
     lazy = true,
     event = { "BufReadPost", "BufAdd", "BufNewFile" },
-    dependencies = { "JoosepAlviste/nvim-ts-context-commentstring" },
-    opts = {
-      options = {
-        custom_commentstring = function()
-          return require("ts_context_commentstring.internal").calculate_commentstring() or vim.bo.commentstring
-        end,
-      },
-    },
+    opts = {},
   },
   {
     "echasnovski/mini.surround",
@@ -51,7 +44,6 @@ return {
   },
   {
     "echasnovski/mini.bufremove",
-
     keys = {
       {
         "<leader>bd",
@@ -74,5 +66,36 @@ return {
     -- stylua: ignore
     { "<leader>bD", function() require("mini.bufremove").delete(0, true) end, desc = "Delete Buffer (Force)" },
     },
+  },
+  {
+    "echasnovski/mini.move",
+    lazy = true,
+    event = { "BufReadPost", "BufAdd", "BufNewFile" },
+    opts = {},
+    keys = function()
+      local ret = {}
+      local directions = { "left", "down", "up", "right" }
+      local keys = { "h", "j", "k", "l" }
+      local move = require("mini.move")
+      for i, dir in ipairs(directions) do
+        ret[#ret + 1] = {
+          "<A-" .. keys[i] .. ">",
+          mode = { "i", "n" },
+          function()
+            move.move_line(dir)
+          end,
+        }
+      end
+      for i, dir in ipairs(directions) do
+        ret[#ret + 1] = {
+          "<A-" .. keys[i] .. ">",
+          mode = { "v" },
+          function()
+            move.move_selection(dir)
+          end,
+        }
+      end
+      return ret
+    end,
   },
 }

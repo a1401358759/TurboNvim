@@ -1,5 +1,5 @@
 return {
-  "ibhagwan/fzf-lua",
+  "cleong14/fzf-lua",
   lazy = true,
   -- optional for icon support
   dependencies = { "nvim-tree/nvim-web-devicons" },

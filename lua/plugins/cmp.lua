@@ -52,8 +52,7 @@ return {
     "lukas-reineke/cmp-rg",
     { "L3MON4D3/LuaSnip", version = "v2.*", build = "make install_jsregexp" },
   },
-  ---@diagnostic disable-next-line: unused-local
-  config = function(_, opts)
+  config = function()
     local cmp = require("cmp")
     local luasnip = require("luasnip")
     local has_words_before = function()
