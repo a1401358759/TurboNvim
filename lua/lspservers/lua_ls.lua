@@ -7,6 +7,9 @@ return {
       codeLens = {
         enable = false,
       },
+      hint = {
+        enable = true, -- necessary
+      },
       completion = {
         callSnippet = "Replace",
       },

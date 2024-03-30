@@ -60,6 +60,11 @@ return {
             callback = vim.lsp.codelens.refresh,
           })
         end
+        if opts.inlay_hints.enabled then
+          if client.supports_method("textDocument/inlayHint") then
+            vim.lsp.inlay_hint.enable(buffer, true)
+          end
+        end
       end
       settings.mason = true
       servers[server_name] = settings

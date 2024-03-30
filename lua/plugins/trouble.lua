@@ -20,6 +20,11 @@ return {
       desc = "Symbols (Trouble)",
     },
     {
+      "<leader>cS",
+      "<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
+      desc = "LSP references/definitions/... (Trouble)",
+    },
+    {
       "<leader>xL",
       "<cmd>Trouble loclist toggle<cr>",
       desc = "Location List (Trouble)",
@@ -30,4 +35,5 @@ return {
       desc = "Quickfix List (Trouble)",
     },
   },
+  opts = {},
 }
