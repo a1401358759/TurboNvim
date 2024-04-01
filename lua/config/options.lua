@@ -8,6 +8,12 @@ options.auto_restore_cursor_position = true
 options.auto_remove_new_lines_comment = true
 options.use_ai_plugins = true
 options.show_cursorline = true
+options.ruff_args = {
+  "--preview",
+  "--line-length=120",
+  "--extend-select=E,N,W,ARG,RUF",
+  "--ignore=E402,E501,N802,N803,N806,N801,N813,N815,N816,RUF001,RUF002,RUF003,RUF012",
+}
 
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
@@ -16,15 +22,16 @@ vim.g.root_spec = { "lsp", { ".git", "lua" }, "cwd" }
 -- Fix markdown indentation settings
 vim.g.markdown_recommended_style = 0
 
-local opt = vim.opt
+vim.uv = vim.uv or vim.loop
 
-opt.autowrite = true -- Enable auto write
+local opt = vim.opt
 
 if not vim.env.SSH_TTY then
   -- only set clipboard if not in ssh, to make sure the OSC 52
   -- integration works automatically. Requires Neovim >= 0.10.0
   opt.clipboard = "unnamedplus" -- Sync with system clipboard
 end
+opt.autowrite = true -- Enable auto write
 opt.completeopt = "menu,menuone,noselect"
 opt.conceallevel = 2 -- Hide * markup for bold and italic, but not markers with substitutions
 opt.confirm = true -- Confirm to save changes before exiting modified buffer
