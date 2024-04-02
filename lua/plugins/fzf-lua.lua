@@ -1,5 +1,5 @@
 return {
-  "cleong14/fzf-lua",
+  "ibhagwan/fzf-lua",
   lazy = true,
   -- optional for icon support
   dependencies = { "nvim-tree/nvim-web-devicons" },
@@ -48,7 +48,7 @@ return {
           cmd_deleted = "git diff --color HEAD --",
           cmd_modified = "git diff --color HEAD",
           cmd_untracked = "git diff --color --no-index /dev/null",
-          -- pager        = "delta",      -- if you have `delta` installed
+          pager = "delta", -- if you have `delta` installed
         },
         man = {
           cmd = "man -c %s | col -bx",
@@ -72,7 +72,7 @@ return {
         -- otherwise auto-detect prioritizes `fd`:`rg`:`find`
         -- default options are controlled by 'fd|rg|find|_opts'
         -- NOTE: 'find -printf' requires GNU find
-        -- cmd            = "find . -type f -printf '%P\n'",
+        -- cmd = "find . -type f -printf '%P\n'",
         find_opts = [[-type f -not -path '*/\.git/*' -printf '%P\n']],
         rg_opts = "--color=never --files --hidden --follow -g '!.git'",
         fd_opts = "--color=never --type f --hidden --follow --exclude .git",

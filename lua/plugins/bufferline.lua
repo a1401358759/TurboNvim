@@ -177,12 +177,12 @@ return {
       desc = "Go to buffer 9",
     },
     {
-      "<A-h>",
+      "<A-,>",
       "<cmd>BufferLineMovePrev<cr>",
       desc = "Move current buffer to left",
     },
     {
-      "<A-l>",
+      "<A-.>",
       "<cmd>BufferLineMoveNext<cr>",
       desc = "Move current buffer to right",
     },
