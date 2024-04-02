@@ -55,7 +55,7 @@ return {
       },
       formatters = {
         injected = { options = { ignore_errors = true } },
-        black = { prepend_args = { "--line-length", "88", "--fast" } },
+        black = { prepend_args = { "--line-length", "120", "--fast" } },
         -- # Example of using shfmt with extra args
         -- shfmt = {
         --   extra_args = { "-i", "2", "-ci" },

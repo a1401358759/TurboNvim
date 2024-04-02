@@ -1,6 +1,9 @@
+local options = require("config.options")
+
 return {
   {
     "luozhiya/fittencode.nvim",
+    cond = options.use_ai_plugins,
     event = { "InsertEnter" },
     config = function()
       require("fittencode").setup({
@@ -25,40 +28,36 @@ return {
     end,
   },
   {
-    "piersolenski/wtf.nvim",
-    lazy = true,
-    dependencies = {
-      "MunifTanjim/nui.nvim",
-    },
-    opts = {},
+    "David-Kunz/gen.nvim",
+    cond = options.use_ai_plugins,
+    event = "VeryLazy",
+    config = function()
+      local gen = require("gen")
+      gen.setup({
+        model = "llama2",
+        display_mode = "float", -- The display mode. Can be "float" or "split".
+        show_prompt = true, -- Shows the prompt submitted to Ollama.
+        show_model = true, -- Displays which model you are using at the beginning of your chat session.
+        no_auto_close = false, -- Never closes the window automatically.
+        debug = false, -- Prints errors and the command which is run.
+      })
+      gen.prompts["Explain_Code"] = {
+        prompt = "Explain the following code in $filetype:\n```\n$text\n```",
+      }
+      gen.prompts["Fix_Code"] = {
+        prompt = "Fix the following code. Only ouput the result in format ```$filetype\n...\n```:\n```$filetype\n$text\n```",
+        replace = true,
+        extract = "```$filetype\n(.-)```",
+      }
+    end,
     keys = {
       {
-        "<leader>gw",
-        mode = { "n", "x" },
+        "<leader>sm",
         function()
-          require("wtf").ai()
+          require("gen").select_model()
         end,
-        desc = "Debug diagnostic with AI",
-      },
-      {
-        mode = { "n" },
-        "<leader>gW",
-        function()
-          require("wtf").search()
-        end,
-        desc = "Search diagnostic with Google",
+        desc = "Select Ollama Model",
       },
     },
-    config = function()
-      require("wtf").setup({
-        popup_type = "popup",
-        -- openai_api_key = "sk-xxxxxxxxxxxxxx",
-        openai_model_id = "gpt-3.5-turbo",
-        context = true,
-        language = "chinese",
-        search_engine = "google",
-        winhighlight = "Normal:Normal,FloatBorder:FloatBorder",
-      })
-    end,
   },
 }
