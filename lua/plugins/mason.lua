@@ -6,6 +6,7 @@ return {
     ensure_installed = {
       -- lsp
       "pyright",
+      "basedpyright",
       "gopls",
       "impl",
       "gofumpt",
