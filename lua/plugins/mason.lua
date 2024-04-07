@@ -33,7 +33,6 @@ return {
 
       -- diagnostic
       "ruff",
-      "ruff-lsp",
 
       -- formatter
       "shfmt",
