@@ -151,30 +151,30 @@ return {
       icon = icons.ui.Branch,
       color = { fg = colors.violet, gui = "bold" },
     })
-    ins_left({
-      "diff",
-      colored = true,
-      symbols = { added = icons.git.added, modified = icons.git.modified, removed = icons.git.removed },
-      diff_color = {
-        added = { fg = colors.green },
-        modified = { fg = colors.orange },
-        removed = { fg = colors.red },
-      },
-      sources = diff_source,
-      cond = conditions.hide_in_width,
-    })
-    ins_left({
-      "filetype",
-      icon_only = true,
-      padding = { left = 1, right = 0 },
-      color = { gui = "bold" },
-    })
-    ins_left({
-      "filename",
-      padding = { left = 0 },
-      cond = conditions.buffer_not_empty,
-      color = { gui = "bold" },
-    })
+    -- ins_left({
+    --   "diff",
+    --   colored = true,
+    --   symbols = { added = icons.git.added, modified = icons.git.modified, removed = icons.git.removed },
+    --   diff_color = {
+    --     added = { fg = colors.green },
+    --     modified = { fg = colors.orange },
+    --     removed = { fg = colors.red },
+    --   },
+    --   sources = diff_source,
+    --   cond = conditions.hide_in_width,
+    -- })
+    -- ins_left({
+    --   "filetype",
+    --   icon_only = true,
+    --   padding = { left = 1, right = 0 },
+    --   color = { gui = "bold" },
+    -- })
+    -- ins_left({
+    --   "filename",
+    --   padding = { left = 0 },
+    --   cond = conditions.buffer_not_empty,
+    --   color = { gui = "bold" },
+    -- })
     -- Insert mid section. You can make any number of sections in neovim :)
     -- for lualine it's any number greater then 2
     ins_left({
@@ -202,21 +202,21 @@ return {
     })
 
     -- Add components to right sections
-    ins_right({
-      "diagnostics",
-      sources = { "nvim_diagnostic" },
-      symbols = {
-        error = icons.diagnostics.Error,
-        warn = icons.diagnostics.Warn,
-        info = icons.diagnostics.Info,
-        hint = icons.diagnostics.Hint,
-      },
-      diagnostics_color = {
-        color_error = { fg = colors.red },
-        color_warn = { fg = colors.yellow },
-        color_info = { fg = colors.cyan },
-      },
-    })
+    -- ins_right({
+    --   "diagnostics",
+    --   sources = { "nvim_diagnostic" },
+    --   symbols = {
+    --     error = icons.diagnostics.Error,
+    --     warn = icons.diagnostics.Warn,
+    --     info = icons.diagnostics.Info,
+    --     hint = icons.diagnostics.Hint,
+    --   },
+    --   diagnostics_color = {
+    --     color_error = { fg = colors.red },
+    --     color_warn = { fg = colors.yellow },
+    --     color_info = { fg = colors.cyan },
+    --   },
+    -- })
     ins_right({
       "o:encoding",
       cond = conditions.hide_in_width,
