@@ -25,6 +25,7 @@ return {
       ["<leader>g"] = { name = "󰊢 Git" },
       ["<leader>h"] = { name = "󰍎 Harpoon" },
       ["<leader>m"] = { name = "󰍔 Markdown" },
+      ["<leader>n"] = { name = " Comments" },
       ["<leader>q"] = { name = "󰗼 Quit/Session" },
       ["<leader>s"] = { name = "󱁴 Search" },
       ["<leader>t"] = { name = " Telescope/Terminal" },
