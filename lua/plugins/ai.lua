@@ -60,4 +60,16 @@ return {
       },
     },
   },
+  {
+    "Exafunction/codeium.nvim",
+    cond = options.use_ai_plugins,
+    event = { "InsertEnter" },
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "hrsh7th/nvim-cmp",
+    },
+    config = function()
+      require("codeium").setup({})
+    end,
+  },
 }
