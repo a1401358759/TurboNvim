@@ -11,28 +11,16 @@ if not vim.uv.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
--- Add LazyLoad event
--- If user starts neovim but does not edit a file, i.e., entering Dashboard directly, the LazyLoad event is hooked to the
--- next BufRead event. Otherwise, the event is triggered right after the VeryLazy event.
-vim.api.nvim_create_autocmd("User", {
-  pattern = "VeryLazy",
-  callback = function()
-    local function _trigger()
-      vim.api.nvim_exec_autocmds("User", { pattern = "LazyLoad" })
-    end
+require("config.autocmds")
 
-    if vim.bo.filetype == "dashboard" then
-      vim.api.nvim_create_autocmd("BufRead", {
-        once = true,
-        callback = _trigger,
-      })
-    else
-      _trigger()
-    end
-  end,
-})
+local Event = require("lazy.core.handler.event")
+Event.mappings.TurboLoad = { id = "TurboLoad", event = "User", pattern = "TurboLoad" }
+Event.mappings["User TurboLoad"] = Event.mappings.TurboLoad
 
 require("lazy").setup({
+  defaults = {
+    lazy = true, -- should plugins be lazy-loaded?
+  },
   spec = {
     { import = "plugins" },
   },

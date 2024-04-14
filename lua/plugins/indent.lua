@@ -28,7 +28,7 @@ return {
   },
   {
     "shellRaining/hlchunk.nvim",
-    event = { "User LazyLoad" },
+    event = { "TurboLoad" },
     config = function()
       local cb = function()
         if vim.g.colors_name == "tokyonight" then

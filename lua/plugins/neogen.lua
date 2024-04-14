@@ -3,7 +3,8 @@
 
 return {
   "danymat/neogen",
-  event = { "VeryLazy" },
+  lazy = true,
+  event = { "TurboLoad" },
   config = function()
     require("neogen").setup({
       enabled = true,

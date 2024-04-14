@@ -1,8 +1,8 @@
 return {
   "folke/noice.nvim",
-  lazy = false,
+  lazy = true,
   dependencies = { "MunifTanjim/nui.nvim" },
-  event = "VeryLazy",
+  event = "TurboLoad",
   opts = {
     cmdline = {
       enabled = true, -- enables the Noice cmdline UI

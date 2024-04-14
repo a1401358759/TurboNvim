@@ -1,6 +1,6 @@
 return {
   "williamboman/mason.nvim",
-  event = "User LazyLoad",
+  event = "TurboLoad",
   cmd = "Mason",
   opts = {
     ensure_installed = {

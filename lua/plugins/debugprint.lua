@@ -1,7 +1,7 @@
 return {
   "andrewferrier/debugprint.nvim",
-  lazy = false,
-  event = { "VeryLazy" },
+  lazy = true,
+  event = { "TurboLoad" },
   opts = {
     keymaps = {
       normal = {

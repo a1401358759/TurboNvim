@@ -1,6 +1,7 @@
 return {
   "b0o/incline.nvim",
-  event = "VeryLazy",
+  lazy = true,
+  event = "TurboLoad",
   config = function()
     local devicons = require("nvim-web-devicons")
     local mine_icons = require("config.icons").icons

@@ -1,7 +1,7 @@
 return {
   "mfussenegger/nvim-lint",
-  lazy = false,
-  event = "VeryLazy",
+  lazy = true,
+  event = "TurboLoad",
   config = function()
     local options = require("config.options")
     require("lint").linters_by_ft = {

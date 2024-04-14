@@ -1,9 +1,6 @@
 return {
   "akinsho/bufferline.nvim",
-  dependencies = {
-    "nvim-tree/nvim-web-devicons",
-  },
-  event = "User LazyLoad",
+  event = "VeryLazy",
   opts = {
     options = {
       themable = true,

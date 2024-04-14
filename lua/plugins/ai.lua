@@ -29,8 +29,9 @@ return {
   },
   {
     "David-Kunz/gen.nvim",
+    lazy = true,
     cond = options.use_ai_plugins,
-    event = "VeryLazy",
+    event = "TurboLoad",
     config = function()
       local gen = require("gen")
       gen.setup({

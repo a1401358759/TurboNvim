@@ -1,7 +1,7 @@
 return {
   "nvim-lualine/lualine.nvim",
   dependencies = { "nvim-tree/nvim-web-devicons" },
-  event = "User LazyLoad",
+  event = "TurboLoad",
   main = "lualine",
   config = function()
     local lualine = require("lualine")
