@@ -28,7 +28,7 @@ return {
   },
   {
     "shellRaining/hlchunk.nvim",
-    event = { "UIEnter" },
+    event = { "User LazyLoad" },
     config = function()
       local cb = function()
         if vim.g.colors_name == "tokyonight" then

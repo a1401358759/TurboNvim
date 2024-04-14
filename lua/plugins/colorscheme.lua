@@ -3,6 +3,7 @@ local options = require("config.options")
 return {
   {
     "ellisonleao/gruvbox.nvim",
+    lazy = true,
     config = function()
       require("gruvbox").setup({
         transparent_mode = options.transparent,
@@ -22,7 +23,6 @@ return {
   },
   {
     "luisiacc/gruvbox-baby",
-    lazy = false,
     config = function()
       local config = require("gruvbox-baby.config")
       local colors = require("gruvbox-baby.colors")
@@ -42,8 +42,8 @@ return {
   },
   {
     "folke/tokyonight.nvim",
-    lazy = false,
-    priority = 1000,
+    lazy = true,
+    -- priority = 1000,
     opts = {
       transparent = options.transparent,
       styles = {

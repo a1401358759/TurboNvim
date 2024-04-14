@@ -1,8 +1,8 @@
 return {
   "nvim-lualine/lualine.nvim",
-  lazy = true,
-  event = { "BufReadPost", "BufAdd", "BufNewFile" },
   dependencies = { "nvim-tree/nvim-web-devicons" },
+  event = "User LazyLoad",
+  main = "lualine",
   config = function()
     local lualine = require("lualine")
     local icons = require("config.icons").icons
