@@ -51,13 +51,15 @@ return {
       settings.on_attach = function(client, buffer)
         client.server_capabilities.documentFormattingProvider = false
         client.server_capabilities.semanticTokensProvider = nil
-        if client.supports_method("textDocument/codeLens") then
-          vim.lsp.codelens.refresh()
-          --- autocmd BufEnter,CursorHold,InsertLeave <buffer> lua vim.lsp.codelens.refresh()
-          vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
-            buffer = buffer,
-            callback = vim.lsp.codelens.refresh,
-          })
+        if opts.codelens.enabled then
+          if client.supports_method("textDocument/codeLens") then
+            vim.lsp.codelens.refresh()
+            --- autocmd BufEnter,CursorHold,InsertLeave <buffer> lua vim.lsp.codelens.refresh()
+            vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
+              buffer = buffer,
+              callback = vim.lsp.codelens.refresh,
+            })
+          end
         end
         if opts.inlay_hints.enabled then
           if client.supports_method("textDocument/inlayHint") then

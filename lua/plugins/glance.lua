@@ -2,7 +2,7 @@
 return {
   "dnlhc/glance.nvim",
   lazy = true,
-  event = { "BufReadPost", "BufAdd", "BufNewFile" },
+  event = { "TurboLoad" },
   config = function()
     local glance = require("glance")
     local actions = glance.actions

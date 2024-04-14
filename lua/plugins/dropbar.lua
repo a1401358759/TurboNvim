@@ -41,7 +41,7 @@ end
 return {
   "Bekaboo/dropbar.nvim",
   lazy = true,
-  event = { "BufReadPost", "BufAdd", "BufNewFile" },
+  event = { "TurboLoad" },
   cond = judge_version(),
   config = function()
     require("dropbar").setup({})

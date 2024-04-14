@@ -3,7 +3,7 @@ local options = require("config.options")
 
 return {
   "gen740/SmoothCursor.nvim",
-  event = { "BufEnter" },
+  event = { "TurboLoad" },
   cond = not options.show_cursorline,
   config = function()
     require("smoothcursor").setup({

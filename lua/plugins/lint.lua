@@ -12,7 +12,6 @@ return {
       typescriptreact = { "eslint_d" },
       svelte = { "eslint_d" },
       python = { "ruff" },
-      markdown = { "markdownlint" },
       dockerfile = { "hadolint" },
     }
     local ruff = require("lint").linters.ruff

@@ -4,7 +4,7 @@ return {
     "lukas-reineke/indent-blankline.nvim",
     cond = false,
     lazy = true,
-    event = { "BufReadPost", "BufAdd", "BufNewFile" },
+    event = { "BufReadPost", "BufNewFile", "BufWritePre" },
     opts = {
       indent = { char = "▏", tab_char = "▏" },
       scope = { enabled = false },

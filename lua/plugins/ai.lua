@@ -31,7 +31,7 @@ return {
     "David-Kunz/gen.nvim",
     lazy = true,
     cond = options.use_ai_plugins,
-    event = "TurboLoad",
+    cmd = "Gen",
     config = function()
       local gen = require("gen")
       gen.setup({

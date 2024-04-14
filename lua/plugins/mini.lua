@@ -2,13 +2,13 @@ return {
   {
     "echasnovski/mini.comment",
     lazy = true,
-    event = { "BufReadPost", "BufAdd", "BufNewFile" },
+    event = { "BufReadPost", "BufWritePre", "BufNewFile" },
     opts = {},
   },
   {
     "echasnovski/mini.surround",
     lazy = true,
-    event = { "BufReadPost", "BufAdd", "BufNewFile" },
+    event = { "BufReadPost", "BufWritePre", "BufNewFile" },
     opts = {
       mappings = {
         add = "ys", -- Add surrounding in Normal and Visual modes
@@ -25,7 +25,7 @@ return {
   {
     "echasnovski/mini.pairs",
     lazy = true,
-    event = { "BufReadPost", "BufAdd", "BufNewFile" },
+    event = { "BufReadPost", "BufWritePre", "BufNewFile" },
     opts = {},
     keys = {
       {
@@ -44,6 +44,7 @@ return {
   },
   {
     "echasnovski/mini.bufremove",
+    lazy = true,
     keys = {
       {
         "<leader>bd",
@@ -70,7 +71,7 @@ return {
   {
     "echasnovski/mini.move",
     lazy = true,
-    event = { "BufReadPost", "BufAdd", "BufNewFile" },
+    event = { "BufReadPost", "BufWritePre", "BufNewFile" },
     opts = {},
   },
 }

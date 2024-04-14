@@ -1,7 +1,8 @@
 return {
-	"folke/todo-comments.nvim",
-	cmd = { "TodoTrouble", "TodoTelescope" },
-	config = true,
+  "folke/todo-comments.nvim",
+  lazy = true,
+  cmd = { "TodoTrouble", "TodoTelescope" },
+  config = true,
   -- stylua: ignore
   keys = {
     { "]t", function() require("todo-comments").jump_next() end, desc = "Next todo comment" },

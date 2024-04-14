@@ -3,7 +3,7 @@
 return {
   "AndrewRadev/switch.vim",
   lazy = true,
-  event = { "BufReadPost", "BufAdd", "BufNewFile" },
+  event = { "BufReadPost", "BufWritePre", "BufNewFile" },
   keys = {
     { "gs", ":Switch<cr>", desc = "Switch the opposite meaning of the word" },
     {

@@ -2,7 +2,7 @@ return {
   "lewis6991/gitsigns.nvim",
   lazy = true,
   cond = vim.fn.executable("git") == 1,
-  event = { "BufReadPre", "BufNewFile" },
+  event = { "TurboLoad" },
   opts = {
     signcolumn = true,
     numhl = false,
