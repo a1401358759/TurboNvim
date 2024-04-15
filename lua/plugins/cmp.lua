@@ -44,20 +44,31 @@ return {
     "hrsh7th/cmp-buffer",
     "hrsh7th/cmp-path",
     "hrsh7th/cmp-cmdline",
-    "hrsh7th/vim-vsnip",
-    "hrsh7th/cmp-vsnip",
-    "hrsh7th/cmp-emoji",
-    "saadparwaiz1/cmp_luasnip",
-    "rafamadriz/friendly-snippets",
     "lukas-reineke/cmp-rg",
-    { "L3MON4D3/LuaSnip", version = "v2.*", build = "make install_jsregexp" },
+    "saadparwaiz1/cmp_luasnip",
+    {
+      "L3MON4D3/LuaSnip",
+      version = "v2.*",
+      build = "make install_jsregexp",
+      dependencies = {
+        {
+          "rafamadriz/friendly-snippets",
+          config = function()
+            require("luasnip.loaders.from_vscode").lazy_load()
+          end,
+        },
+      },
+      opts = {
+        history = true,
+        delete_check_events = "TextChanged",
+      },
+    },
   },
   config = function()
     local cmp = require("cmp")
     local luasnip = require("luasnip")
-    local has_words_before = function()
-      unpack = unpack or table.unpack
-      local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+    local function has_words_before()
+      local line, col = (unpack or table.unpack)(vim.api.nvim_win_get_cursor(0))
       return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
     end
     cmp.setup({
@@ -70,7 +81,7 @@ return {
       },
       snippet = {
         expand = function(args)
-          require("luasnip").lsp_expand(args.body)
+          luasnip.lsp_expand(args.body)
         end,
       },
       mapping = cmp.mapping.preset.insert({
@@ -126,12 +137,10 @@ return {
         { name = "nvim_lsp", priority = 1000 },
         -- { name = "buffer" },
         { name = "rg", keyword_length = 3, max_item_count = 5 },
+        { name = "luasnip" },
         { name = "fittencode" },
         { name = "codeium" },
-        { name = "luasnip" },
-        { name = "vsnip" },
         { name = "path" },
-        { name = "emoji" },
       }),
       formatting = {
         fields = { "kind", "abbr", "menu" },

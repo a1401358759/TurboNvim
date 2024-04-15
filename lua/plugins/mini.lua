@@ -2,7 +2,6 @@ return {
   {
     "echasnovski/mini.comment",
     lazy = true,
-    event = { "BufReadPost", "BufWritePre", "BufNewFile" },
     opts = {},
   },
   {
@@ -25,7 +24,7 @@ return {
   {
     "echasnovski/mini.pairs",
     lazy = true,
-    event = { "BufReadPost", "BufWritePre", "BufNewFile" },
+    event = { "InsertEnter" },
     opts = {},
     keys = {
       {
@@ -71,7 +70,6 @@ return {
   {
     "echasnovski/mini.move",
     lazy = true,
-    event = { "BufReadPost", "BufWritePre", "BufNewFile" },
     opts = {},
   },
 }

@@ -2,7 +2,6 @@
 return {
   "dnlhc/glance.nvim",
   lazy = true,
-  event = { "TurboLoad" },
   config = function()
     local glance = require("glance")
     local actions = glance.actions
@@ -44,9 +43,11 @@ return {
         },
       },
     })
-    vim.keymap.set("n", "gpd", "<CMD>Glance definitions<CR>")
-    vim.keymap.set("n", "gpr", "<CMD>Glance references<CR>")
-    vim.keymap.set("n", "gpt", "<CMD>Glance type_definitions<CR>")
-    vim.keymap.set("n", "gpi", "<CMD>Glance implementations<CR>")
   end,
+  keys = {
+    { "gpd", "<CMD>Glance definitions<CR>", desc = "Glance definitions" },
+    { "gpr", "<CMD>Glance references<CR>", desc = "Glance references" },
+    { "gpt", "<CMD>Glance type_definitions<CR>", desc = "Glance type_definitions" },
+    { "gpi", "<CMD>Glance implementations<CR>", desc = "Glance implementations" },
+  },
 }

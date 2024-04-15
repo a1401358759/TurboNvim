@@ -1,7 +1,7 @@
 return {
   "folke/which-key.nvim",
   lazy = true,
-  event = { "BufReadPost", "BufAdd", "BufNewFile" },
+  event = { "BufReadPost", "BufNewFile", "BufWritePre" },
   config = function()
     local wk = require("which-key")
     wk.setup({

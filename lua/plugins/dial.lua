@@ -14,6 +14,7 @@ end
 return {
   "monaqa/dial.nvim",
   lazy = true,
+  event = { "BufReadPost", "BufWritePre", "BufNewFile" },
   -- stylua: ignore
   keys = {
     { "<C-a>", function() return M.dial(true) end, expr = true, desc = "Increment", mode = {"n", "v"} },

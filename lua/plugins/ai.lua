@@ -70,7 +70,12 @@ return {
       "hrsh7th/nvim-cmp",
     },
     config = function()
-      require("codeium").setup({})
+      require("codeium").setup({
+        detect_proxy = true,
+        enable_chat = true,
+        enable_local_search = true,
+        enable_index_service = true,
+      })
     end,
   },
 }
