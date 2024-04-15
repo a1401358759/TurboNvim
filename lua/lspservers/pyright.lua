@@ -1,3 +1,4 @@
+-- Done
 -- https://github.com/microsoft/pyright
 
 local util = require("lspconfig.util")

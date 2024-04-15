@@ -26,6 +26,8 @@ return {
       "dockerfile-language-server",
       "docker-compose-language-service",
       "hadolint",
+      "marksman",
+      "eslint_d",
 
       -- dap
       "delve",
@@ -33,6 +35,7 @@ return {
 
       -- diagnostic
       "ruff",
+      "markdownlint",
 
       -- formatter
       "shfmt",

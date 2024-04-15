@@ -1,3 +1,4 @@
+-- Done
 -- https://github.com/mads-hartmann/bash-language-server
 
 local util = require("lspconfig.util")

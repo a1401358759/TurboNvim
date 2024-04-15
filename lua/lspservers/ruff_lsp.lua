@@ -1,3 +1,5 @@
+-- Done
+
 local options = require("config.options")
 
 return {

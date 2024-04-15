@@ -1,3 +1,4 @@
+-- Done
 -- https://github.com/DetachHead/basedpyright
 
 local util = require("lspconfig.util")

@@ -1,4 +1,7 @@
+-- Done
 -- https://github.com/golang/tools/tree/master/gopls
+-- go install golang.org/x/tools/gopls@latest
+-- go get -u github.com/golang-jwt/jwt/v5
 
 return {
   settings = {

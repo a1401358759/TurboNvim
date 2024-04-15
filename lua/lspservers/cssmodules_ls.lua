@@ -1,4 +1,7 @@
+-- Done
+-- npm install -g cssmodules-language-server
+
 return {
-  filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
   cmd = { "cssmodules-language-server" },
+  filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
 }

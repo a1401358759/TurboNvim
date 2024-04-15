@@ -1,3 +1,4 @@
+-- Done
 -- https://github.com/aca/emmet-ls
 
 local util = require("lspconfig.util")
