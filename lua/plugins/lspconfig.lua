@@ -1,3 +1,5 @@
+local icons = require("config.icons").icons
+
 return {
   "neovim/nvim-lspconfig",
   event = { "BufReadPost", "BufNewFile", "BufWritePre" },
@@ -13,6 +15,14 @@ return {
       update_in_insert = false,
       severity_sort = true,
       virtual_text = false,
+      signs = {
+        text = {
+          [vim.diagnostic.severity.ERROR] = icons.diagnostics.Error,
+          [vim.diagnostic.severity.WARN] = icons.diagnostics.Warn,
+          [vim.diagnostic.severity.INFO] = icons.diagnostics.Info,
+          [vim.diagnostic.severity.HINT] = icons.diagnostics.Hint,
+        }, -- neovim/neovim#26193 (0.10.0+)
+      },
     },
     inlay_hints = {
       enabled = true,
@@ -124,13 +134,13 @@ return {
     end
 
     -- diagnostics
-    local icons = require("config.icons").icons
-    for name, icon in pairs(icons.diagnostics) do
-      name = "DiagnosticSign" .. name
-      vim.fn.sign_define(name, { text = icon, texthl = name, numhl = "" })
+    if vim.fn.has("nvim-0.10.0") == 0 then
+      for name, icon in pairs(icons.diagnostics) do
+        name = "DiagnosticSign" .. name
+        vim.fn.sign_define(name, { text = icon, texthl = name, numhl = "" })
+      end
     end
-    -- disabled inline diagnostics
-    vim.diagnostic.config(opts.diagnostics)
+    vim.diagnostic.config(vim.deepcopy(opts.diagnostics))
 
     vim.api.nvim_create_autocmd("LspAttach", {
       group = vim.api.nvim_create_augroup("UserLspConfig", {}),

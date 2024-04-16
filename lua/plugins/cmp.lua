@@ -40,16 +40,8 @@ return {
   "hrsh7th/nvim-cmp",
   event = { "InsertEnter" },
   dependencies = {
-    "hrsh7th/cmp-nvim-lsp",
-    "hrsh7th/cmp-buffer",
-    "hrsh7th/cmp-path",
-    "hrsh7th/cmp-cmdline",
-    "lukas-reineke/cmp-rg",
-    "saadparwaiz1/cmp_luasnip",
     {
       "L3MON4D3/LuaSnip",
-      version = "v2.*",
-      build = "make install_jsregexp",
       dependencies = {
         {
           "rafamadriz/friendly-snippets",
@@ -58,10 +50,18 @@ return {
           end,
         },
       },
-      opts = {
-        history = true,
-        delete_check_events = "TextChanged",
-      },
+      opts = { history = true, delete_check_events = "TextChanged" },
+      config = function(_, opts)
+        require("luasnip").config.set_config(opts)
+      end,
+    },
+    {
+      "saadparwaiz1/cmp_luasnip",
+      "hrsh7th/cmp-nvim-lsp",
+      "hrsh7th/cmp-buffer",
+      "hrsh7th/cmp-path",
+      "hrsh7th/cmp-cmdline",
+      "lukas-reineke/cmp-rg",
     },
   },
   config = function()

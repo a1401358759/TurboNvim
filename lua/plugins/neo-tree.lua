@@ -3,7 +3,6 @@ local icons = require("config.icons").icons
 return {
   "nvim-neo-tree/neo-tree.nvim",
   lazy = true,
-  branch = "v3.x",
   cmd = "Neotree",
   keys = {
     {
@@ -58,13 +57,6 @@ return {
       bind_to_cwd = false,
       follow_current_file = { enabled = true },
       use_libuv_file_watcher = true,
-      commands = {
-        copy_file_name = function(state)
-          local node = state.tree:get_node()
-          ---@diagnostic disable-next-line: param-type-mismatch
-          vim.fn.setreg("*", node.name, "c")
-        end,
-      },
     },
     window = {
       mappings = {
@@ -76,6 +68,12 @@ return {
             vim.fn.setreg("+", path, "c")
           end,
           desc = "copy path to clipboard",
+        },
+        ["O"] = {
+          function(state)
+            require("lazy.util").open(state.tree:get_node().path, { system = true })
+          end,
+          desc = "Open with System Application",
         },
       },
     },
