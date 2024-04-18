@@ -47,6 +47,17 @@ return {
       end,
     }
 
+    local function split(str, delimiter)
+      local result = {}
+      for match in (str .. delimiter):gmatch("(.-)" .. delimiter) do
+        table.insert(result, match)
+      end
+      -- 获取表的长度
+      local length = #result
+      -- 获取最后一个元素
+      return result[length]
+    end
+
     -- Config
     local config = {
       options = {
@@ -150,6 +161,9 @@ return {
       "branch",
       icon = icons.ui.Branch,
       color = { fg = colors.violet, gui = "bold" },
+      on_click = function()
+        vim.cmd([[Gitsigns toggle_signs]])
+      end,
     })
     -- ins_left({
     --   "diff",
@@ -199,6 +213,9 @@ return {
       end,
       icon = icons.ui.Gears,
       color = { fg = colors.orange, gui = "bold" },
+      on_click = function()
+        vim.cmd.LspInfo()
+      end,
     })
 
     -- Add components to right sections
@@ -228,7 +245,30 @@ return {
       color = { fg = colors.green, gui = "bold" },
     })
     ins_right({ "location", color = { fg = colors.green, gui = "bold" } })
-    ins_right({ "progress", color = { fg = colors.green, gui = "bold" } })
+    ins_right({
+      "progress",
+      color = { fg = colors.green, gui = "bold" },
+      on_click = function()
+        vim.cmd("1")
+      end,
+    })
+    ins_right({
+      function()
+        local venv_name = require("venv-selector").get_active_venv()
+        if venv_name ~= nil then
+          return " " .. split(venv_name, "/")
+        else
+          return ""
+        end
+      end,
+      on_click = function()
+        vim.cmd.VenvSelect()
+      end,
+      cond = function()
+        return vim.bo.filetype == "python"
+      end,
+      color = { gui = "bold" },
+    })
     ins_right({
       function()
         return icons.ui.Separator
