@@ -134,5 +134,6 @@ return {
         vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code Action" })
       end,
     })
+    require("lspconfig.ui.windows").default_options.border = "rounded"
   end,
 }
