@@ -25,7 +25,11 @@ return {
     "echasnovski/mini.pairs",
     lazy = true,
     event = { "InsertEnter" },
-    opts = {},
+    opts = {
+      mappings = {
+        ["`"] = { action = "closeopen", pair = "``", neigh_pattern = "[^\\`].", register = { cr = false } },
+      },
+    },
     keys = {
       {
         "<leader>up",

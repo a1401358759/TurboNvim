@@ -4,6 +4,19 @@ return {
   dependencies = { "nvim-telescope/telescope-fzf-native.nvim" },
   cmd = "Telescope",
   version = false,
+  opts = function(_, opts)
+    local open_with_trouble = require("trouble.sources.telescope").open
+    return vim.tbl_deep_extend("force", opts, {
+      defaults = {
+        mappings = {
+          i = {
+            ["<c-t>"] = open_with_trouble,
+            ["<a-t>"] = open_with_trouble,
+          },
+        },
+      },
+    })
+  end,
   config = function()
     require("telescope").setup({
       defaults = {

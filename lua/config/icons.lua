@@ -42,6 +42,7 @@ M.icons = {
     File = "󰈔 ",
     Folder = "󰉋 ",
     ForStatement = "󰑖 ",
+    FittenCode = " ",
     Function = "󰊕 ",
     H1Marker = "󰉫 ", -- Used by markdown treesitter parser
     H2Marker = "󰉬 ",

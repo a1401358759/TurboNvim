@@ -2,7 +2,8 @@
 return {
   "nvim-treesitter/nvim-treesitter",
   lazy = true,
-  event = "BufReadPre",
+  event = { "TurboLoad", "VeryLazy" },
+  cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
   version = false, -- last release is way too old and doesn't work on Windows
   build = ":TSUpdate",
   init = function(plugin)
@@ -41,7 +42,6 @@ return {
       end,
     },
   },
-  cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
   keys = {
     { "<c-space>", desc = "Increment selection" },
     { "<bs>", desc = "Schrink selection", mode = "x" },

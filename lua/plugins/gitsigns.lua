@@ -45,7 +45,7 @@ return {
       map("n", "<leader>gu", gs.undo_stage_hunk, "Undo Stage Hunk")
       map("n", "<leader>gR", gs.reset_buffer, "Reset Buffer")
       map("n", "<leader>gp", gs.preview_hunk_inline, "Preview Hunk Inline")
-      map("n", "<leader>gb", function() gs.blame_line({ full = true }) end, "Blame Line")
+      map("n", "<leader>gb", function() require("utils.ui").blame_line() end, "Git Blame Line")
       map("n", "<leader>gd", gs.diffthis, "Diff This")
       map("n", "<leader>gD", function() gs.diffthis("~") end, "Diff This ~")
       map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", "GitSigns Select Hunk")
