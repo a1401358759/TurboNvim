@@ -2,6 +2,7 @@ local icons = require("config.icons").icons
 
 return {
   "nvim-neo-tree/neo-tree.nvim",
+  branch = "v3.x",
   lazy = true,
   cmd = "Neotree",
   keys = {
@@ -57,6 +58,11 @@ return {
       bind_to_cwd = false,
       follow_current_file = { enabled = true },
       use_libuv_file_watcher = true,
+      filtered_items = {
+        hide_by_pattern = { -- uses glob style patterns
+          "__pycache__",
+        },
+      },
     },
     window = {
       mappings = {
