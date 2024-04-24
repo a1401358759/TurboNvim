@@ -1,31 +1,28 @@
 return {
   "andrewferrier/debugprint.nvim",
   lazy = true,
-  event = { "BufReadPost", "BufNewFile", "BufWritePre" },
+  cmd = {
+    "ToggleCommentDebugPrints",
+    "DeleteDebugPrints",
+  },
   opts = {
-    keymaps = {
-      normal = {
-        plain_below = "g?p",
-        plain_above = "g?P",
-        variable_below = "g?v",
-        variable_above = "g?V",
-        variable_below_alwaysprompt = "g?r",
-        variable_above_alwaysprompt = "g?R",
-        textobj_below = "g?o",
-        textobj_above = "g?O",
-        toggle_comment_debug_prints = nil,
-        delete_debug_prints = "dD",
-      },
-      visual = {
-        variable_below = "g?v",
-        variable_above = "g?V",
-      },
-    },
     commands = {
       toggle_comment_debug_prints = "ToggleCommentDebugPrints",
       delete_debug_prints = "DeleteDebugPrints",
     },
     print_tag = "DEBUGPRINT",
   },
-  config = true,
+  keys = {
+    { "g?p", mode = "n", desc = "plain debug below current line" },
+    { "g?P", mode = "n", desc = "plain debug above current line" },
+    { "g?v", mode = "n", desc = "Variable debug below current line" },
+    { "g?V", mode = "n", desc = "Variable debug above current line" },
+    { "g?o", mode = "n", desc = "Text-obj-selected variable debug below current line" },
+    { "g?O", mode = "n", desc = "Text-obj-selected variable debug above current line" },
+    { "g?v", mode = "x", desc = "Variable debug below current line" },
+    { "g?V", mode = "x", desc = "Variable debug above current line" },
+    { "g?r", mode = "n", desc = "Variable debug below current line (always prompt)" },
+    { "g?R", mode = "n", desc = "Variable debug above current line (always prompt)" },
+    { "<leader>dd", "<cmd>DeleteDebugPrints<cr>", desc = "Delete DebugPrints" },
+  },
 }
