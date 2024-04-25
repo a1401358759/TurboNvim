@@ -59,6 +59,7 @@ return {
       follow_current_file = { enabled = true },
       use_libuv_file_watcher = true,
       filtered_items = {
+        show_hidden_count = false,
         hide_by_pattern = { -- uses glob style patterns
           "__pycache__",
         },
