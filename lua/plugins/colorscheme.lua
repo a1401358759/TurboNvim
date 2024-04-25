@@ -55,4 +55,15 @@ return {
       require("tokyonight").setup(opts)
     end,
   },
+  {
+    "olimorris/onedarkpro.nvim",
+    priority = 1000, -- Ensure it loads first
+    opts = {
+      cursorline = options.show_cursorline, -- Use cursorline highlighting?
+      transparency = options.transparent, -- Use a transparent background?
+      terminal_colors = true, -- Use the theme's colors for Neovim's :terminal?
+      lualine_transparency = true, -- Center bar transparency?
+      highlight_inactive_windows = false, -- When the window is out of focus, change the normal background?
+    },
+  },
 }
