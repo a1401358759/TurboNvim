@@ -66,6 +66,22 @@ return {
           vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
         end
       end
+
+      vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { desc = "Goto Declaration" })
+      vim.keymap.set("n", "gd", function()
+        require("telescope.builtin").lsp_definitions({ reuse_win = true })
+      end, { desc = "Goto Definition" })
+      vim.keymap.set("n", "gr", "<cmd>Telescope lsp_references<cr>", { desc = "References" })
+      vim.keymap.set("n", "gI", function()
+        require("telescope.builtin").lsp_implementations({ reuse_win = true })
+      end, { desc = "Goto Implementation" })
+      vim.keymap.set("n", "gk", vim.lsp.buf.signature_help, { desc = "Signature Help" })
+      vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Hover" })
+      vim.keymap.set("n", "gy", function()
+        require("telescope.builtin").lsp_type_definitions({ reuse_win = true })
+      end, { desc = "Goto T[y]pe Definition" })
+      vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, { desc = "Rename" })
+      vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code Action" })
     end
     -- setup lspservers
     local mason_lspconfig = require("mason-lspconfig")
