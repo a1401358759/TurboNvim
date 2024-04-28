@@ -147,7 +147,7 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 if options.auto_save then
   vim.api.nvim_create_autocmd({ "InsertLeave", "TextChanged" }, {
     pattern = { "*" },
-    command = "silent! write!",
+    command = "silent! wall",
     nested = true,
   })
 end
@@ -248,7 +248,6 @@ end, { desc = "Delete the current Buffer while maintaining the window layout" })
 
 -- line number column does not display cursorline
 vim.api.nvim_create_autocmd({ "FileType" }, {
-  pattern = { "*" },
   callback = function()
     if options.transparent then
       vim.api.nvim_set_hl(0, "NotifyBackground", { bg = "#000000" })
