@@ -35,6 +35,7 @@ return {
 
       -- diagnostic
       "ruff",
+      "ruff-lsp",
       "markdownlint",
 
       -- formatter
