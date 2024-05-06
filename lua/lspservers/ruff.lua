@@ -1,12 +1,11 @@
 -- Done
-local options = require("config.options")
 
 return {
   enabled = false,
   filetypes = { "python" },
   single_file_support = true,
-  cmd = { "ruff", "server", "--preview", "--config", "~/.config/nvim/pyproject.toml" },
+  cmd = { "ruff", "server", "--preview" },
   settings = {
-    args = options.ruff_args,
+    configuration = "~/.config/nvim/pyproject.toml",
   },
 }
