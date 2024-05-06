@@ -155,5 +155,7 @@ return {
       "<cmd>BufferLineMoveNext<cr>",
       desc = "Move current buffer to right",
     },
+    { "<S-h>", "<cmd>BufferLineCyclePrev<cr>", desc = "Prev Buffer" },
+    { "<S-l>", "<cmd>BufferLineCycleNext<cr>", desc = "Next Buffer" },
   },
 }

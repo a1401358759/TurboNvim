@@ -7,7 +7,7 @@ return {
   {
     "echasnovski/mini.surround",
     lazy = true,
-    event = { "BufReadPost", "BufWritePre", "BufNewFile" },
+    event = { "TurboLoad" },
     opts = {
       mappings = {
         add = "ys", -- Add surrounding in Normal and Visual modes
@@ -75,5 +75,17 @@ return {
     "echasnovski/mini.move",
     lazy = true,
     opts = {},
+    keys = {
+      -- Visual
+      { "<A-h>", "<cmd>lua MiniMove.move_selection('left')<CR>", desc = "Move left", mode = { "v", "x" } },
+      { "<A-l>", "<cmd>lua MiniMove.move_selection('right')<CR>", desc = "Move right", mode = { "v", "x" } },
+      { "<A-j>", "<cmd>lua MiniMove.move_selection('down')<CR>", desc = "Move down", mode = { "v", "x" } },
+      { "<A-k>", "<cmd>lua MiniMove.move_selection('up')<CR>", desc = "Move up", mode = { "v", "x" } },
+      -- Normal
+      { "<A-h>", "<cmd>lua MiniMove.move_line('left')<CR>", desc = "Move line left", mode = "n" },
+      { "<A-l>", "<cmd>lua MiniMove.move_line('right')<CR>", desc = "Move line right", mode = "n" },
+      { "<A-j>", "<cmd>lua MiniMove.move_line('down')<CR>", desc = "Move line down", mode = "n" },
+      { "<A-k>", "<cmd>lua MiniMove.move_line('up')<CR>", desc = "Move line up", mode = "n" },
+    },
   },
 }
