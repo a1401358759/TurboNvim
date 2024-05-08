@@ -1,6 +1,7 @@
 return {
   {
     "echasnovski/mini.comment",
+    event = { "TurboLoad" },
     lazy = true,
     opts = {},
   },
