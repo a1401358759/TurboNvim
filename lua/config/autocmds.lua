@@ -252,7 +252,6 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
     if options.transparent then
       vim.api.nvim_set_hl(0, "NotifyBackground", { bg = "#000000" })
     end
-    vim.cmd([[hi! EndOfBuffer guibg=bg guifg=bg]])
     vim.cmd([[hi! CursorLineNr guibg=bg]])
   end,
 })
