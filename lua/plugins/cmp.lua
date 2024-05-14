@@ -169,15 +169,15 @@ return {
           end
         end,
       },
-      ["<CR>"] = {
-        c = cmp.mapping.confirm({ select = false }),
-      },
     }
     -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
     cmp.setup.cmdline({ "/", "?" }, {
       mapping = cmp.mapping.preset.cmdline(cmd_mapping),
       sources = {
         { name = "buffer" },
+      },
+      completion = {
+        completeopt = "menu,menuone,noselect",
       },
     })
 
@@ -190,6 +190,9 @@ return {
         { name = "cmdline" },
       }),
       matching = { disallow_symbol_nonprefix_matching = false },
+      completion = {
+        completeopt = "menu,menuone,noselect",
+      },
     })
     setCompHL()
   end,
