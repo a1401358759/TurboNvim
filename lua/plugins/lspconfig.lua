@@ -2,7 +2,7 @@ local diag_icons = require("config.icons").icons.diagnostics
 
 return {
   "neovim/nvim-lspconfig",
-  event = { "TurboLoad" },
+  event = { "VeryLazy" },
   dependencies = {
     { "folke/neoconf.nvim", cmd = "Neoconf", config = false, dependencies = { "nvim-lspconfig" } },
     { "folke/neodev.nvim", opts = {} },
@@ -37,6 +37,12 @@ return {
   },
   config = function(_, opts)
     require("lspconfig.ui.windows").default_options.border = "rounded"
+    -- add init
+    local on_init = function(client, _)
+      if client.supports_method("textDocument/semanticTokens") then
+        client.server_capabilities.semanticTokensProvider = nil
+      end
+    end
     -- add capabilities
     local has_cmp, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
     local capabilities = vim.tbl_deep_extend(
@@ -80,6 +86,9 @@ return {
       end
       settings.on_attach = on_attach
       settings.capabilities = capabilities
+      if server_name == "lua_ls" then
+        settings.on_init = on_init
+      end
       require("lspconfig")[server_name].setup(settings)
       ::continue::
     end
