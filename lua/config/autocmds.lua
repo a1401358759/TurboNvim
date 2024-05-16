@@ -2,27 +2,6 @@ local function augroup(name)
   return vim.api.nvim_create_augroup("lazyvim_" .. name, { clear = true })
 end
 
--- Add TurboLoad event
--- If user starts neovim but does not edit a file, i.e., entering Dashboard directly, the TurboLoad event is hooked to the
--- next BufRead event. Otherwise, the event is triggered right after the VeryLazy event.
-vim.api.nvim_create_autocmd("User", {
-  pattern = "VeryLazy",
-  callback = function()
-    local function _trigger()
-      vim.api.nvim_exec_autocmds("User", { pattern = "TurboLoad" })
-    end
-
-    if vim.bo.filetype == "dashboard" then
-      vim.api.nvim_create_autocmd("BufRead", {
-        once = true,
-        callback = _trigger,
-      })
-    else
-      _trigger()
-    end
-  end,
-})
-
 -- Check if we need to reload the file when it changed
 vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
   group = augroup("checktime"),
@@ -78,7 +57,6 @@ vim.api.nvim_create_autocmd("FileType", {
     "lspinfo",
     "notify",
     "qf",
-    "query",
     "spectre_panel",
     "startuptime",
     "tsplayground",

@@ -11,12 +11,7 @@ if not vim.uv.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require("config.autocmds")
-
-local Event = require("lazy.core.handler.event")
-Event.mappings.TurboLoad = { id = "TurboLoad", event = "User", pattern = "TurboLoad" }
-Event.mappings["User TurboLoad"] = Event.mappings.TurboLoad
-
+require("utils.plugin").setup()
 require("lazy").setup({
   defaults = {
     lazy = true, -- should plugins be lazy-loaded?
@@ -26,6 +21,23 @@ require("lazy").setup({
   },
   ui = {
     border = "rounded",
+    backdrop = 60,
   },
   checker = { enabled = true }, -- automatically check for plugin updates
+  performance = {
+    rtp = {
+      disabled_plugins = {
+        "editorconfig",
+        "gzip",
+        "matchit",
+        "matchparen",
+        "netrwPlugin",
+        "shada",
+        "tarPlugin",
+        "tohtml",
+        "tutor",
+        "zipPlugin",
+      },
+    },
+  },
 })
