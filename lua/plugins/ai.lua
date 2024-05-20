@@ -8,7 +8,6 @@ return {
     config = function()
       require("fittencode").setup({
         disable_specific_inline_completion = {
-          -- Disable auto-completion for some specific file suffixes by entering them below
           -- For example, `suffixes = {'lua', 'cpp'}`
           suffixes = {},
         },
@@ -16,7 +15,6 @@ return {
           -- Enable inline code completion.
           enable = true,
         },
-        -- Set the mode of the completion.
         -- Available options:
         -- - 'inline' (default)
         -- - 'source'

@@ -2,7 +2,6 @@ return {
   "nvim-lualine/lualine.nvim",
   dependencies = { "nvim-tree/nvim-web-devicons" },
   event = "TurboLoad",
-  main = "lualine",
   config = function()
     local lualine = require("lualine")
     local icons = require("config.icons").icons
@@ -46,17 +45,6 @@ return {
         return gitdir and #gitdir > 0 and #gitdir < #filepath
       end,
     }
-
-    local function split(str, delimiter)
-      local result = {}
-      for match in (str .. delimiter):gmatch("(.-)" .. delimiter) do
-        table.insert(result, match)
-      end
-      -- 获取表的长度
-      local length = #result
-      -- 获取最后一个元素
-      return result[length]
-    end
 
     -- Config
     local config = {
@@ -251,23 +239,6 @@ return {
       on_click = function()
         vim.cmd("1")
       end,
-    })
-    ins_right({
-      function()
-        local venv_name = require("venv-selector").get_active_venv()
-        if venv_name ~= nil then
-          return " " .. split(venv_name, "/")
-        else
-          return ""
-        end
-      end,
-      on_click = function()
-        vim.cmd.VenvSelect()
-      end,
-      cond = function()
-        return vim.bo.filetype == "python"
-      end,
-      color = { gui = "bold" },
     })
     ins_right({
       function()
