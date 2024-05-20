@@ -1,7 +1,7 @@
 return {
   "nvim-treesitter/nvim-treesitter",
   build = ":TSUpdate",
-  event = { "TurboLoad", "VeryLazy" },
+  event = { "VeryLazy" },
   dependencies = {
     "windwp/nvim-ts-autotag",
   },

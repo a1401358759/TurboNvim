@@ -4,6 +4,7 @@ return {
   {
     "ellisonleao/gruvbox.nvim",
     lazy = true,
+    priority = 1000,
     config = function()
       require("gruvbox").setup({
         transparent_mode = options.transparent,
@@ -23,6 +24,8 @@ return {
   },
   {
     "luisiacc/gruvbox-baby",
+    lazy = true,
+    priority = 1000,
     config = function()
       local config = require("gruvbox-baby.config")
       local colors = require("gruvbox-baby.colors")
@@ -43,7 +46,7 @@ return {
   {
     "folke/tokyonight.nvim",
     lazy = true,
-    -- priority = 1000,
+    priority = 1000,
     opts = {
       transparent = options.transparent,
       styles = {
@@ -57,6 +60,7 @@ return {
   },
   {
     "olimorris/onedarkpro.nvim",
+    lazy = true,
     priority = 1000, -- Ensure it loads first
     opts = {
       cursorline = options.show_cursorline, -- Use cursorline highlighting?
