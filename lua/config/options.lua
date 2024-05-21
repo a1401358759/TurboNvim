@@ -18,23 +18,28 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 vim.g.autoformat = false
 vim.g.root_spec = { "lsp", { ".git", "lua" }, "cwd" }
--- Fix markdown indentation settings
-vim.g.markdown_recommended_style = 0
 
 vim.uv = vim.uv or vim.loop
 
 local opt = vim.opt
 
-if not vim.env.SSH_TTY then
-  -- only set clipboard if not in ssh, to make sure the OSC 52
-  -- integration works automatically. Requires Neovim >= 0.10.0
-  opt.clipboard = "unnamedplus" -- Sync with system clipboard
-end
+opt.clipboard = vim.env.SSH_TTY and "" or "unnamedplus" -- Sync with system clipboard
 opt.autowrite = true -- Enable auto write
 opt.completeopt = "menu,menuone,noselect"
 opt.conceallevel = 2 -- Hide * markup for bold and italic, but not markers with substitutions
 opt.confirm = true -- Confirm to save changes before exiting modified buffer
+opt.cursorline = options.show_cursorline
 opt.expandtab = true -- Use spaces instead of tabs
+opt.fillchars = {
+  foldopen = "",
+  foldclose = "",
+  fold = " ",
+  foldsep = " ",
+  diff = "╱",
+  eob = " ",
+}
+opt.foldlevel = 99
+opt.formatexpr = "v:lua.require'utils.ui'.formatexpr()"
 opt.formatoptions = "jcroqlnt" -- tcqj
 opt.grepformat = "%f:%l:%c:%m"
 opt.grepprg = "rg --vimgrep"
@@ -60,9 +65,10 @@ opt.spelllang = { "en" }
 opt.splitbelow = true -- Put new windows below current
 opt.splitkeep = "screen"
 opt.splitright = true -- Put new windows right of current
+opt.statuscolumn = [[%!v:lua.require'utils.ui'.statuscolumn()]]
 opt.tabstop = 2 -- Number of spaces tabs count for
 opt.termguicolors = true -- True color support
-opt.timeoutlen = 300
+opt.timeoutlen = vim.g.vscode and 1000 or 300
 opt.undofile = true
 opt.undolevels = 10000
 opt.updatetime = 200 -- Save swap file and trigger CursorHold
@@ -70,39 +76,21 @@ opt.virtualedit = "block" -- Allow cursor to move where there is no text in visu
 opt.wildmode = "longest:full,full" -- Command-line completion mode
 opt.winminwidth = 5 -- Minimum window width
 opt.wrap = false -- Disable line wrap
-opt.fillchars = {
-  foldopen = "",
-  foldclose = "",
-  fold = " ",
-  foldsep = " ",
-  diff = "╱",
-  eob = " ",
-}
 opt.cmdheight = 0
-opt.cursorline = options.show_cursorline
 opt.winblend = 0
 opt.pumblend = 0
 
 if vim.fn.has("nvim-0.10") == 1 then
   opt.smoothscroll = true
-end
-
--- Folding
-vim.opt.foldlevel = 99
-vim.opt.foldtext = "v:lua.require'utils.ui'.foldtext()"
-
-if vim.fn.has("nvim-0.9.0") == 1 then
-  opt.statuscolumn = [[%!v:lua.require'utils.ui'.statuscolumn()]]
-end
-
--- HACK: causes freezes on <= 0.9, so only enable on >= 0.10 for now
-if vim.fn.has("nvim-0.10") == 1 then
+  opt.foldexpr = "v:lua.require'utils.ui'.foldexpr()"
   opt.foldmethod = "expr"
-  vim.opt.foldexpr = "v:lua.require'utils.ui'.foldexpr()"
-  vim.opt.fillchars = "fold: "
+  opt.foldtext = ""
 else
   opt.foldmethod = "indent"
+  opt.foldtext = "v:lua.require'utils.ui'.foldtext()"
 end
 
-vim.o.formatexpr = "v:lua.require'utils.ui'.formatexpr()"
+-- Fix markdown indentation settings
+vim.g.markdown_recommended_style = 0
+
 return options
