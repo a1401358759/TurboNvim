@@ -40,6 +40,7 @@ return {
         Search = { bg = c.bright_yellow, fg = "#ffffff" },
         IncSearch = { bg = c.orange, fg = "#ffffff" },
         CurSearch = { link = "IncSearch" },
+        Visual = { bg = "#665c54" },
       }
     end,
   },

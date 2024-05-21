@@ -62,11 +62,6 @@ return {
       completion = {
         completeopt = "menu,menuone,noinsert",
       },
-      snippet = {
-        expand = function(args)
-          vim.snippet.expand(args.body)
-        end,
-      },
       mapping = cmp.mapping.preset.insert({
         ["<C-b>"] = cmp.mapping.scroll_docs(-4),
         ["<C-f>"] = cmp.mapping.scroll_docs(4),
