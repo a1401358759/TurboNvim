@@ -46,8 +46,12 @@ return {
     "hrsh7th/cmp-cmdline",
     "lukas-reineke/cmp-rg",
     {
-      { "rafamadriz/friendly-snippets" },
-      { "garymjr/nvim-snippets", opts = { friendly_snippets = true } },
+      "garymjr/nvim-snippets",
+      opts = {
+        friendly_snippets = true,
+        global_snippets = { "all", "global" },
+      },
+      dependencies = { "rafamadriz/friendly-snippets" },
     },
   },
   opts = function()
@@ -127,6 +131,20 @@ return {
     }
   end,
   config = function(_, opts)
+    for _, source in ipairs(opts.sources) do
+      source.group_index = source.group_index or 1
+    end
+
+    local parse = require("cmp.utils.snippet").parse
+    ---@diagnostic disable-next-line: duplicate-set-field
+    require("cmp.utils.snippet").parse = function(input)
+      local ok, ret = pcall(parse, input)
+      if ok then
+        return ret
+      end
+      return require("utils.ui").snippet_preview(input)
+    end
+
     local cmp = require("cmp")
     cmp.setup(opts)
 

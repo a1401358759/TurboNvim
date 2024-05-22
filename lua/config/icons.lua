@@ -15,7 +15,7 @@ M.icons = {
     ignored = " ",
     -- unstaged = "󰄱",
     unstaged = "",
-    staged = " ",
+    staged = "󰱒 ",
     conflict = " ",
   },
   lspkind = {

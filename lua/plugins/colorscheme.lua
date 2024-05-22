@@ -41,6 +41,7 @@ return {
         IncSearch = { bg = c.orange, fg = "#ffffff" },
         CurSearch = { link = "IncSearch" },
         Visual = { bg = "#665c54" },
+        FloatBorder = { bg = c.none },
       }
     end,
   },

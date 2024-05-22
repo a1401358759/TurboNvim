@@ -281,4 +281,23 @@ function M.blame_line(opts)
   return require("lazy.util").float_cmd(cmd, opts)
 end
 
+---@param snippet string
+---@return string
+function M.snippet_replace(snippet, fn)
+  return snippet:gsub("%$%b{}", function(m)
+    local n, name = m:match("^%${(%d+):(.+)}$")
+    return n and fn({ n = n, text = name }) or m
+  end) or snippet
+end
+
+-- This function resolves nested placeholders in a snippet.
+---@param snippet string
+---@return string
+function M.snippet_preview(snippet)
+  local ret = M.snippet_replace(snippet, function(placeholder)
+    return M.snippet_preview(placeholder.text)
+  end):gsub("%$0", "")
+  return ret
+end
+
 return M

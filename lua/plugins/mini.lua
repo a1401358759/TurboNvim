@@ -13,27 +13,10 @@ return {
     },
   },
   {
-    "JoosepAlviste/nvim-ts-context-commentstring",
-    lazy = true,
-    opts = {
-      enable_autocmd = false,
-    },
-    init = function()
-      if vim.fn.has("nvim-0.10") == 1 then
-        local inject = require("utils.inject")
-        vim.g.skip_ts_context_commentstring_module = true
-        -- Majestically override the native `get_commentstring` function.
-        vim.schedule(function()
-          inject.set_upvalue(
-            inject.get_upvalue(require("vim._comment").textobject, "get_comment_parts"),
-            "get_commentstring",
-            function()
-              return require("ts_context_commentstring.internal").calculate_commentstring() or vim.bo.commentstring
-            end
-          )
-        end)
-      end
-    end,
+    "folke/ts-comments.nvim",
+    opts = {},
+    event = "VeryLazy",
+    enabled = vim.fn.has("nvim-0.10.0") == 1,
   },
   {
     "echasnovski/mini.surround",
