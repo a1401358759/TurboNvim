@@ -37,6 +37,7 @@ return {
       "ruff",
       "ruff-lsp",
       "markdownlint",
+      "markdown-toc",
 
       -- formatter
       "shfmt",
