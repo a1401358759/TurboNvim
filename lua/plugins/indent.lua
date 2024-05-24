@@ -41,6 +41,7 @@ return {
           notify = false,
         },
         indent = {
+          enable = true,
           chars = { "▏" },
           style = {
             { fg = indent_color },
