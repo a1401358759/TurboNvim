@@ -41,11 +41,11 @@ return {
         html = { { "prettier", "prettierd" } },
         json = { { "jq", "fixjson", "prettier", "prettierd" } },
         yaml = { { "prettier", "prettierd" } },
-        markdown = { { "prettier", "prettierd" } },
+        markdown = { { "prettierd", "prettier" }, "markdownlint", "markdown-toc" },
         graphql = { { "prettier", "prettierd" } },
         python = function(bufnr)
           if require("conform").get_formatter_info("ruff_format", bufnr).available then
-            return { "isort", "ruff_format" }
+            return { "ruff_fix", "ruff_organize_imports", "ruff_format" }
           else
             return { "isort", "black" }
           end
