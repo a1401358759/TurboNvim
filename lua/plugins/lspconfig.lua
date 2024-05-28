@@ -2,7 +2,7 @@ local diag_icons = require("config.icons").icons.diagnostics
 
 return {
   "neovim/nvim-lspconfig",
-  event = { "VeryLazy" },
+  event = { "VeryLazy", "TurboLoad" },
   dependencies = {
     { "folke/neoconf.nvim", cmd = "Neoconf", config = false, dependencies = { "nvim-lspconfig" } },
     { "folke/neodev.nvim", opts = {} },
@@ -26,6 +26,7 @@ return {
     },
     inlay_hints = {
       enabled = true,
+      exclude = { "go", "lua" }, -- filetypes for which you don't want to enable inlay hints
     },
     codelens = {
       enabled = false,
@@ -68,7 +69,11 @@ return {
         end
       end
       if opts.inlay_hints.enabled then
-        if vim.api.nvim_buf_is_valid(bufnr) and vim.bo[bufnr].buftype == "" then
+        if
+          vim.api.nvim_buf_is_valid(bufnr)
+          and vim.bo[bufnr].buftype == ""
+          and not vim.tbl_contains(opts.inlay_hints.exclude, vim.bo[bufnr].filetype)
+        then
           if client.supports_method("textDocument/inlayHint") then
             vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
           end
