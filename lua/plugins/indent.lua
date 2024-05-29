@@ -30,10 +30,10 @@ return {
     "shellRaining/hlchunk.nvim",
     event = { "TurboLoad" },
     config = function()
-      local indent_color = function()
-        local bg_color = require("utils.ui").bg("CursorLine").bg
-        return bg_color
-      end
+      -- local indent_color = function()
+      --   local bg_color = require("utils.ui").bg("CursorLine").bg
+      --   return bg_color
+      -- end
 
       require("hlchunk").setup({
         chunk = {
@@ -42,10 +42,10 @@ return {
         },
         indent = {
           enable = true,
-          chars = { "▏" },
-          style = {
-            { fg = indent_color },
-          },
+          chars = { "│" },
+          -- style = {
+          --   { fg = indent_color },
+          -- },
         },
         blank = { enable = false },
         line_num = { enable = false },

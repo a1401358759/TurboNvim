@@ -112,3 +112,7 @@ map("n", "<leader>|", "<C-W>v", { desc = "Split Window Right", remap = true })
 
 -- change colorscheme
 map("n", "<leader>cs", "<cmd>Telescope colorscheme<CR>", { desc = "Telescope colorscheme" })
+
+-- commenting
+map("n", "gco", "o<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", { desc = "Add Comment Below" })
+map("n", "gcO", "O<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", { desc = "Add Comment Above" })

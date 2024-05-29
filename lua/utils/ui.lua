@@ -281,6 +281,8 @@ function M.blame_line(opts)
   return require("lazy.util").float_cmd(cmd, opts)
 end
 
+---@alias Placeholder {n:number, text:string}
+
 ---@param snippet string
 ---@return string
 function M.snippet_replace(snippet, fn)
@@ -294,10 +296,13 @@ end
 ---@param snippet string
 ---@return string
 function M.snippet_preview(snippet)
-  local ret = M.snippet_replace(snippet, function(placeholder)
-    return M.snippet_preview(placeholder.text)
-  end):gsub("%$0", "")
-  return ret
+  local ok, parsed = pcall(function()
+    return vim.lsp._snippet_grammar.parse(snippet)
+  end)
+  return ok and tostring(parsed)
+    or M.snippet_replace(snippet, function(placeholder)
+      return M.snippet_preview(placeholder.text)
+    end):gsub("%$0", "")
 end
 
 return M
