@@ -1,7 +1,7 @@
 return {
   "folke/trouble.nvim",
   lazy = true,
-  branch = "dev", -- IMPORTANT!
+  branch = "main", -- IMPORTANT!
   cmd = { "Trouble", "TroubleToggle", "TroubleRefresh" },
   keys = {
     {

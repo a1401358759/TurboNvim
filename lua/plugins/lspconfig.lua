@@ -4,8 +4,6 @@ return {
   "neovim/nvim-lspconfig",
   event = { "VeryLazy", "TurboLoad" },
   dependencies = {
-    { "folke/neoconf.nvim", cmd = "Neoconf", config = false, dependencies = { "nvim-lspconfig" } },
-    { "folke/neodev.nvim", opts = {} },
     "mason.nvim",
     "williamboman/mason-lspconfig.nvim",
   },
@@ -30,6 +28,10 @@ return {
     },
     codelens = {
       enabled = false,
+    },
+    -- Enable lsp cursor word highlighting
+    document_highlight = {
+      enabled = true,
     },
     format = {
       formatting_options = nil,
