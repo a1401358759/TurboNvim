@@ -19,23 +19,6 @@ return {
     enabled = vim.fn.has("nvim-0.10.0") == 1,
   },
   {
-    "echasnovski/mini.surround",
-    lazy = true,
-    event = { "TurboLoad" },
-    opts = {
-      mappings = {
-        add = "ys", -- Add surrounding in Normal and Visual modes
-        delete = "ds", -- Delete surrounding
-        find = "bf", -- Find surrounding (to the right)
-        find_left = "bF", -- Find surrounding (to the left)
-        highlight = "bh", -- Highlight surrounding
-        replace = "cs", -- Replace surrounding
-        update_n_lines = "bn", -- Update `n_lines`
-      },
-      silent = true,
-    },
-  },
-  {
     "echasnovski/mini.pairs",
     lazy = true,
     event = { "InsertEnter" },
