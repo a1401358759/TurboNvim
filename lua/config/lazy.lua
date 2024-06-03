@@ -30,7 +30,6 @@ require("lazy").setup({
         "editorconfig",
         "gzip",
         "matchit",
-        "matchparen",
         "netrwPlugin",
         "shada",
         "tarPlugin",
