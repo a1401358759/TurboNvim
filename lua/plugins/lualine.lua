@@ -223,6 +223,16 @@ return {
     --   },
     -- })
     ins_right({
+      function()
+        local reg = vim.fn.reg_recording()
+        return "󰃽 [" .. reg .. "]"
+      end,
+      cond = function()
+        return vim.fn.reg_recording() ~= ""
+      end,
+      color = { fg = colors.magenta, gui = "bold" },
+    })
+    ins_right({
       "o:encoding",
       cond = conditions.hide_in_width,
       color = { fg = colors.green, gui = "bold" },
