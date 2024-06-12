@@ -126,9 +126,7 @@ return {
       function()
         return icons.ui.Separator
       end,
-      color = function()
-        return { fg = mode_color[vim.fn.mode()] }
-      end,
+      color = { fg = colors.blue },
       padding = { left = 0, right = 2 },
     })
     ins_left({
@@ -139,6 +137,13 @@ return {
         return { fg = mode_color[vim.fn.mode()] }
       end,
       padding = { right = 1 },
+    })
+    ins_left({
+      "mode",
+      color = function()
+        return { fg = mode_color[vim.fn.mode()], gui = "bold" }
+      end,
+      padding = { left = 0 },
     })
     ins_left({
       "filesize",
@@ -254,9 +259,7 @@ return {
       function()
         return icons.ui.Separator
       end,
-      color = function()
-        return { fg = mode_color[vim.fn.mode()] }
-      end,
+      color = { fg = colors.blue },
       padding = { left = 1 },
     })
     lualine.setup(config)

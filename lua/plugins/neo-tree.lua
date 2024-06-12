@@ -78,6 +78,8 @@ return {
     },
     window = {
       mappings = {
+        ["l"] = "open",
+        ["h"] = "close_node",
         ["<space>"] = "none",
         ["Y"] = {
           function(state)
@@ -93,6 +95,7 @@ return {
           end,
           desc = "Open with System Application",
         },
+        ["P"] = { "toggle_preview", config = { use_float = true } },
       },
     },
     default_component_configs = {
