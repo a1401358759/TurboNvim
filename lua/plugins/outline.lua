@@ -9,6 +9,10 @@ return {
     local opts = {
       symbols = {},
       symbol_blacklist = {},
+      keymaps = {
+        up_and_jump = "<up>",
+        down_and_jump = "<down>",
+      },
     }
     local filter = {
       "Class",

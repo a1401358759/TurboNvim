@@ -4,6 +4,18 @@ return {
   -- optional for icon support
   dependencies = { "nvim-tree/nvim-web-devicons" },
   config = function()
+    local img_previewer ---@type string[]?
+    for _, v in ipairs({
+      { cmd = "ueberzug", args = {} },
+      { cmd = "chafa", args = { "{file}", "--format=symbols" } },
+      { cmd = "viu", args = { "-b" } },
+    }) do
+      if vim.fn.executable(v.cmd) == 1 then
+        img_previewer = vim.list_extend({ v.cmd }, v.args)
+        break
+      end
+    end
+
     -- calling `setup` is optional for customization
     require("fzf-lua").setup({
       winopts = {
@@ -57,6 +69,14 @@ return {
           syntax = true, -- preview syntax highlight?
           syntax_limit_l = 0, -- syntax limit (lines), 0=nolimit
           syntax_limit_b = 1024 * 1024, -- syntax limit (bytes), 0=nolimit
+          extensions = {
+            ["png"] = img_previewer,
+            ["jpg"] = img_previewer,
+            ["jpeg"] = img_previewer,
+            ["gif"] = img_previewer,
+            ["webp"] = img_previewer,
+          },
+          ueberzug_scaler = "fit_contain",
         },
       },
       files = {
@@ -86,6 +106,7 @@ return {
     })
   end,
   keys = {
+    { "<esc>", "<esc>", ft = "fzf", mode = "t", nowait = true },
     { "<C-p>", "<cmd>lua require('fzf-lua').files()<cr>", desc = "FzfLua files" },
     { "<C-g>", "<cmd>lua require('fzf-lua').live_grep()<cr>", desc = "FzfLua live_grep" },
     { "<C-e>", "<cmd>lua require('fzf-lua').lsp_document_diagnostics()<cr>", desc = "FzfLua builtin" },
