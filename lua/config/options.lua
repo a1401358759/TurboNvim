@@ -18,6 +18,11 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 vim.g.autoformat = false
 vim.g.root_spec = { "lsp", { ".git", "lua" }, "cwd" }
+-- Set filetype to `bigfile` for files larger than 1.5 MB
+-- Only vim syntax will be enabled (with the correct filetype)
+-- LSP, treesitter and other ft plugins will be disabled.
+-- mini.animate will also be disabled.
+vim.g.bigfile_size = 1024 * 1024 * 1.5 -- 1.5 MB
 
 vim.uv = vim.uv or vim.loop
 
