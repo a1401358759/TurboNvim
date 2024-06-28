@@ -1,5 +1,7 @@
 -- Done
 
+local conf_path = vim.fn.stdpath("config") .. "/pyproject.toml"
+
 return {
   enabled = true,
   init_options = {
@@ -7,7 +9,7 @@ return {
     single_file_support = true,
     cmd = { "ruff", "server", "--preview" },
     settings = {
-      configuration = "~/.config/nvim/pyproject.toml",
+      configuration = conf_path,
     },
   },
 }
