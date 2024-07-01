@@ -5,7 +5,7 @@ return {
   event = { "VeryLazy", "TurboLoad" },
   dependencies = {
     "mason.nvim",
-    "williamboman/mason-lspconfig.nvim",
+    { "williamboman/mason-lspconfig.nvim", config = function() end },
   },
   opts = {
     diagnostics = {
