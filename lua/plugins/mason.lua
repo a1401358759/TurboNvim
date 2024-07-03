@@ -4,50 +4,63 @@ return {
   cmd = "Mason",
   opts = {
     ensure_installed = {
-      -- lsp
-      "pyright",
+      -- python
       "basedpyright",
-      "gopls",
+      "pyright",
+      "ruff",
+      "isort",
+      "black",
+
+      -- go
       "impl",
+      "gopls",
       "gofumpt",
       "gomodifytags",
       "goimports-reviser",
-      "css-lsp",
-      "cssmodules-language-server",
-      "json-lsp",
+
+      -- frontend
       "html-lsp",
+      "css-lsp",
       "emmet-ls",
       "vetur-vls",
-      "vim-language-server",
-      "lua-language-server",
-      "bash-language-server",
-      "typescript-language-server",
       "tailwindcss-language-server",
-      "dockerfile-language-server",
-      "docker-compose-language-service",
-      "hadolint",
-      "marksman",
       "eslint_d",
+      "vtsls",
+      "prettier",
+      "prettierd",
+
+      -- lua
+      "lua-language-server",
+      "stylua",
+
+      -- shell & bash
+      "bash-language-server",
+      "shfmt",
+      "shellcheck",
+
+      -- sql
+      "sql-formatter",
+
+      -- vim
+      "vim-language-server",
+
+      -- json
+      "json-lsp",
+      "fixjson",
 
       -- dap
       "delve",
       "debugpy",
 
-      -- diagnostic
-      "ruff",
-      "ruff-lsp",
+      -- docker
+      "dockerfile-language-server",
+      "docker-compose-language-service",
+
+      -- markdown
       "markdownlint",
       "markdown-toc",
-
-      -- formatter
-      "shfmt",
-      "isort",
-      "black",
-      "prettier",
-      "prettierd",
-      "sql-formatter",
-      "stylua",
-      "shellcheck",
+      "marksman",
+      "hadolint",
     },
     max_concurrent_installers = 20,
     pip = {
