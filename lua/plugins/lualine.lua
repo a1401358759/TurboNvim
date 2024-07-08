@@ -51,7 +51,7 @@ return {
       options = {
         component_separators = "",
         section_separators = "",
-        globalstatus = true,
+        globalstatus = vim.o.laststatus == 3,
         disabled_filetypes = { statusline = { "dashboard", "alpha" } },
         theme = {
           normal = { c = { fg = colors.fg } },
