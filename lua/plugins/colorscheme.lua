@@ -72,4 +72,26 @@ return {
       highlight_inactive_windows = false, -- When the window is out of focus, change the normal background?
     },
   },
+  {
+    "polirritmico/monokai-nightasty.nvim",
+    priority = 1000,
+    opts = {
+      dark_style_background = "transparent", -- default, dark, transparent, #color
+      markdown_header_marks = "true",
+      -- Style to be applied to different syntax groups. See `:help nvim_set_hl`
+      hl_styles = {
+        keywords = { italic = true },
+        comments = { italic = true },
+        floats = "transparent",
+        sidebars = "transparent",
+      },
+      color_headers = true,
+      dim_inactive = true,
+      hide_inactive_statusline = true,
+    },
+    config = function(_, opts)
+      vim.opt.cursorline = true
+      require("monokai-nightasty").load(opts)
+    end,
+  },
 }
