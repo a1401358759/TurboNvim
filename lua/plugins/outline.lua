@@ -44,7 +44,7 @@ return {
     local opts = {
       symbols = {
         icons = {},
-        filter = kind_filter,
+        filter = vim.deepcopy(kind_filter),
       },
       keymaps = {
         up_and_jump = "<up>",
