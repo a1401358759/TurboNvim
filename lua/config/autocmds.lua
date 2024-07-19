@@ -67,7 +67,11 @@ vim.api.nvim_create_autocmd("FileType", {
   },
   callback = function(event)
     vim.bo[event.buf].buflisted = false
-    vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = event.buf, silent = true })
+    vim.keymap.set("n", "q", "<cmd>close<cr>", {
+      buffer = event.buf,
+      silent = true,
+      desc = "Quit buffer",
+    })
   end,
 })
 
@@ -236,12 +240,12 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 
 -- Show diagnostics under the cursor when holding position
 vim.api.nvim_create_autocmd("CursorHold", {
+  pattern = "*",
   callback = function()
-    local opts = {
+    vim.diagnostic.open_float({
       focusable = false,
       scope = "line", -- "cursor"
       border = "rounded",
-      source = "always",
       close_events = {
         "BufLeave",
         "BufHidden",
@@ -252,8 +256,7 @@ vim.api.nvim_create_autocmd("CursorHold", {
         "WinLeave",
       },
       -- prefix = " ",
-    }
-    vim.diagnostic.open_float(nil, opts)
+    })
   end,
 })
 

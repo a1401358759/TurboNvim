@@ -10,6 +10,12 @@ return {
     cmd = { "ruff", "server", "--preview" },
     settings = {
       configuration = conf_path,
+      lineLength = 120,
+      organizeImports = true,
+      lint = {
+        enable = true,
+        preview = true,
+      },
     },
   },
 }
