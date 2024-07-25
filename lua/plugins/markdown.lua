@@ -20,10 +20,21 @@ return {
     end,
   },
   {
-    "lukas-reineke/headlines.nvim",
-    lazy = true,
+    "MeanderingProgrammer/markdown.nvim",
     ft = { "markdown", "norg", "rmd", "org" },
-    dependencies = "nvim-treesitter/nvim-treesitter",
-    config = true, -- or `opts = {}`
+    dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" },
+    enabled = true,
+    opts = {
+      file_types = { "markdown", "norg", "rmd", "org" },
+      code = {
+        sign = false,
+        width = "block",
+        right_pad = 1,
+      },
+      heading = {
+        sign = false,
+        icons = {},
+      },
+    },
   },
 }
