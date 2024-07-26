@@ -8,6 +8,6 @@ return {
     vim.g.joshuto_floating_window_winblend = 0
   end,
   keys = {
-    { "<leader>tr", "<cmd>Joshuto<cr>", desc = "Joshuto float" },
+    { "<leader>tr", "<cmd>Joshuto<cr>", desc = "Toggle Joshuto Float" },
   },
 }
