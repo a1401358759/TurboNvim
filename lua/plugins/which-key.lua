@@ -22,6 +22,7 @@ return {
         { "<leader>m", group = "Markdown" },
         { "<leader>q", group = "Quit/Session" },
         { "<leader>s", group = "Search" },
+        { "<leader>t", group = "Terminal" },
         { "<leader>u", group = "UI", icon = { icon = "󰙵 ", color = "cyan" } },
         { "<leader>x", group = "Diagnostics/Quickfix", icon = { icon = "󱖫 ", color = "green" } },
         { "[", group = "Prev" },
