@@ -90,7 +90,7 @@ return {
       hide_inactive_statusline = true,
     },
     config = function(_, opts)
-      vim.opt.cursorline = true
+      vim.opt.cursorline = options.show_cursorline
       require("monokai-nightasty").load(opts)
     end,
   },
