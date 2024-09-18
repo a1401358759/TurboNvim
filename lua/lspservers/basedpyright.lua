@@ -9,6 +9,7 @@ local root_files = {
 }
 
 return {
+  enabled = false,
   filetypes = { "python" },
   single_file_support = true,
   cmd = { "basedpyright-langserver", "--stdio" },

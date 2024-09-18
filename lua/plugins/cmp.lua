@@ -32,7 +32,8 @@ local setCompHL = function()
   hl(0, "CmpItemKindEnumMember", { fg = fgdark, bg = "#6C8ED4" })
   hl(0, "CmpItemKindInterface", { fg = fgdark, bg = "#58B5A8" })
   hl(0, "CmpItemKindColor", { fg = fgdark, bg = "#58B5A8" })
-  hl(0, "CmpItemKindTypeParameter", { fg = fgdark, bg = "#58B5A8" })
+  hl(0, "CmpItemKindFittenCode", { fg = fgdark, bg = "#58B5A8" })
+  hl(0, "CmpItemKindTypeParameter", { fg = fgdark, bg = "#6CC644" })
 end
 
 return {

@@ -42,10 +42,16 @@ return {
         },
         indent = {
           enable = true,
-          chars = { "│" },
+          ahead_lines = 25,
+          delay = 50,
+          -- chars = { "│" },
+          chars = { "▏" },
           -- style = {
           --   { fg = indent_color },
           -- },
+          style = {
+            vim.fn.synIDattr(vim.fn.synIDtrans(vim.fn.hlID("Whitespace")), "fg", "gui"),
+          },
         },
         blank = { enable = false },
         line_num = { enable = false },

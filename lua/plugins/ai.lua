@@ -1,3 +1,4 @@
+---@diagnostic disable: missing-fields
 local options = require("config.options")
 
 return {
@@ -14,14 +15,12 @@ return {
         inline_completion = {
           -- Enable inline code completion.
           enable = true,
+          disable_completion_within_the_line = true,
         },
         -- Available options:
         -- - 'inline' (default)
         -- - 'source'
         completion_mode = "source",
-        log = {
-          level = vim.log.levels.WARN,
-        },
       })
     end,
   },

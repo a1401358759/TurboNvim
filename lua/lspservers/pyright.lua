@@ -39,7 +39,7 @@ local filter_publish_diagnostics = function(a, params, client_info, extra_messag
 end
 
 return {
-  enabled = false,
+  enabled = true,
   filetypes = { "python" },
   single_file_support = true,
   cmd = { "pyright-langserver", "--stdio" },
