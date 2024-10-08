@@ -2,9 +2,8 @@
 return {
   {
     "lukas-reineke/indent-blankline.nvim",
-    cond = false,
-    lazy = true,
-    event = { "BufReadPost", "BufNewFile", "BufWritePre" },
+    cond = true,
+    event = { "TurboLoad" },
     opts = {
       indent = { char = "▏", tab_char = "▏" },
       scope = { enabled = false },
@@ -29,12 +28,8 @@ return {
   {
     "shellRaining/hlchunk.nvim",
     event = { "TurboLoad" },
+    cond = false,
     config = function()
-      -- local indent_color = function()
-      --   local bg_color = require("utils.ui").bg("CursorLine").bg
-      --   return bg_color
-      -- end
-
       require("hlchunk").setup({
         chunk = {
           enable = false,
@@ -46,9 +41,6 @@ return {
           delay = 50,
           -- chars = { "│" },
           chars = { "▏" },
-          -- style = {
-          --   { fg = indent_color },
-          -- },
           style = {
             vim.fn.synIDattr(vim.fn.synIDtrans(vim.fn.hlID("Whitespace")), "fg", "gui"),
           },

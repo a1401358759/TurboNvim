@@ -5,6 +5,7 @@ return {
     cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
     ft = { "markdown" },
     build = function()
+      require("lazy").load({ plugins = { "markdown-preview.nvim" } })
       vim.fn["mkdp#util#install"]()
     end,
     keys = {
@@ -20,12 +21,8 @@ return {
     end,
   },
   {
-    "MeanderingProgrammer/markdown.nvim",
-    ft = { "markdown", "norg", "rmd", "org" },
-    dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" },
-    enabled = true,
+    "MeanderingProgrammer/render-markdown.nvim",
     opts = {
-      file_types = { "markdown", "norg", "rmd", "org" },
       code = {
         sign = false,
         width = "block",
@@ -36,5 +33,9 @@ return {
         icons = {},
       },
     },
+    ft = { "markdown", "norg", "rmd", "org" },
+    config = function(_, opts)
+      require("render-markdown").setup(opts)
+    end,
   },
 }
