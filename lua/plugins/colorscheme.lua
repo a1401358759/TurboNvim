@@ -51,6 +51,7 @@ return {
     priority = 1000,
     opts = {
       transparent = options.transparent,
+      style = "moon",
       styles = {
         sidebars = "transparent",
         floats = "transparent",
