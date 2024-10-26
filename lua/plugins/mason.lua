@@ -18,6 +18,9 @@ return {
       "gomodifytags",
       "goimports-reviser",
 
+      -- java
+      "jdtls",
+
       -- frontend
       "html-lsp",
       "css-lsp",
