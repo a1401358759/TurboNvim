@@ -3,4 +3,4 @@ require("config.autocmds")
 require("config.keymaps")
 require("config.lazy")
 
-vim.cmd([[colorscheme monokai-nightasty]])
+vim.cmd([[colorscheme tokyonight]])
