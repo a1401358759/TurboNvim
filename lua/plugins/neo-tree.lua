@@ -117,7 +117,7 @@ return {
   },
   config = function(_, opts)
     local function on_move(data)
-      require("utils.ui").on_rename(data.source, data.destination)
+      Snacks.rename.on_rename_file(data.source, data.destination)
     end
 
     local events = require("neo-tree.events")
@@ -126,6 +126,7 @@ return {
       { event = events.FILE_MOVED, handler = on_move },
       { event = events.FILE_RENAMED, handler = on_move },
     })
+
     require("neo-tree").setup(opts)
     vim.api.nvim_create_autocmd("TermClose", {
       pattern = "*lazygit",

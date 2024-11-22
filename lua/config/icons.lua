@@ -92,6 +92,7 @@ M.icons = {
     Statement = "󰅩 ",
     String = "󰉾 ",
     Struct = " ",
+    Supermaven = " ",
     SwitchStatement = "󰺟 ",
     Table = " ",
     TabNine = "󱚦 ",

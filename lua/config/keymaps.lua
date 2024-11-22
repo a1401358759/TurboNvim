@@ -1,3 +1,4 @@
+---@diagnostic disable: undefined-global
 local map = vim.keymap.set
 
 -- better up/down
@@ -89,12 +90,7 @@ if vim.fn.has("nvim-0.9.0") == 1 then
   map("n", "<leader>ui", vim.show_pos, { desc = "Inspect Pos" })
 end
 
--- floating terminal
-map("t", "<esc>", "<c-\\><c-n><cmd>close<cr>", { desc = "Enter Normal Mode" })
-map("t", "<esc><esc>", "<c-\\><c-n><cmd>close<cr>", { desc = "Enter Normal Mode" })
-
 -- Terminal Mappings
-map("t", "<esc><esc>", "<c-\\><c-n>", { desc = "Enter Normal Mode" })
 map("t", "<C-h>", "<cmd>wincmd h<cr>", { desc = "Go to Left Window" })
 map("t", "<C-j>", "<cmd>wincmd j<cr>", { desc = "Go to Lower Window" })
 map("t", "<C-k>", "<cmd>wincmd k<cr>", { desc = "Go to Upper Window" })

@@ -34,6 +34,7 @@ local setCompHL = function()
   hl(0, "CmpItemKindColor", { fg = fgdark, bg = "#58B5A8" })
   hl(0, "CmpItemKindFittenCode", { fg = fgdark, bg = "#58B5A8" })
   hl(0, "CmpItemKindTypeParameter", { fg = fgdark, bg = "#6CC644" })
+  hl(0, "CmpItemKindSupermaven", { fg = fgdark, bg = "#6CC644" })
 end
 
 return {
@@ -101,6 +102,7 @@ return {
       sources = cmp.config.sources({
         { name = "nvim_lsp" },
         { name = "rg", keyword_length = 3, max_item_count = 5 },
+        { name = "supermaven" },
         { name = "fittencode" },
         { name = "codeium" },
         { name = "path" },

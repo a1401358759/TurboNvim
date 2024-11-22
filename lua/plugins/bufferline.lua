@@ -48,11 +48,6 @@ return {
     { "<leader>bp", "<Cmd>BufferLineTogglePin<CR>", desc = "Toggle pin" },
     { "<leader>bP", "<Cmd>BufferLineGroupClose ungrouped<CR>", desc = "Delete non-pinned buffers" },
     {
-      "<c-q>",
-      "<cmd>BufferDelete<CR>",
-      desc = "Close current buffer",
-    },
-    {
 
       "<leader>bq",
       "<cmd>BufferLinePickClose<cr>",

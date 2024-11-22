@@ -25,20 +25,16 @@ return {
     end,
   },
   {
-    "Exafunction/codeium.nvim",
+    "supermaven-inc/supermaven-nvim",
     cond = options.use_ai_plugins,
     event = { "InsertEnter" },
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "hrsh7th/nvim-cmp",
+    opts = {
+      keymaps = {
+        accept_suggestion = nil, -- handled by nvim-cmp / blink.cmp
+      },
     },
-    config = function()
-      require("codeium").setup({
-        detect_proxy = true,
-        enable_chat = true,
-        enable_local_search = true,
-        enable_index_service = true,
-      })
+    config = function(_, opts)
+      require("supermaven-nvim").setup(opts)
     end,
   },
 }
