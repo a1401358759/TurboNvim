@@ -107,7 +107,7 @@ return {
       end
     end
   end,
-  single_file_support = true,
+  single_file_support = false,
   init_options = {
     workspace = get_jdtls_workspace_dir(),
     jvm_args = {},
