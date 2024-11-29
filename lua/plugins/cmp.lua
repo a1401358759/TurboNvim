@@ -40,6 +40,7 @@ end
 return {
   "hrsh7th/nvim-cmp",
   version = false, -- last release is way too old
+  cond = not vim.g.blink_main,
   event = { "InsertEnter", "CmdlineEnter" },
   dependencies = {
     "hrsh7th/cmp-nvim-lsp",

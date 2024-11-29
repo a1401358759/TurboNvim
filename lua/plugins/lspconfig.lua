@@ -4,6 +4,7 @@ return {
   "neovim/nvim-lspconfig",
   event = { "VeryLazy", "TurboLoad" },
   dependencies = {
+    "saghen/blink.cmp",
     "mason.nvim",
     { "williamboman/mason-lspconfig.nvim", config = function() end },
   },
@@ -94,10 +95,11 @@ return {
         goto continue
       end
       settings.on_attach = on_attach
-      settings.capabilities = capabilities
+      -- settings.capabilities = capabilities
       if server_name == "lua_ls" then
         settings.on_init = on_init
       end
+      settings.capabilities = require("blink.cmp").get_lsp_capabilities(settings.capabilities)
       require("lspconfig")[server_name].setup(settings)
       ::continue::
     end

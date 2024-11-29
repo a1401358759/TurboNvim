@@ -14,6 +14,7 @@ options.ruff_args = {
   "--ignore=E402,E501,N802,N803,N806,N801,N813,N815,N816,RUF001,RUF002,RUF003,RUF012,ARG001",
 }
 
+vim.g.blink_main = true
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 vim.g.autoformat = false
