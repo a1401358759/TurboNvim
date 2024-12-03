@@ -1,6 +1,6 @@
 -- customize config
 local options = {}
-options.transparent = false
+options.transparent = true
 options.auto_save = true
 options.auto_switch_input = true
 options.auto_restore_cursor_position = true

@@ -225,28 +225,7 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
     if options.transparent then
       vim.api.nvim_set_hl(0, "NotifyBackground", { bg = "#000000" })
     end
-    vim.cmd([[hi! CursorLineNr guibg=bg]])
+    vim.api.nvim_set_hl(0, "Pmenu", { bg = "NONE" })
+    vim.api.nvim_set_hl(0, "CursorLineNr", { bg = "NONE" })
   end,
 })
-
--- Show diagnostics under the cursor when holding position
--- vim.api.nvim_create_autocmd("CursorHold", {
---   pattern = "*",
---   callback = function()
---     vim.diagnostic.open_float({
---       focusable = false,
---       scope = "line", -- "cursor"
---       border = "rounded",
---       close_events = {
---         "BufLeave",
---         "BufHidden",
---         "CursorMoved",
---         "CursorMovedI",
---         "InsertEnter",
---         "FocusLost",
---         "WinLeave",
---       },
---       -- prefix = " ",
---     })
---   end,
--- })
