@@ -32,7 +32,7 @@ return {
         winblend = 0,
         scrollbar = true,
         draw = {
-          columns = { { "label", "label_description", gap = 1 }, { "kind_icon", "kind", gap = 1 } },
+          columns = { { "kind_icon" }, { "label", "label_description", gap = 1 }, { "kind" } },
         },
       },
       documentation = {

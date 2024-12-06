@@ -21,6 +21,7 @@ return {
           text = "EXPLORER",
           text_align = "center",
           highlight = "Directory",
+          separator = " ",
           padding = 0,
         },
         {
