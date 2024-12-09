@@ -1,6 +1,6 @@
 return {
   "OXY2DEV/markview.nvim",
-  lazy = false,
+  lazy = true,
   cmd = { "Markview", "Markview splitToggle" },
   ft = { "markdown" },
   keys = {
