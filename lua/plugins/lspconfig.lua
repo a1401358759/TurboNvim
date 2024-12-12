@@ -85,6 +85,7 @@ return {
     end
     -- setup lspservers
     local mason_lspconfig = require("mason-lspconfig")
+    local has_blink, blink_cmp = pcall(require, "blink.cmp")
     for _, server_name in ipairs(mason_lspconfig.get_installed_servers()) do
       local require_path = string.format("%s%s", "lspservers/", server_name)
       local ok, settings = pcall(require, require_path)
@@ -95,11 +96,13 @@ return {
         goto continue
       end
       settings.on_attach = on_attach
-      -- settings.capabilities = capabilities
+      settings.capabilities = capabilities
+      if has_blink then
+        settings.capabilities = blink_cmp.get_lsp_capabilities(settings.capabilities)
+      end
       if server_name == "lua_ls" then
         settings.on_init = on_init
       end
-      settings.capabilities = require("blink.cmp").get_lsp_capabilities(settings.capabilities)
       require("lspconfig")[server_name].setup(settings)
       ::continue::
     end
