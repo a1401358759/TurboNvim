@@ -48,6 +48,16 @@ return {
         { section = "startup" },
       },
     },
+    indent = {
+      indent = {
+        char = "▏",
+      },
+      scope = {
+        char = "▏",
+      },
+    },
+    input = {},
+    scroll = {},
     styles = {
       notification = {
         wo = { wrap = true } -- Wrap notifications
