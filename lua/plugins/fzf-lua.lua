@@ -5,6 +5,8 @@ return {
   -- optional for icon support
   dependencies = { "nvim-tree/nvim-web-devicons" },
   config = function()
+    local actions = require("fzf-lua.actions")
+
     local img_previewer ---@type string[]?
     for _, v in ipairs({
       { cmd = "ueberzug", args = {} },
@@ -23,9 +25,13 @@ return {
         border = "rounded",
         preview = {
           layout = "horizontal",
-          scrollbar = "float",
+          scrollchars = { "┃", "" },
         },
         fullscreen = true,
+      },
+      fzf_colors = true,
+      fzf_opts = {
+        ["--no-scrollbar"] = true,
       },
       keymap = {
         builtin = {
@@ -53,18 +59,11 @@ return {
         },
       },
       previewers = {
-        head = {
-          cmd = "head",
-          args = nil,
-        },
         git_diff = {
           cmd_deleted = "git diff --color HEAD --",
           cmd_modified = "git diff --color HEAD",
           cmd_untracked = "git diff --color --no-index /dev/null",
           pager = "delta", -- if you have `delta` installed
-        },
-        man = {
-          cmd = "man -c %s | col -bx",
         },
         builtin = {
           syntax = true, -- preview syntax highlight?
@@ -84,25 +83,31 @@ return {
         -- previewer      = "bat",          -- uncomment to override previewer
         -- (name from 'previewers' table)
         -- set to 'false' to disable
-        prompt = "Files❯ ",
+        prompt = "  ",
         multiprocess = true, -- run command in a separate process
         git_icons = true, -- show git icons?
         file_icons = true, -- show file icons?
         color_icons = true, -- colorize file|git icons
-        -- executed command priority is 'cmd' (if exists)
-        -- otherwise auto-detect prioritizes `fd`:`rg`:`find`
-        -- default options are controlled by 'fd|rg|find|_opts'
-        -- NOTE: 'find -printf' requires GNU find
-        -- cmd = "find . -type f -printf '%P\n'",
-        find_opts = [[-type f -not -path '*/\.git/*' -printf '%P\n']],
-        rg_opts = "--color=never --files --hidden --follow -g '!.git'",
-        fd_opts = "--color=never --type f --hidden --follow --exclude .git",
+        cwd_prompt = false,
+        actions = {
+          ["alt-i"] = { actions.toggle_ignore },
+          ["alt-h"] = { actions.toggle_hidden },
+        },
       },
       buffers = {
         prompt = "Buffers❯ ",
         file_icons = true, -- show file icons?
         color_icons = true, -- colorize file|git icons
         sort_lastused = true, -- sort buffers() by last used
+      },
+      grep = {
+        actions = {
+          ["alt-i"] = { actions.toggle_ignore },
+          ["alt-h"] = { actions.toggle_hidden },
+        },
+      },
+      code_actions = {
+        previewer = vim.fn.executable("delta") == 1 and "codeaction_native" or nil,
       },
     })
   end,
@@ -111,7 +116,24 @@ return {
     { "<C-p>", "<cmd>lua require('fzf-lua').files()<cr>", desc = "FzfLua files" },
     { "<C-g>", "<cmd>lua require('fzf-lua').live_grep()<cr>", desc = "FzfLua live_grep" },
     { "<C-e>", "<cmd>lua require('fzf-lua').lsp_document_diagnostics()<cr>", desc = "FzfLua builtin" },
-    { "<A-r>", "<cmd>lua require('fzf-lua').lsp_references()<cr>", desc = "FzfLua references" },
-    { "<A-d>", "<cmd>lua require('fzf-lua').lsp_definitions()<cr>", desc = "FzfLua definitions" },
+    { "<A-r>", "<cmd>FzfLua lsp_references jump_to_single_result=true ignore_current_line=true<cr>", desc = "FzfLua references" },
+    { "<A-d>", "<cmd>FzfLua lsp_definitions jump_to_single_result=true ignore_current_line=true<cr>", desc = "FzfLua definitions" },
+    { "gI", "<cmd>FzfLua lsp_implementations jump_to_single_result=true ignore_current_line=true<cr>", desc = "Goto Implementation" },
+    { "gy", "<cmd>FzfLua lsp_typedefs jump_to_single_result=true ignore_current_line=true<cr>", desc = "Goto T[y]pe Definition" },
+    { "<leader>fo", "<cmd>FzfLua oldfiles<CR>", desc = "Find files history" },
+    { "<leader>fh", "<cmd>FzfLua live_grep_resume<CR>", desc = "Find last lookup" },
+    { "<leader>fw", "<cmd>FzfLua grep_cword<CR>", desc = "Find all help document tags" },
+    { "<leader>fm", "<cmd>FzfLua marks<CR>", desc = "Find marks in the current workspace" },
+    { "<leader>fi", "<cmd>FzfLua highlights<CR>", desc = "Find all neovim highlights" },
+    { "<leader>fb", "<cmd>FzfLua buffers<CR>", desc = "Find all buffers" },
+    { "<leader>f/", "<cmd>FzfLua search_history<CR>", desc = "Find all search history" },
+    { "<leader>f:", "<cmd>FzfLua command_history<CR>", desc = "Find all command history" },
+    { "<leader>fd", "<cmd>FzfLua diagnostics_workspace<CR>", desc = "Find diagnostics in the current workspace" },
+    { "<leader>cs", "<cmd>FzfLua colorschemes<CR>", { desc = "Switch colorscheme" } },
+    {
+      "<leader>fs",
+      "<cmd>FzfLua spell_suggest<cr>",
+      desc = "Find spelling suggestions",
+    },
   },
 }

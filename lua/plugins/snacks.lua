@@ -30,13 +30,7 @@ return {
       width = 72,
       sections = {
         {
-          section = "terminal",
-          align = "center",
-          cmd = "cat ~/.config/nvim/static/neovim.cat",
-          -- indent = -6,
-          height = 11,
-          width = 72,
-          padding = 1,
+          section = "header",
         },
         {
           section = "keys",
@@ -56,7 +50,9 @@ return {
         char = "▏",
       },
     },
-    input = {},
+    input = {
+      win = { style = { relative = "cursor", row = -3, col = 0 } },
+    },
     scroll = {},
     styles = {
       notification = {

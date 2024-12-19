@@ -4,7 +4,7 @@ return {
   event = { "BufReadPost", "BufNewFile", "BufWritePre" },
   opts = {
     ---@type false | "classic" | "modern" | "helix"
-    preset = "modern",
+    preset = "helix",
     icons = {
       group = "",
     },
