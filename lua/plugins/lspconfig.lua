@@ -124,10 +124,6 @@ return {
         vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
 
         vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { desc = "Goto Declaration" })
-        vim.keymap.set("n", "gd", function()
-          require("telescope.builtin").lsp_definitions({ reuse_win = true })
-        end, { desc = "Goto Definition" })
-        vim.keymap.set("n", "gr", "<cmd>Telescope lsp_references<cr>", { desc = "References" })
         vim.keymap.set("n", "gI", function()
           require("telescope.builtin").lsp_implementations({ reuse_win = true })
         end, { desc = "Goto Implementation" })

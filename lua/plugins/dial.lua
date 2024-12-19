@@ -11,6 +11,13 @@ function M.dial(increment, g)
   return require("dial.map")[func](group)
 end
 
+---@param s string
+function M.str_title(s)
+  return (s:gsub("(%a)([%w_']*)", function(f, r)
+    return f:upper() .. r:lower()
+  end))
+end
+
 return {
   "monaqa/dial.nvim",
   recommended = true,
@@ -86,14 +93,81 @@ return {
       cyclic = true,
     })
 
-    local capitalized_boolean = augend.constant.new({
-      elements = {
-        "True",
-        "False",
-      },
-      word = true,
-      cyclic = true,
-    })
+    local group_default = {
+      augend.integer.alias.decimal, -- nonnegative decimal number (0, 1, 2, 3, ...)
+      augend.integer.alias.decimal_int, -- nonnegative and negative decimal number
+      augend.integer.alias.hex, -- nonnegative hex number  (0x01, 0x1a1f, etc.)
+      augend.date.alias["%Y/%m/%d"], -- date (2022/02/19, etc.)
+      ordinal_numbers,
+      weekdays,
+      months,
+      augend.constant.alias.bool, -- boolean value (true <-> false)
+      logical_alias,
+    }
+
+    local word_antisense_switch = {
+      { "true", "false" },
+      { "on", "off" },
+      { "yes", "no" },
+      { "disable", "enable" },
+      { "enabled", "disabled" },
+      { "success", "failure" },
+      { "open", "close" },
+      { "in", "out" },
+      { "resolve", "reject" },
+      { "start", "end" },
+      { "before", "after" },
+      { "from", "to" },
+      { "relative", "absolute" },
+      { "up", "down" },
+      { "left", "right" },
+      { "top", "bottom" },
+      { "first", "last" },
+      { "next", "prev" },
+      { "row", "column" },
+      { "dark", "light" },
+      { "inferior", "superior" },
+      { "lower", "upper" },
+      { "selected", "unselected" },
+      { "active", "inactive" },
+      { "white", "black" },
+      { "get", "post" },
+      { "forward", "backward" },
+      { "odd", "even" },
+      { "old", "new" },
+      { "+", "-" },
+      { ">", "<" },
+      { "=", "!=" },
+    }
+
+    for _, value in ipairs(word_antisense_switch) do
+      local upper_words = { string.upper(value[1]), string.upper(value[2]) }
+      local title_words = { M.str_title(value[1]), M.str_title(value[2]) }
+      table.insert(
+        group_default,
+        augend.constant.new({
+          elements = value,
+          word = true,
+          cyclic = true,
+        })
+      )
+      table.insert(
+        group_default,
+        augend.constant.new({
+          elements = upper_words,
+          word = true,
+          cyclic = true,
+        })
+      )
+      table.insert(
+        group_default,
+        augend.constant.new({
+          elements = title_words,
+          word = true,
+          cyclic = true,
+        })
+      )
+    end
 
     return {
       dials_by_ft = {
@@ -111,18 +185,7 @@ return {
         python = "python",
       },
       groups = {
-        default = {
-          augend.integer.alias.decimal, -- nonnegative decimal number (0, 1, 2, 3, ...)
-          augend.integer.alias.decimal_int, -- nonnegative and negative decimal number
-          augend.integer.alias.hex, -- nonnegative hex number  (0x01, 0x1a1f, etc.)
-          augend.date.alias["%Y/%m/%d"], -- date (2022/02/19, etc.)
-          ordinal_numbers,
-          weekdays,
-          months,
-          capitalized_boolean,
-          augend.constant.alias.bool, -- boolean value (true <-> false)
-          logical_alias,
-        },
+        default = group_default,
         vue = {
           augend.constant.new({ elements = { "let", "const" } }),
           augend.hexcolor.new({ case = "lower" }),

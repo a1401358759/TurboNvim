@@ -45,7 +45,6 @@ return {
         fzf = {
           ["esc"] = "abort",
           ["ctrl-h"] = "unix-line-discard",
-          ["ctrl-k"] = "half-page-down",
           ["ctrl-b"] = "half-page-up",
           ["ctrl-n"] = "beginning-of-line",
           ["ctrl-a"] = "end-of-line",
@@ -112,12 +111,14 @@ return {
     })
   end,
   keys = {
+    { "<c-j>", "<c-j>", ft = "fzf", mode = "t", nowait = true },
+    { "<c-k>", "<c-k>", ft = "fzf", mode = "t", nowait = true },
     { "<esc>", "<esc>", ft = "fzf", mode = "t", nowait = true },
     { "<C-p>", "<cmd>lua require('fzf-lua').files()<cr>", desc = "FzfLua files" },
     { "<C-g>", "<cmd>lua require('fzf-lua').live_grep()<cr>", desc = "FzfLua live_grep" },
     { "<C-e>", "<cmd>lua require('fzf-lua').lsp_document_diagnostics()<cr>", desc = "FzfLua builtin" },
-    { "<A-r>", "<cmd>FzfLua lsp_references jump_to_single_result=true ignore_current_line=true<cr>", desc = "FzfLua references" },
-    { "<A-d>", "<cmd>FzfLua lsp_definitions jump_to_single_result=true ignore_current_line=true<cr>", desc = "FzfLua definitions" },
+    { "gr", "<cmd>FzfLua lsp_references jump_to_single_result=true ignore_current_line=true<cr>", desc = "FzfLua references" },
+    { "gd", "<cmd>FzfLua lsp_definitions jump_to_single_result=true ignore_current_line=true<cr>", desc = "FzfLua definitions" },
     { "gI", "<cmd>FzfLua lsp_implementations jump_to_single_result=true ignore_current_line=true<cr>", desc = "Goto Implementation" },
     { "gy", "<cmd>FzfLua lsp_typedefs jump_to_single_result=true ignore_current_line=true<cr>", desc = "Goto T[y]pe Definition" },
     { "<leader>fo", "<cmd>FzfLua oldfiles<CR>", desc = "Find files history" },
