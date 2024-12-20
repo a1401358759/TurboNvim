@@ -20,6 +20,8 @@ return {
 
       -- java
       "jdtls",
+      "java-debug-adapter",
+      "java-test",
 
       -- frontend
       "html-lsp",
