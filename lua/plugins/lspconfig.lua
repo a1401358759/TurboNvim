@@ -1,3 +1,4 @@
+---@diagnostic disable: missing-fields
 local diag_icons = require("config.icons").icons.diagnostics
 
 return {

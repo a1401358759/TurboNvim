@@ -229,3 +229,12 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
     vim.api.nvim_set_hl(0, "CursorLineNr", { bg = "NONE" })
   end,
 })
+
+-- Set tabsize for java files
+vim.api.nvim_create_autocmd({ "FileType" }, {
+  pattern = { "java" },
+  callback = function()
+    vim.opt.shiftwidth = 4 -- Size of an indent
+    vim.opt.tabstop = 4 -- Number of spaces tabs count for
+  end,
+})

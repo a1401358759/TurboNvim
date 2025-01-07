@@ -20,6 +20,13 @@ return {
       ["<Up>"] = { "select_prev", "fallback" },
       -- ["<Tab>"] = { "select_next", "fallback" },
       -- ["<S-Tab>"] = { "select_prev", "fallback" },
+
+      -- cmdline keymap
+      cmdline = {
+        preset = "enter",
+        ["<Tab>"] = { "select_next", "fallback" },
+        ["<S-Tab>"] = { "select_prev", "fallback" },
+      },
     },
 
     appearance = {
@@ -30,6 +37,7 @@ return {
 
     sources = {
       default = { "lsp", "path", "snippets", "buffer", "ripgrep" },
+      cmdline = {},
       providers = {
         ripgrep = {
           module = "blink-ripgrep",
@@ -39,6 +47,11 @@ return {
     },
     completion = {
       accept = { auto_brackets = { enabled = true } },
+      list = {
+        selection = function(ctx)
+          return ctx.mode == "cmdline" and "auto_insert" or "preselect"
+        end,
+      },
       menu = {
         border = "rounded",
         winblend = 0,
