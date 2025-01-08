@@ -47,11 +47,6 @@ return {
     },
     completion = {
       accept = { auto_brackets = { enabled = true } },
-      list = {
-        selection = function(ctx)
-          return ctx.mode == "cmdline" and "auto_insert" or "preselect"
-        end,
-      },
       menu = {
         border = "rounded",
         winblend = 0,

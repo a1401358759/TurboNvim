@@ -4,7 +4,7 @@ local options = require("config.options")
 return {
   {
     "luozhiya/fittencode.nvim",
-    cond = options.use_ai_plugins,
+    cond = options.ai_plugin == "fittencode",
     event = { "InsertEnter" },
     config = function()
       require("fittencode").setup({
@@ -31,7 +31,7 @@ return {
   },
   {
     "supermaven-inc/supermaven-nvim",
-    cond = options.use_ai_plugins,
+    cond = options.ai_plugin == "supermaven",
     event = { "InsertEnter" },
     opts = {},
     config = function(_, opts)

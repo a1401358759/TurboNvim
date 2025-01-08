@@ -51,7 +51,7 @@ return {
       },
     },
     input = {
-      win = { style = { relative = "cursor", row = -3, col = 0 } },
+      win = { style = { relative = "cursor", row = 1, col = 0 } },
     },
     scroll = {},
     styles = {
