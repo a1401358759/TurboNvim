@@ -38,4 +38,33 @@ return {
       require("supermaven-nvim").setup(opts)
     end,
   },
+  {
+    "yetone/avante.nvim",
+    event = "TurboLoad",
+    version = false, -- set this if you want to always pull the latest change
+    opts = {
+      provider = "deepseek_3",
+      auto_suggestions_provider = "deepseek_3", -- Since auto-suggestions are a high-frequency operation and therefore expensive, it is recommended to specify an inexpensive provider or even a free provider: copilot
+      vendors = {
+        deepseek_3 = {
+          __inherited_from = "openai",
+          endpoint = "https://api.deepseek.com",
+          model = "deepseek-coder",
+          api_key_name = "DEEPSEEK_API_KEY",
+        },
+      },
+      behaviour = {
+        auto_suggestions = false,
+      },
+    },
+    -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
+    build = "make",
+    -- build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" -- for windows
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      "stevearc/dressing.nvim",
+      "nvim-lua/plenary.nvim",
+      "MunifTanjim/nui.nvim",
+    },
+  },
 }
