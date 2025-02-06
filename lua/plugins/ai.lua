@@ -49,7 +49,8 @@ return {
         deepseek_3 = {
           __inherited_from = "openai",
           endpoint = "https://api.deepseek.com",
-          model = "deepseek-coder",
+          -- deepseek-reasoner, deepseek-coder, deepseek-chat
+          model = "deepseek-chat",
           api_key_name = "DEEPSEEK_API_KEY",
         },
       },
