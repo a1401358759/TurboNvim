@@ -27,10 +27,14 @@ return {
     },
     dashboard = {
       enabled = true,
-      width = 72,
       sections = {
         {
-          section = "header",
+          section = "terminal",
+          cmd = "lolcat --seed=22 ~/.config/nvim/static/neovim.cat",
+          indent = -5,
+          height = 8,
+          width = 69,
+          padding = 1,
         },
         {
           section = "keys",
