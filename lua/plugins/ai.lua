@@ -56,6 +56,13 @@ return {
       },
       behaviour = {
         auto_suggestions = false,
+        support_paste_from_clipboard = true,
+      },
+      windows = {
+        input = {
+          prefix = " ",
+          height = 8, -- Height of the input window in vertical layout
+        },
       },
     },
     -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`

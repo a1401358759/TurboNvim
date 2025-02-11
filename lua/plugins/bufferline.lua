@@ -31,6 +31,9 @@ return {
           highlight = "Directory",
           padding = 0,
         },
+        {
+          filetype = "snacks_layout_box",
+        },
       },
     },
   },
