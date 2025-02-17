@@ -43,8 +43,11 @@ return {
     event = "TurboLoad",
     version = false, -- set this if you want to always pull the latest change
     opts = {
-      provider = "deepseek_3",
-      auto_suggestions_provider = "deepseek_3", -- Since auto-suggestions are a high-frequency operation and therefore expensive, it is recommended to specify an inexpensive provider or even a free provider: copilot
+      provider = "ollama",
+      behaviour = {
+        auto_suggestions = false,
+        support_paste_from_clipboard = true,
+      },
       vendors = {
         deepseek_3 = {
           __inherited_from = "openai",
@@ -53,10 +56,18 @@ return {
           model = "deepseek-chat",
           api_key_name = "DEEPSEEK_API_KEY",
         },
-      },
-      behaviour = {
-        auto_suggestions = false,
-        support_paste_from_clipboard = true,
+        ollama = {
+          __inherited_from = "openai",
+          api_key_name = "",
+          endpoint = "http://127.0.0.1:11434/v1",
+          model = "deepseek-r1:7b",
+        },
+        qianwen = {
+          __inherited_from = "openai",
+          api_key_name = "DASHSCOPE_API_KEY",
+          endpoint = "https://dashscope.aliyuncs.com/compatible-mode/v1",
+          model = "qwen-plus",
+        },
       },
       windows = {
         input = {

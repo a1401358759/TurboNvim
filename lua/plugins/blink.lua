@@ -9,6 +9,9 @@ return {
 
   version = "v0.*",
   opts = {
+    cmdline = {
+      enabled = false,
+    },
     keymap = {
       preset = "enter",
       ["<CR>"] = { "select_and_accept", "fallback" },
@@ -20,13 +23,6 @@ return {
       ["<Up>"] = { "select_prev", "fallback" },
       -- ["<Tab>"] = { "select_next", "fallback" },
       -- ["<S-Tab>"] = { "select_prev", "fallback" },
-
-      -- cmdline keymap
-      cmdline = {
-        preset = "enter",
-        ["<Tab>"] = { "select_next", "fallback" },
-        ["<S-Tab>"] = { "select_prev", "fallback" },
-      },
     },
 
     appearance = {
@@ -37,7 +33,6 @@ return {
 
     sources = {
       default = { "lsp", "path", "snippets", "buffer", "ripgrep" },
-      cmdline = {},
       providers = {
         ripgrep = {
           module = "blink-ripgrep",
