@@ -1,24 +1,21 @@
+---@type string
+local xdg_config = vim.env.XDG_CONFIG_HOME or vim.env.HOME .. "/.config"
+
+---@param path string
+local function have(path)
+  return vim.uv.fs_stat(xdg_config .. "/" .. path) ~= nil
+end
+
 return {
   "nvim-treesitter/nvim-treesitter",
   build = ":TSUpdate",
   event = { "VeryLazy" },
-  dependencies = {
-    "windwp/nvim-ts-autotag",
-  },
   cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
   opts = {
     auto_install = true,
-    autotag = { enable = true },
     highlight = {
       enable = true,
       additional_vim_regex_highlighting = false,
-      disable = function(_, buf)
-        local max_filesize = 100 * 1024 -- 100 KB
-        local ok, stats = pcall(vim.uv.fs_stat, vim.api.nvim_buf_get_name(buf))
-        if ok and stats and stats.size > max_filesize then
-          return true
-        end
-      end,
     },
     indent = { enable = true },
     -- incremental selection
@@ -80,6 +77,40 @@ return {
     },
   },
   config = function(_, opts)
+    local function add(lang)
+      if type(opts.ensure_installed) == "table" then
+        table.insert(opts.ensure_installed, lang)
+      end
+    end
+
+    vim.filetype.add({
+      extension = { rasi = "rasi", rofi = "rasi", wofi = "rasi" },
+      filename = {
+        ["vifmrc"] = "vim",
+      },
+      pattern = {
+        [".*/waybar/config"] = "jsonc",
+        [".*/mako/config"] = "dosini",
+        [".*/kitty/.+%.conf"] = "kitty",
+        [".*/hypr/.+%.conf"] = "hyprlang",
+        ["%.env%.[%w_.-]+"] = "sh",
+      },
+    })
+    vim.treesitter.language.register("bash", "kitty")
+    add("git_config")
+
+    if have("hypr") then
+      add("hyprlang")
+    end
+
+    if have("fish") then
+      add("fish")
+    end
+
+    if have("rofi") or have("wofi") then
+      add("rasi")
+    end
+    -- set up treesitter
     require("nvim-treesitter.configs").setup(opts)
   end,
   keys = {
