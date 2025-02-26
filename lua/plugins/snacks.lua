@@ -31,9 +31,9 @@ return {
         {
           section = "terminal",
           cmd = "lolcat --seed=22 ~/.config/nvim/static/neovim.cat",
-          indent = -5,
-          height = 8,
-          width = 69,
+          indent = -7,
+          height = 6,
+          width = 80,
           padding = 1,
         },
         {
