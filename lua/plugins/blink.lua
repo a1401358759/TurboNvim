@@ -38,7 +38,6 @@ return {
           module = "blink-ripgrep",
           name = "Ripgrep",
           opts = {
-            future_features = { backend = "gitgrep" },
             prefix_min_len = 5,
             ignore_paths = { ".gitignore", ".git/info/exclude", ".ignore", "node_modules" },
           },
