@@ -5,9 +5,9 @@ return {
     "rafamadriz/friendly-snippets",
     "mikavilpas/blink-ripgrep.nvim",
   },
-  event = { "InsertEnter", "CmdlineEnter" },
+  event = { "InsertEnter" },
 
-  version = "v0.*",
+  version = "*",
   opts = {
     cmdline = {
       enabled = false,
@@ -37,6 +37,11 @@ return {
         ripgrep = {
           module = "blink-ripgrep",
           name = "Ripgrep",
+          opts = {
+            future_features = { backend = "gitgrep" },
+            prefix_min_len = 5,
+            ignore_paths = { ".gitignore", ".git/info/exclude", ".ignore", "node_modules" },
+          },
         },
       },
     },
