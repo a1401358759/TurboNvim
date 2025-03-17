@@ -192,24 +192,11 @@ return {
     })
 
     ins_left({
-      function()
-        local msg = "No Active Lsp"
-        local bufnr = vim.api.nvim_get_current_buf()
-        local clients = vim.lsp.get_clients({ bufnr = bufnr })
-        if next(clients) == nil then
-          return msg
-        end
-        local c = {}
-        for _, client in pairs(clients) do
-          table.insert(c, client.name)
-        end
-        return table.concat(c, " ")
-      end,
+      "lsp_status",
       icon = icons.ui.Gears,
+      symbols = { done = "", separator = " " },
+      ignore_lsp = {},
       color = { fg = colors.orange, gui = "bold" },
-      on_click = function()
-        vim.cmd.LspInfo()
-      end,
     })
 
     -- Add components to right sections
@@ -237,6 +224,10 @@ return {
         return vim.fn.reg_recording() ~= ""
       end,
       color = { fg = colors.magenta, gui = "bold" },
+    })
+    ins_right({
+      "searchcount",
+      color = { fg = colors.green, gui = "bold" },
     })
     ins_right({
       "o:encoding",
