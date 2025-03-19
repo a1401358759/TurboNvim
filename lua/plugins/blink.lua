@@ -4,13 +4,14 @@ return {
   dependencies = {
     "rafamadriz/friendly-snippets",
     "mikavilpas/blink-ripgrep.nvim",
+    "bydlw98/blink-cmp-env",
   },
   event = { "InsertEnter" },
 
   version = "*",
   opts = {
     cmdline = {
-      enabled = false,
+      enabled = true,
     },
     keymap = {
       preset = "enter",
@@ -32,7 +33,7 @@ return {
     },
 
     sources = {
-      default = { "lsp", "path", "snippets", "buffer", "ripgrep" },
+      default = { "lazydev", "lsp", "path", "snippets", "buffer", "ripgrep", "env" },
       providers = {
         ripgrep = {
           module = "blink-ripgrep",
@@ -42,10 +43,24 @@ return {
             ignore_paths = { ".gitignore", ".git/info/exclude", ".ignore", "node_modules" },
           },
         },
+        lazydev = {
+          name = "LazyDev",
+          module = "lazydev.integrations.blink",
+          -- make lazydev completions top priority (see `:h blink.cmp`)
+          score_offset = 100,
+        },
+        env = {
+          name = "Env",
+          module = "blink-cmp-env",
+          opts = {
+            show_braces = false,
+            show_documentation_window = true,
+          },
+        },
       },
     },
     completion = {
-      accept = { auto_brackets = { enabled = true } },
+      accept = { auto_brackets = { enabled = false } },
       menu = {
         border = "rounded",
         winblend = 0,
