@@ -3,4 +3,5 @@ require("config.autocmds")
 require("config.keymaps")
 require("config.lazy")
 
-vim.cmd([[colorscheme tokyonight]])
+local colorscheme = os.getenv("NVIM_COLORSCHEME") or "tokyonight"
+vim.cmd([[colorscheme ]] .. colorscheme)
