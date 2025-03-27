@@ -12,7 +12,7 @@ return {
     event = "TurboLoad",
     version = false, -- set this if you want to always pull the latest change
     opts = {
-      provider = "ollama",
+      provider = "deepseek_3",
       behaviour = {
         auto_suggestions = false,
         support_paste_from_clipboard = true,
