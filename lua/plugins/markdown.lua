@@ -1,8 +1,8 @@
 return {
   "MeanderingProgrammer/render-markdown.nvim",
   lazy = true,
-  ft = { "markdown", "Avante" },
+  ft = { "markdown", "Avante", "codecompanion" },
   opts = {
-    file_types = { "markdown", "Avante" },
+    file_types = { "markdown", "Avante", "codecompanion" },
   },
 }

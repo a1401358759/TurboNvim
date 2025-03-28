@@ -69,6 +69,7 @@ vim.api.nvim_create_autocmd("FileType", {
     "gitsigns-blame",
     "notifier",
     "Avante",
+    "codecompanion",
   },
   callback = function(event)
     vim.bo[event.buf].buflisted = false
