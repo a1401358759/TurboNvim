@@ -85,6 +85,7 @@ return {
     { "<leader>tt", function() Snacks.terminal() end, desc = "Toggle horizontal terminal" },
     { "<leader>tg", function() Snacks.terminal("lazygit", { cwd = vim.uv.cwd(), win = { border = "rounded" } }) end, desc = "Lazygit" },
     { "<leader>td", function() Snacks.terminal("lazydocker", { cwd = vim.uv.cwd(), win = { border = "rounded" } }) end, desc = "Lazydocker" },
+    { "<c-q>", "<cmd>close<cr>", desc = "Close Terminal", mode = { "t" } },
     { "<c-/>", function() Snacks.terminal() end, desc = "Toggle Terminal" },
     -- Top Pickers & Explorer
     { "<leader><space>", function() Snacks.picker.smart() end, desc = "Smart Find Files" },

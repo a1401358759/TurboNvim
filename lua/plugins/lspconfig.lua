@@ -15,6 +15,9 @@ return {
       update_in_insert = false,
       severity_sort = true,
       virtual_text = false,
+      virtual_lines = {
+        current_line = true,
+      },
       signs = {
         text = {
           [vim.diagnostic.severity.ERROR] = diag_icons.Error,
@@ -44,7 +47,7 @@ return {
     require("lspconfig.ui.windows").default_options.border = "rounded"
     -- add init
     local on_init = function(client, _)
-      if client.supports_method("textDocument/semanticTokens") then
+      if client:supports_method("textDocument/semanticTokens") then
         client.server_capabilities.semanticTokensProvider = nil
       end
     end
@@ -64,7 +67,7 @@ return {
         client.server_capabilities.hoverProvider = false
       end
       if opts.codelens.enabled then
-        if client.supports_method("textDocument/codeLens") then
+        if client:supports_method("textDocument/codeLens") then
           vim.lsp.codelens.refresh()
           vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
             buffer = bufnr,
@@ -78,7 +81,7 @@ return {
           and vim.bo[bufnr].buftype == ""
           and not vim.tbl_contains(opts.inlay_hints.exclude, vim.bo[bufnr].filetype)
         then
-          if client.supports_method("textDocument/inlayHint") then
+          if client:supports_method("textDocument/inlayHint") then
             vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
           end
         end

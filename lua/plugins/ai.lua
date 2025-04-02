@@ -35,6 +35,7 @@ return {
           -- deepseek-reasoner, deepseek-coder, deepseek-chat
           model = "deepseek-chat",
           api_key_name = "DEEPSEEK_API_KEY",
+          max_tokens = 8192,
         },
         qianwen = {
           __inherited_from = "openai",
