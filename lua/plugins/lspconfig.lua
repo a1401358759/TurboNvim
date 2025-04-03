@@ -42,6 +42,15 @@ return {
       formatting_options = nil,
       timeout_ms = nil,
     },
+    -- add any global capabilities here
+    capabilities = {
+      workspace = {
+        fileOperations = {
+          didRename = true,
+          willRename = true,
+        },
+      },
+    },
   },
   config = function(_, opts)
     require("lspconfig.ui.windows").default_options.border = "rounded"
@@ -53,11 +62,13 @@ return {
     end
     -- add capabilities
     local has_cmp, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
+    local has_blink, blink = pcall(require, "blink.cmp")
     local capabilities = vim.tbl_deep_extend(
       "force",
       {},
       vim.lsp.protocol.make_client_capabilities(),
-      has_cmp and cmp_nvim_lsp.default_capabilities({}) or {},
+      has_cmp and cmp_nvim_lsp.default_capabilities() or {},
+      has_blink and blink.get_lsp_capabilities() or {},
       opts.capabilities or {}
     )
     -- add on_attach
@@ -89,7 +100,6 @@ return {
     end
     -- setup lspservers
     local mason_lspconfig = require("mason-lspconfig")
-    local has_blink, blink_cmp = pcall(require, "blink.cmp")
     for _, server_name in ipairs(mason_lspconfig.get_installed_servers()) do
       local require_path = string.format("%s%s", "lspservers/", server_name)
       local ok, settings = pcall(require, require_path)
@@ -101,9 +111,6 @@ return {
       end
       settings.on_attach = on_attach
       settings.capabilities = capabilities
-      if has_blink then
-        settings.capabilities = blink_cmp.get_lsp_capabilities(settings.capabilities)
-      end
       if server_name == "lua_ls" then
         settings.on_init = on_init
       end
