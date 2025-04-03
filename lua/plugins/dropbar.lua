@@ -1,9 +1,5 @@
-local judge_version = function()
-  if vim.fn.has("nvim-0.10.0") == 1 then
-    return true
-  else
-    return false
-  end
+local is_available = function()
+  return vim.fn.has("nvim-0.11.0") == 1
 end
 
 local remove_dropba_color = function()
@@ -42,7 +38,7 @@ return {
   "Bekaboo/dropbar.nvim",
   lazy = true,
   event = { "TurboLoad" },
-  cond = judge_version(),
+  cond = is_available(),
   config = function()
     require("dropbar").setup({})
     remove_dropba_color()
