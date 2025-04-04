@@ -50,6 +50,12 @@ return {
           willRename = true,
         },
       },
+      textDocument = {
+        foldingRange = {
+          dynamicRegistration = false,
+          lineFoldingOnly = true,
+        },
+      },
     },
   },
   config = function(_, opts)
