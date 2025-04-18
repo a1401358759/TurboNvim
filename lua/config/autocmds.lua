@@ -240,3 +240,17 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
     vim.opt.tabstop = 4 -- Number of spaces tabs count for
   end,
 })
+
+-- regiseter lsp keymaps
+vim.api.nvim_create_autocmd("LspAttach", {
+  group = vim.api.nvim_create_augroup("UserLspConfig", {}),
+  callback = function(ev)
+    -- Enable completion triggered by <c-x><c-o>
+    vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
+
+    vim.keymap.set("n", "gk", vim.lsp.buf.signature_help, { desc = "Signature Help" })
+    vim.keymap.set("i", "<c-k>", vim.lsp.buf.signature_help, { desc = "Signature Help" })
+    vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, { desc = "Rename" })
+    vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code Action" })
+  end,
+})

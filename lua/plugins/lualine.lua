@@ -22,6 +22,7 @@ return {
       bg = "#202328",
       fg = "#bbc2cf",
       yellow = "#ECBE7B",
+      springYellow = "#e0af68",
       cyan = "#008080",
       darkblue = "#081633",
       green = "#98be65",
@@ -29,7 +30,9 @@ return {
       violet = "#a9a1e1",
       magenta = "#c678dd",
       blue = "#51afef",
+      springBlue = "#7FB4CA",
       red = "#ec5f67",
+      pink = "#d27e99",
     }
 
     local conditions = {
@@ -232,17 +235,17 @@ return {
     ins_right({
       "o:encoding",
       cond = conditions.hide_in_width,
-      color = { fg = colors.green, gui = "bold" },
+      color = { fg = colors.violet, gui = "bold" },
     })
     ins_right({
       "fileformat",
       icons_enabled = true,
-      color = { fg = colors.green, gui = "bold" },
+      color = { fg = colors.springYellow, gui = "bold" },
     })
-    ins_right({ "location", color = { fg = colors.green, gui = "bold" } })
+    ins_right({ "location", color = { fg = colors.springBlue, gui = "bold" } })
     ins_right({
       "progress",
-      color = { fg = colors.green, gui = "bold" },
+      color = { fg = colors.pink, gui = "bold" },
       on_click = function()
         vim.cmd("1")
       end,
