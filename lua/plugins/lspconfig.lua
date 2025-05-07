@@ -60,12 +60,6 @@ return {
   },
   config = function(_, opts)
     require("lspconfig.ui.windows").default_options.border = "rounded"
-    -- add init
-    local on_init = function(client, _)
-      if client:supports_method("textDocument/semanticTokens") then
-        client.server_capabilities.semanticTokensProvider = nil
-      end
-    end
     -- add capabilities
     local has_cmp, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
     local has_blink, blink = pcall(require, "blink.cmp")
@@ -112,10 +106,7 @@ return {
       if not ok then
         settings = {}
       end
-      if server_name == "lua_ls" then
-        settings.on_init = on_init
-      end
-      if settings.enabled == true then
+      if settings.enabled ~= false then
         settings.on_attach = on_attach
         settings.capabilities = capabilities
         require("lspconfig")[server_name].setup(settings)
