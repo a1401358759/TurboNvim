@@ -2,7 +2,16 @@ return {
   {
     "supermaven-inc/supermaven-nvim",
     event = { "InsertEnter" },
-    opts = {},
+    cmd = {
+      "SupermavenUseFree",
+      "SupermavenUsePro",
+    },
+    opts = {
+      keymaps = {
+        accept_suggestion = nil, -- handled by nvim-cmp / blink.cmp
+      },
+      ignore_filetypes = { "bigfile", "snacks_input", "snacks_notif" },
+    },
     config = function(_, opts)
       require("supermaven-nvim").setup(opts)
     end,
