@@ -32,17 +32,17 @@ return {
         lua = { "stylua" },
         fish = { "fish_indent" },
         sh = { "shfmt" },
-        javascript = { { "prettierd", "prettier" } },
-        typescript = { { "prettier", "prettierd" } },
-        javascriptreact = { { "prettier", "prettierd" } },
-        typescriptreact = { { "prettier", "prettierd" } },
-        svelte = { { "prettier", "prettierd" } },
-        css = { { "prettier", "prettierd" } },
-        html = { { "prettier", "prettierd" } },
-        json = { { "jq", "fixjson", "prettier", "prettierd" } },
-        yaml = { { "prettier", "prettierd" } },
-        markdown = { { "prettierd", "prettier" }, "markdownlint", "markdown-toc" },
-        graphql = { { "prettier", "prettierd" } },
+        javascript = { "prettierd", "prettier" },
+        typescript = { "prettier", "prettierd" },
+        javascriptreact = { "prettier", "prettierd" },
+        typescriptreact = { "prettier", "prettierd" },
+        svelte = { "prettier", "prettierd" },
+        css = { "prettier", "prettierd" },
+        html = { "prettier", "prettierd" },
+        json = { "jq", "fixjson" },
+        yaml = { "prettier", "prettierd" },
+        markdown = { "prettierd", "prettier", "markdownlint", "markdown-toc" },
+        graphql = { "prettier", "prettierd" },
         python = function(bufnr)
           if require("conform").get_formatter_info("ruff_format", bufnr).available then
             return { "ruff_fix", "ruff_organize_imports", "ruff_format" }
@@ -54,11 +54,19 @@ return {
       },
       formatters = {
         injected = { options = { ignore_errors = true } },
-        black = { prepend_args = { "--line-length", "200", "--fast" } },
-        -- # Example of using shfmt with extra args
-        -- shfmt = {
-        --   extra_args = { "-i", "2", "-ci" },
-        -- },
+        black = { prepend_args = { "--line-length", "150", "--fast" } },
+        ruff_format = {
+          args = {
+            "format",
+            "--config",
+            vim.fn.stdpath("config") .. "/pyproject.toml",
+            "--force-exclude",
+            "--stdin-filename",
+            "$FILENAME",
+            "-",
+          },
+        },
+        ruff_fix = { append_args = { "--config", vim.fn.stdpath("config") .. "/pyproject.toml" } },
       },
     })
   end,

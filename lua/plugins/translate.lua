@@ -1,6 +1,7 @@
 return {
   "JuanZoran/Trans.nvim",
   dependencies = { "kkharji/sqlite.lua" },
+  event = "TurboLoad",
   build = function()
     require("Trans").install()
   end,

@@ -8,9 +8,8 @@ options.auto_remove_new_lines_comment = true
 options.show_cursorline = true
 options.ruff_args = {
   "--preview",
-  "--line-length=200",
-  "--extend-select=E,N,W,ARG,RUF",
-  "--ignore=E402,E501,N802,N803,N806,N801,N813,N815,N816,RUF001,RUF002,RUF003,RUF012,ARG001",
+  "--config",
+  vim.fn.stdpath("config") .. "/pyproject.toml",
 }
 
 vim.g.blink_main = true
