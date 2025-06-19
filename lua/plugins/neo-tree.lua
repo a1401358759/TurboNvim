@@ -57,7 +57,7 @@ return {
     popup_border_style = "rounded",
     sources = { "filesystem", "buffers", "git_status", "document_symbols" },
     source_selector = {
-      winbar = true, -- toggle to show selector on winbar
+      winbar = false, -- toggle to show selector on winbar
       statusline = true,
       content_layout = "center",
       tabs_layout = "equal",
