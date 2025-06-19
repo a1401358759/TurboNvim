@@ -32,10 +32,8 @@ return {
       "emmet-ls",
       "vetur-vls",
       "tailwindcss-language-server",
-      "eslint_d",
       "vtsls",
-      "prettier",
-      "prettierd",
+      "biome",
 
       -- lua
       "lua-language-server",
@@ -64,11 +62,13 @@ return {
       "dockerfile-language-server",
       "docker-compose-language-service",
 
+      -- dockerfile
+      "hadolint",
+
       -- markdown
       "markdownlint",
       "markdown-toc",
       "marksman",
-      "hadolint",
     },
     max_concurrent_installers = 20,
     pip = {
