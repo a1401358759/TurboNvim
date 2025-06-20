@@ -196,7 +196,7 @@ return {
 
     ins_left({
       "lsp_status",
-      icon = icons.ui.Gears,
+      icon = icons.ui.Gear,
       symbols = { done = "", separator = " " },
       ignore_lsp = {},
       color = { fg = colors.orange, gui = "bold" },
@@ -245,7 +245,7 @@ return {
     ins_right({ "location", color = { fg = colors.springBlue, gui = "bold" } })
     ins_right({
       "progress",
-      color = { fg = colors.pink, gui = "bold" },
+      color = { fg = colors.green, gui = "bold" },
       on_click = function()
         vim.cmd("1")
       end,
