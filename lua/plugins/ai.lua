@@ -68,4 +68,20 @@ return {
       })
     end,
   },
+  {
+    "JonRoosevelt/gemini-cli.nvim",
+    event = "TurboLoad",
+    config = function()
+      require("gemini").setup()
+    end,
+    keys = {
+      {
+        "<leader>gc",
+        function()
+          require("gemini").toggle_gemini_cli()
+        end,
+        desc = "Gemini-CLI Toggle",
+      },
+    },
+  },
 }

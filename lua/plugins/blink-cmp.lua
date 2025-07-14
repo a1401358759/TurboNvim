@@ -5,6 +5,7 @@ return {
     "rafamadriz/friendly-snippets",
     "mikavilpas/blink-ripgrep.nvim",
     "bydlw98/blink-cmp-env",
+    "archie-judd/blink-cmp-words",
   },
   event = { "InsertEnter" },
 
@@ -33,7 +34,7 @@ return {
     },
 
     sources = {
-      default = { "lazydev", "lsp", "path", "snippets", "buffer", "ripgrep", "env" },
+      default = { "lazydev", "lsp", "path", "snippets", "buffer", "ripgrep", "dictionary", "thesaurus", "env" },
       providers = {
         ripgrep = {
           module = "blink-ripgrep",
@@ -57,6 +58,29 @@ return {
             show_documentation_window = true,
           },
         },
+        -- Use the thesaurus source
+        thesaurus = {
+          name = "blink-cmp-words",
+          module = "blink-cmp-words.thesaurus",
+          opts = {
+            score_offset = 0,
+            pointer_symbols = { "!", "&", "^" },
+          },
+        },
+        -- Use the dictionary source
+        dictionary = {
+          name = "blink-cmp-words",
+          module = "blink-cmp-words.dictionary",
+          opts = {
+            dictionary_search_threshold = 3,
+            score_offset = 0,
+            pointer_symbols = { "!", "&", "^" },
+          },
+        },
+      },
+      per_filetype = {
+        text = { "dictionary" },
+        markdown = { "thesaurus" },
       },
     },
     completion = {
