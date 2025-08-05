@@ -41,7 +41,11 @@ return {
           name = "Ripgrep",
           opts = {
             prefix_min_len = 5,
-            ignore_paths = { ".gitignore", ".git/info/exclude", ".ignore", "node_modules" },
+            backend = {
+              ripgrep = {
+                ignore_paths = { ".gitignore", ".git/info/exclude", ".ignore", "node_modules" },
+              },
+            },
           },
         },
         lazydev = {
