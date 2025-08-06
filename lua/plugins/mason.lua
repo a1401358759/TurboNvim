@@ -18,9 +18,6 @@ return {
       "gofumpt",
       "gomodifytags",
       "goimports-reviser",
-      -- java
-      "java-debug-adapter",
-      "java-test",
       -- frontend
       "biome",
       -- lua
@@ -66,8 +63,6 @@ return {
         "pyright",
         -- go
         "gopls",
-        -- java
-        "jdtls",
         -- frontend
         "html",
         "cssls",
