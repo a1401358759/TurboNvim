@@ -39,7 +39,7 @@ indent-width = 4
 # Unlike Flake8, Ruff doesn't enable pycodestyle warnings (`W`) or
 # McCabe complexity (`C901`) by default.
 select = ["E4", "E7", "E9", "F"]
-ignore = ["E402","E501","N802","N803","N806","N801","N813","N815","N816","N999","RUF001","RUF002","RUF003","RUF012","ARG001"]
+ignore = ["E402","E501","N802","N803","N806","N801","N813","N815","N816","N999","RUF001","RUF002","RUF003","RUF012","RUF052","ARG001"]
 extend-select = ["E", "N", "W", "ARG", "RUF"]
 
 # Allow fix for all enabled rules (when `--fix`) is provided.

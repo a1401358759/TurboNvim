@@ -26,21 +26,23 @@ return {
     config = function()
       require("codecompanion").setup({
         adapters = {
-          deepseek = function()
-            return require("codecompanion.adapters").extend("deepseek", {
-              env = {
-                api_key = "DEEPSEEK_API_KEY",
-              },
-              schema = {
-                model = {
-                  default = "deepseek-chat",
-                  choices = {
-                    ["deepseek-chat"] = { opts = { can_reason = true } },
+          http = {
+            deepseek = function()
+              return require("codecompanion.adapters").extend("deepseek", {
+                env = {
+                  api_key = "DEEPSEEK_API_KEY",
+                },
+                schema = {
+                  model = {
+                    default = "deepseek-chat",
+                    choices = {
+                      ["deepseek-chat"] = { opts = { can_reason = true } },
+                    },
                   },
                 },
-              },
-            })
-          end,
+              })
+            end,
+          },
         },
         strategies = {
           chat = {
