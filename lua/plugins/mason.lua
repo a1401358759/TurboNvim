@@ -59,7 +59,7 @@ return {
       automatic_enable = false,
       ensure_installed = {
         -- python
-        "basedpyright",
+        -- "basedpyright",
         "pyright",
         -- go
         "gopls",

@@ -15,14 +15,11 @@ return {
     words = { enabled = true },
     terminal = {
       enabled = true,
+      cwd = vim.uv.cwd(),
       win = {
-        position = "float",
         title = "",
         title_pos = "center",
         border = "rounded",
-        backdrop = 100,
-        width = 0.9,
-        height = 0.9,
       }
     },
     dashboard = {
@@ -74,7 +71,7 @@ return {
         }
       }
     },
-    explorer = {},
+    -- explorer = {},
     image = { force = true },
   },
   keys = {
@@ -82,18 +79,19 @@ return {
     { "<c-q>", function() Snacks.bufdelete() end, desc = "Delete Buffer" },
     { "<leader>cR", function() Snacks.rename.rename_file() end, desc = "Rename File" },
     -- Terminal
-    { "<leader>tt", function() Snacks.terminal() end, desc = "Toggle horizontal terminal" },
-    { "<leader>tg", function() Snacks.terminal("lazygit", { cwd = vim.uv.cwd(), win = { border = "rounded" } }) end, desc = "Lazygit" },
-    { "<leader>td", function() Snacks.terminal("lazydocker", { cwd = vim.uv.cwd(), win = { border = "rounded" } }) end, desc = "Lazydocker" },
     { "<c-q>", "<cmd>close<cr>", desc = "Close Terminal", mode = { "t" } },
-    { "<c-/>", function() Snacks.terminal() end, desc = "Toggle Terminal" },
+    { "<leader>tt", function() Snacks.terminal() end, desc = "Toggle Horizontal Terminal" },
+    { "<leader>tg", function() Snacks.terminal("lazygit", { win = { position = "float" } }) end, desc = "Lazygit" },
+    { "<leader>td", function() Snacks.terminal("lazydocker", { win = { position = "float" } }) end, desc = "Lazydocker" },
+    { "<leader>tf", function() Snacks.terminal(nil, { win = { position = "float" } }) end, desc = "Toggle Float Terminal" },
+    { "<c-/>", function() Snacks.terminal(nil, { win = { position = "float" } }) end, desc = "Toggle Float Terminal" },
     -- Top Pickers & Explorer
     { "<leader><space>", function() Snacks.picker.smart() end, desc = "Smart Find Files" },
     { "<leader>,", function() Snacks.picker.buffers() end, desc = "Buffers" },
     { "<leader>/", function() Snacks.picker.grep() end, desc = "Grep" },
     { "<leader>:", function() Snacks.picker.command_history() end, desc = "Command History" },
     { "<leader>n", function() Snacks.picker.notifications() end, desc = "Notification History" },
-    { "<leader>1", function() Snacks.explorer() end, desc = "Snacks Explorer" },
+    -- { "<leader>1", function() Snacks.explorer() end, desc = "Snacks Explorer" },
     -- find
     { "<leader>fb", function() Snacks.picker.buffers() end, desc = "Buffers" },
     { "<leader>fc", function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end, desc = "Find Config File" },
