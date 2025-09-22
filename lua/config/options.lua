@@ -79,16 +79,7 @@ opt.wrap = false -- Disable line wrap
 opt.cmdheight = 0
 opt.winblend = 0
 opt.pumblend = 0
-
-if vim.fn.has("nvim-0.10") == 1 then
-  opt.smoothscroll = true
-  opt.foldexpr = "v:lua.require'utils.ui'.foldexpr()"
-  opt.foldmethod = "expr"
-  opt.foldtext = ""
-else
-  opt.foldmethod = "indent"
-  opt.foldtext = "v:lua.require'utils.ui'.foldtext()"
-end
+opt.foldmethod = "expr"
 
 -- Fix markdown indentation settings
 vim.g.markdown_recommended_style = 0
