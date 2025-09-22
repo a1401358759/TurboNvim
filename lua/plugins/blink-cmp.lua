@@ -7,12 +7,22 @@ return {
     "bydlw98/blink-cmp-env",
     "archie-judd/blink-cmp-words",
   },
-  event = { "InsertEnter" },
+  event = { "InsertEnter", "CmdlineEnter" },
 
   version = "*",
   opts = {
     cmdline = {
       enabled = true,
+      keymap = { preset = "cmdline" },
+      completion = {
+        list = { selection = { preselect = false } },
+        menu = {
+          auto_show = function()
+            return vim.fn.getcmdtype() == ":"
+          end,
+        },
+        ghost_text = { enabled = true },
+      },
     },
     keymap = {
       preset = "enter",
@@ -83,6 +93,7 @@ return {
       per_filetype = {
         text = { "dictionary" },
         markdown = { "thesaurus" },
+        lua = { inherit_defaults = true, "lazydev" },
       },
     },
     completion = {
