@@ -58,7 +58,7 @@ return {
       },
     },
   },
-  config = function(_, opts)
+  config = vim.schedule_wrap(function(_, opts)
     require("lspconfig.ui.windows").default_options.border = "rounded"
     -- add capabilities
     local has_cmp, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
@@ -109,7 +109,8 @@ return {
       if settings.enabled ~= false then
         settings.on_attach = on_attach
         settings.capabilities = capabilities
-        require("lspconfig")[server_name].setup(settings)
+        vim.lsp.enable(server_name)
+        vim.lsp.config(server_name, settings)
       end
     end
 
@@ -121,5 +122,5 @@ return {
       end
     end
     vim.diagnostic.config(vim.deepcopy(opts.diagnostics))
-  end,
+  end),
 }
