@@ -1,57 +1,40 @@
 -- Done
 -- https://github.com/microsoft/pyright
 
-local util = require("lspconfig.util")
-
-local root_files = {
-  ".git",
-  ".gitignore",
-}
-
-local ignore_diagnostic_message = {
-  '"self" is not accessed',
-  '"args" is not accessed',
-  '"kwargs" is not accessed',
-  '"cls" is not accessed',
-}
-
-local filter_publish_diagnostics = function(a, params, client_info, extra_message, config)
-  ---@diagnostic disable-next-line: unused-local
-  local client = vim.lsp.get_client_by_id(client_info.client_id)
-
-  if extra_message.ignore_diagnostic_message then
-    local new_index = 1
-
-    for _, diagnostic in ipairs(params.diagnostics) do
-      if not vim.tbl_contains(extra_message.ignore_diagnostic_message, diagnostic.message) then
-        params.diagnostics[new_index] = diagnostic
-        new_index = new_index + 1
-      end
+local function set_python_path(command)
+  local path = command.args
+  local clients = vim.lsp.get_clients({
+    bufnr = vim.api.nvim_get_current_buf(),
+    name = "pyright",
+  })
+  for _, client in ipairs(clients) do
+    if client.settings then
+      ---@diagnostic disable-next-line: param-type-mismatch
+      client.settings.python = vim.tbl_deep_extend("force", client.settings.python, { pythonPath = path })
+    else
+      client.config.settings = vim.tbl_deep_extend("force", client.config.settings, { python = { pythonPath = path } })
     end
-
-    for i = new_index, #params.diagnostics do
-      params.diagnostics[i] = nil
-    end
+    client:notify("workspace/didChangeConfiguration", { settings = nil })
   end
-
-  ---@diagnostic disable-next-line: redundant-parameter
-  vim.lsp.diagnostic.on_publish_diagnostics(a, params, client_info, extra_message, config)
 end
 
 return {
   enabled = true,
-  filetypes = { "python" },
   single_file_support = true,
+  filetypes = { "python" },
   cmd = { "pyright-langserver", "--stdio" },
-  ---@diagnostic disable-next-line: deprecated
-  root_dir = util.root_pattern(unpack(root_files)),
+  root_markers = {
+    "pyproject.toml",
+    "setup.py",
+    "setup.cfg",
+    "requirements.txt",
+    "Pipfile",
+    "pyrightconfig.json",
+    ".git",
+  },
   handlers = {
     -- If you want to disable pyright's diagnostic prompt, open the code below
-    -- ["textDocument/publishDiagnostics"] = function(...) end,
-    -- If you want to disable pyright from diagnosing unused parameters, open the function below
-    ["textDocument/publishDiagnostics"] = vim.lsp.with(filter_publish_diagnostics, {
-      ignore_diagnostic_message = ignore_diagnostic_message,
-    }),
+    ["textDocument/publishDiagnostics"] = function(...) end,
   },
   settings = {
     pyright = {
@@ -67,30 +50,27 @@ return {
         useLibraryCodeForTypes = true,
         autoImportCompletions = false,
         diagnosticMode = "openFilesOnly",
-        -- https://github.com/microsoft/pyright/blob/main/docs/configuration.md#type-check-diagnostics-settings
-        diagnosticSeverityOverrides = {
-          strictListInference = true,
-          strictDictionaryInference = true,
-          strictSetInference = true,
-          reportUnusedImport = "warning",
-          reportUnusedClass = "warning",
-          reportUnusedFunction = "warning",
-          reportUnusedVariable = "warning",
-          reportUnusedCoroutine = "warning",
-          reportDuplicateImport = "warning",
-          reportPrivateUsage = "none",
-          reportUnusedExpression = "warning",
-          reportConstantRedefinition = "error",
-          reportUndefinedVariable = "error",
-          reportAssertAlwaysTrue = "error",
-          reportMissingTypeStubs = "none",
-          reportIncompleteStub = "none",
-          reportInvalidStubStatement = "none",
-          reportMissingModuleSource = "none",
-          reportMissingImports = "none",
-          reportIncompatibleMethodOverride = "none",
-        },
       },
     },
   },
+  on_attach = function(client, bufnr)
+    vim.api.nvim_buf_create_user_command(bufnr, "LspPyrightOrganizeImports", function()
+      local params = {
+        command = "pyright.organizeimports",
+        arguments = { vim.uri_from_bufnr(bufnr) },
+      }
+
+      -- Using client.request() directly because "pyright.organizeimports" is private
+      -- (not advertised via capabilities), which client:exec_cmd() refuses to call.
+      -- https://github.com/neovim/neovim/blob/c333d64663d3b6e0dd9aa440e433d346af4a3d81/runtime/lua/vim/lsp/client.lua#L1024-L1030
+      client.request("workspace/executeCommand", params, nil, bufnr)
+    end, {
+      desc = "Organize Imports",
+    })
+    vim.api.nvim_buf_create_user_command(bufnr, "LspPyrightSetPythonPath", set_python_path, {
+      desc = "Reconfigure pyright with the provided python path",
+      nargs = 1,
+      complete = "file",
+    })
+  end,
 }
