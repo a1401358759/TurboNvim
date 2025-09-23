@@ -1,9 +1,10 @@
 return {
   "nvim-treesitter/nvim-treesitter",
+  lazy = vim.fn.argc(-1) == 0,
+  branch = "main",
   build = ":TSUpdate",
   event = { "TurboLoad", "VeryLazy" },
-  branch = "main",
-  cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
+  cmd = { "TSUpdate", "TSInstall", "TSLog", "TSUninstall" },
   opts = {
     ensure_installed = {
       "bash",
@@ -78,10 +79,7 @@ return {
         if not (ok and stats and stats.size > max_filesize) then
           vim.treesitter.start()
           vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-          if vim.bo.filetype ~= "dart" then
-            -- Conflicts with flutter-tools.nvim, causing performance issues
-            vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-          end
+          -- vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
         end
       end,
     })

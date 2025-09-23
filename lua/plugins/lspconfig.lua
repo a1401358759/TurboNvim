@@ -109,8 +109,8 @@ return {
       if settings.enabled ~= false then
         settings.on_attach = on_attach
         settings.capabilities = capabilities
-        vim.lsp.enable(server_name)
         vim.lsp.config(server_name, settings)
+        vim.lsp.enable(server_name)
       end
     end
 

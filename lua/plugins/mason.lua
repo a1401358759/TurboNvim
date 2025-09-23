@@ -59,7 +59,6 @@ return {
       automatic_enable = false,
       ensure_installed = {
         -- python
-        -- "basedpyright",
         "pyright",
         -- go
         "gopls",
@@ -67,7 +66,7 @@ return {
         "html",
         "cssls",
         "emmet_ls",
-        "vuels",
+        "vue_ls",
         "vtsls",
         "tailwindcss",
         -- lua
