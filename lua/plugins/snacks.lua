@@ -27,7 +27,7 @@ return {
       sections = {
         {
           section = "terminal",
-          cmd = "lolcat --seed=22 ~/.config/nvim/static/neovim.cat",
+          cmd = "lolcat --seed=20 ~/.config/nvim/static/neovim.cat",
           indent = -7,
           height = 6,
           width = 80,

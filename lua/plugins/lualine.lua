@@ -199,6 +199,7 @@ return {
       icon = icons.ui.Gear,
       symbols = { done = "", separator = " " },
       ignore_lsp = {},
+      show_name = true,
       color = { fg = colors.orange, gui = "bold" },
     })
 
