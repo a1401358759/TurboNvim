@@ -11,6 +11,9 @@ return {
 
   version = "*",
   opts = {
+    snippets = {
+      preset = "default",
+    },
     cmdline = {
       enabled = true,
       keymap = { preset = "cmdline" },
@@ -18,7 +21,8 @@ return {
         list = { selection = { preselect = false } },
         menu = {
           auto_show = function()
-            return vim.fn.getcmdtype() == ":"
+            local valid_types = { [":"] = true, ["/"] = true, ["?"] = true }
+            return valid_types[vim.fn.getcmdtype()]
           end,
         },
         ghost_text = { enabled = true },
@@ -129,5 +133,9 @@ return {
       },
     },
   },
-  opts_extend = { "sources.default" },
+  opts_extend = {
+    "sources.completion.enabled_providers",
+    "sources.compat",
+    "sources.default",
+  },
 }

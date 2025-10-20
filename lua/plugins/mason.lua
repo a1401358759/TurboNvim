@@ -82,6 +82,8 @@ return {
         "docker_compose_language_service",
         -- yamal
         "yamlls",
+        -- latex
+        "ltex_plus",
       },
     })
     local mr = require("mason-registry")
