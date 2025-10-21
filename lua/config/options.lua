@@ -12,6 +12,7 @@ options.ruff_args = {
   vim.fn.stdpath("config") .. "/pyproject.toml",
 }
 
+vim.g.use_ai = true
 vim.g.blink_main = true
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"

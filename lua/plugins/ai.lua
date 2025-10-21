@@ -1,6 +1,7 @@
 return {
   {
     "supermaven-inc/supermaven-nvim",
+    cond = vim.g.use_ai,
     event = { "InsertEnter" },
     cmd = {
       "SupermavenUseFree",
@@ -18,6 +19,7 @@ return {
   },
   {
     "olimorris/codecompanion.nvim",
+    cond = vim.g.use_ai,
     event = "TurboLoad",
     dependencies = {
       "nvim-lua/plenary.nvim",
@@ -72,6 +74,7 @@ return {
   },
   {
     "folke/sidekick.nvim",
+    cond = vim.g.use_ai,
     opts = {
       cli = {
         mux = {
