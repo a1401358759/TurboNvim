@@ -14,10 +14,7 @@ return {
       "isort",
       "black",
       -- go
-      "impl",
-      "gofumpt",
-      "gomodifytags",
-      "goimports-reviser",
+      "golangci-lint",
       -- frontend
       "biome",
       -- lua

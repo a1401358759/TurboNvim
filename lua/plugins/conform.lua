@@ -49,7 +49,7 @@ return {
             return { "isort", "black" }
           end
         end,
-        go = { "goimports-reviser", "gofumpt" },
+        go = { "golangcilint" },
       },
       formatters = {
         injected = { options = { ignore_errors = true } },

@@ -12,6 +12,7 @@ return {
       typescriptreact = { "biomejs" },
       python = { "ruff" },
       dockerfile = { "hadolint" },
+      go = { "golangcilint" },
     }
 
     -- ruff
