@@ -254,3 +254,12 @@ vim.api.nvim_create_autocmd("LspAttach", {
     vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code Action" })
   end,
 })
+
+-- 移除 markdown 文件的拼写检查，避免显示波浪线
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "markdown",
+  callback = function()
+    vim.opt_local.spell = false
+    vim.diagnostic.enable(false)
+  end,
+})
