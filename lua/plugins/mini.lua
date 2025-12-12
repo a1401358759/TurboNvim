@@ -35,4 +35,19 @@ return {
       { "<A-k>", "<cmd>lua MiniMove.move_line('up')<CR>", desc = "Move line up", mode = "n" },
     },
   },
+  {
+    "nvim-mini/mini.nvim",
+    version = "*",
+    lazy = true,
+    opts = {
+      mappings = {
+        add = "ys", -- Add surrounding in Normal and Visual modes
+        delete = "ds", -- Delete surrounding
+        replace = "cs", -- Replace surrounding
+      },
+    },
+    config = function(_, opts)
+      require("mini.surround").setup(opts)
+    end,
+  },
 }

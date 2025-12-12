@@ -9,5 +9,6 @@ return {
       jdk = { auto_install = false },
     })
     require("lspconfig").jdtls.setup({})
+    vim.lsp.enable("jdtls")
   end,
 }
