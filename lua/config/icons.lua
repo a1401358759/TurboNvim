@@ -4,7 +4,7 @@ M.icons = {
   diagnostics = {
     Error = " ",
     Warn = " ",
-    Hint = " ",
+    Hint = " ",
     Info = " ",
   },
   dap = {
