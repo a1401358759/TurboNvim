@@ -25,16 +25,25 @@ return {
         local modified = vim.api.nvim_get_option_value("modified", { buf = props.buf })
 
         local function get_git_diff()
-          local icons =
-            { removed = mine_icons.git.removed, changed = mine_icons.git.modified, added = mine_icons.git.added }
           local signs = vim.b[props.buf].gitsigns_status_dict
           local labels = {}
           if signs == nil then
             return labels
           end
-          for name, icon in pairs(icons) do
+          local icons = {
+            { kind = "added", icon = mine_icons.git.added },
+            { kind = "changed", icon = mine_icons.git.modified },
+            { kind = "removed", icon = mine_icons.git.removed },
+          }
+          local diff_color = {
+            added = "#b8db87",
+            changed = "#7ca1f2",
+            removed = "#e26a75",
+          }
+          for _, item in pairs(icons) do
+            local name = item.kind
             if tonumber(signs[name]) and signs[name] > 0 then
-              table.insert(labels, { icon .. signs[name] .. " ", group = "Diff" .. name })
+              table.insert(labels, { item.icon .. signs[name] .. " ", guifg = diff_color[name] })
             end
           end
           if #labels > 0 then
