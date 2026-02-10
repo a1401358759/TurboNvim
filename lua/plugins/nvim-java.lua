@@ -3,12 +3,9 @@ return {
   ft = { "java" },
   config = function()
     require("java").setup({
-      jdtls = {
-        version = "v1.43.0",
-      },
-      jdk = { auto_install = false },
+      jdk = { auto_install = false, version = "17" },
     })
-    require("lspconfig").jdtls.setup({})
+    vim.lsp.config("jdtls", {})
     vim.lsp.enable("jdtls")
   end,
 }
