@@ -53,13 +53,18 @@ return {
         end
 
         local function get_diagnostic_label()
-          local icons = mine_icons.diagnostics
           local label = {}
-
-          for severity, icon in pairs(icons) do
+          local icons = {
+            { severity = "Hint", icon = mine_icons.diagnostics.Hint },
+            { severity = "Info", icon = mine_icons.diagnostics.Info },
+            { severity = "Warn", icon = mine_icons.diagnostics.Warn },
+            { severity = "Error", icon = mine_icons.diagnostics.Error },
+          }
+          for _, item in pairs(icons) do
+            local severity = item.severity
             local n = #vim.diagnostic.get(props.buf, { severity = vim.diagnostic.severity[string.upper(severity)] })
             if n > 0 then
-              table.insert(label, { icon .. n .. " ", group = "DiagnosticSign" .. severity })
+              table.insert(label, { item.icon .. n .. " ", group = "DiagnosticSign" .. severity })
             end
           end
           if #label > 0 then
