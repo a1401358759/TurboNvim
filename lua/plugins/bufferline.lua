@@ -90,9 +90,9 @@ return {
       desc = "Close all buffers",
     },
     {
-      "<leader>bt",
+      "<leader>bj",
       "<cmd>BufferLinePick<cr>",
-      desc = "Go to buffer *",
+      desc = "Pick Buffer",
     },
     {
       "<leader>bs",

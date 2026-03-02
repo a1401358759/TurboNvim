@@ -63,6 +63,7 @@ vim.api.nvim_create_autocmd("FileType", {
     "tsplayground",
     "neotest-output",
     "checkhealth",
+    "dap-float",
     "neotest-summary",
     "neotest-output-panel",
     "dbout",

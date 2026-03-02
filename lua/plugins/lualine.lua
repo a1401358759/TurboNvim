@@ -147,7 +147,7 @@ return {
       color = function()
         return { fg = mode_color[vim.fn.mode()], gui = "bold" }
       end,
-      padding = { left = 0 },
+      padding = { left = 0, right = 1 },
     })
     ins_left({
       "filesize",
@@ -232,6 +232,10 @@ return {
     ins_right({
       "searchcount",
       color = { fg = colors.green, gui = "bold" },
+    })
+    ins_right({
+      "venv-selector",
+      color = { fg = colors.cyan, gui = "bold" },
     })
     ins_right({
       "o:encoding",
