@@ -8,6 +8,11 @@ return {
       override_notify = false,
       -- Picker backend to prefer: "telescope", "fzf-lua", "snacks", "native", "mini-pick", or "auto".
       picker = "snacks",
+      picker_options = {
+        snacks = {
+          layout = { fullscreen = false },
+        },
+      },
       statusline_func = {
         lualine = function() -- called by lualine
           local venv_path = require("venv-selector").venv()
