@@ -36,7 +36,7 @@ return {
                 },
                 schema = {
                   model = {
-                    default = "deepseek-chat",
+                    default = "deepseek-v4-flash",
                     choices = {
                       ["deepseek-chat"] = { opts = { can_reason = true } },
                     },
