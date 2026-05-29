@@ -19,7 +19,7 @@ local function set_python_path(command)
 end
 
 return {
-  enabled = true,
+  enabled = false,
   single_file_support = true,
   filetypes = { "python" },
   cmd = { "pyright-langserver", "--stdio" },

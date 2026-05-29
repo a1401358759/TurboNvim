@@ -62,7 +62,7 @@ return {
     },
     picker = {
       layout = {
-        fullscreen = true,
+        fullscreen = false,
       },
       sources = {
         explorer = {
@@ -86,20 +86,19 @@ return {
     { "<leader>tf", function() Snacks.terminal(nil, { win = { position = "float" } }) end, desc = "Toggle Float Terminal" },
     { "<c-/>", function() Snacks.terminal(nil, { win = { position = "float" } }) end, desc = "Toggle Float Terminal" },
     -- Top Pickers & Explorer
-    { "<leader><space>", function() Snacks.picker.smart() end, desc = "Smart Find Files" },
-    { "<leader>,", function() Snacks.picker.buffers() end, desc = "Buffers" },
-    { "<leader>/", function() Snacks.picker.grep() end, desc = "Grep" },
+    { "<leader><space>", function() Snacks.picker.smart({ layout = { fullscreen = true } }) end, desc = "Smart Find Files" },
+    { "<leader>/", function() Snacks.picker.grep({ layout = { fullscreen = true } }) end, desc = "Grep" },
     { "<leader>:", function() Snacks.picker.command_history() end, desc = "Command History" },
-    { "<leader>n", function() Snacks.picker.notifications() end, desc = "Notification History" },
+    { "<leader>n", function() Snacks.picker.notifications({ layout = { fullscreen = true } }) end, desc = "Notification History" },
     -- { "<leader>1", function() Snacks.explorer() end, desc = "Snacks Explorer" },
     -- find
-    { "<leader>fb", function() Snacks.picker.buffers() end, desc = "Buffers" },
+    { "<leader>fb", function() Snacks.picker.buffers({ layout = { fullscreen = true } }) end, desc = "Buffers" },
     { "<leader>fc", function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end, desc = "Find Config File" },
-    { "<c-p>", function() Snacks.picker.files() end, desc = "Find Files" },
-    { "<leader>ff", function() Snacks.picker.files() end, desc = "Find Files" },
-    { "<leader>fg", function() Snacks.picker.git_files() end, desc = "Find Git Files" },
-    { "<leader>fp", function() Snacks.picker.projects() end, desc = "Projects" },
-    { "<leader>fr", function() Snacks.picker.recent() end, desc = "Recent" },
+    { "<c-p>", function() Snacks.picker.files({ layout = { fullscreen = true } }) end, desc = "Find Files" },
+    { "<leader>ff", function() Snacks.picker.files({ layout = { fullscreen = true } }) end, desc = "Find Files" },
+    { "<leader>fg", function() Snacks.picker.git_files({ layout = { fullscreen = true } }) end, desc = "Find Git Files" },
+    { "<leader>fp", function() Snacks.picker.projects({ layout = { fullscreen = true } }) end, desc = "Projects" },
+    { "<leader>fr", function() Snacks.picker.recent({ layout = { fullscreen = true } }) end, desc = "Recent" },
     { "<leader>fs", function() Snacks.picker.spelling() end, desc = "Spelling" },
     -- git
     { "<leader>gb", function() Snacks.picker.git_branches() end, desc = "Git Branches" },
@@ -113,7 +112,7 @@ return {
     { "<leader>sb", function() Snacks.picker.lines() end, desc = "Buffer Lines" },
     { "<leader>sB", function() Snacks.picker.grep_buffers() end, desc = "Grep Open Buffers" },
     { "<leader>sg", function() Snacks.picker.grep() end, desc = "Grep" },
-    { "<leader>sw", function() Snacks.picker.grep_word() end, desc = "Visual selection or word", mode = { "n", "x" } },
+    { "<leader>sw", function() Snacks.picker.grep_word({ layout = { fullscreen = true } }) end, desc = "Visual selection or word", mode = { "n", "x" } },
     -- search
     { '<leader>s"', function() Snacks.picker.registers() end, desc = "Registers" },
     { "<leader>s/", function() Snacks.picker.search_history() end, desc = "Search History" },
@@ -138,7 +137,7 @@ return {
     -- LSP
     { "gd", function() Snacks.picker.lsp_definitions() end, desc = "Goto Definition" },
     { "gD", function() Snacks.picker.lsp_declarations() end, desc = "Goto Declaration" },
-    { "gr", function() Snacks.picker.lsp_references() end, nowait = true, desc = "References" },
+    { "gr", function() Snacks.picker.lsp_references({ layout = { fullscreen = true } }) end, nowait = true, desc = "References" },
     { "gI", function() Snacks.picker.lsp_implementations() end, desc = "Goto Implementation" },
     { "gy", function() Snacks.picker.lsp_type_definitions() end, desc = "Goto T[y]pe Definition" },
     { "<leader>ss", function() Snacks.picker.lsp_symbols() end, desc = "LSP Symbols" },

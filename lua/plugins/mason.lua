@@ -57,6 +57,7 @@ return {
       ensure_installed = {
         -- python
         "pyright",
+        "ty",
         -- go
         "gopls",
         -- frontend
