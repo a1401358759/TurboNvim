@@ -7,7 +7,7 @@ return {
     ty = {
       disableLanguageServices = false,
       showSyntaxErrors = true,
-      diagnosticMode = "openFilesOnly", -- "off" | "workspace" | "openFilesOnly"
+      diagnosticMode = "off", -- "off" | "workspace" | "openFilesOnly"
       inlayHints = {
         variableTypes = false,
         callArgumentNames = true,

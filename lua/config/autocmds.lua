@@ -258,7 +258,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 -- 移除 markdown 文件的拼写检查，避免显示波浪线
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = "markdown",
+  pattern = { "markdown", "json" },
   callback = function()
     vim.opt_local.spell = false
     vim.diagnostic.enable(false)
