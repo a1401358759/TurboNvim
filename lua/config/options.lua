@@ -8,11 +8,11 @@ options.auto_remove_new_lines_comment = true
 options.show_cursorline = true
 options.ruff_args = {
   "--preview",
-  "--line-length=120",
-  "--extend-select=E,N,W,ARG,RUF",
-  "--ignore=E402,E501,N802,N803,N806,N801,N813,N815,N816,RUF001,RUF002,RUF003,RUF012,ARG001",
+  "--config",
+  vim.fn.stdpath("config") .. "/pyproject.toml",
 }
 
+vim.g.use_ai = true
 vim.g.blink_main = true
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
@@ -80,16 +80,7 @@ opt.wrap = false -- Disable line wrap
 opt.cmdheight = 0
 opt.winblend = 0
 opt.pumblend = 0
-
-if vim.fn.has("nvim-0.10") == 1 then
-  opt.smoothscroll = true
-  opt.foldexpr = "v:lua.require'utils.ui'.foldexpr()"
-  opt.foldmethod = "expr"
-  opt.foldtext = ""
-else
-  opt.foldmethod = "indent"
-  opt.foldtext = "v:lua.require'utils.ui'.foldtext()"
-end
+opt.foldmethod = "expr"
 
 -- Fix markdown indentation settings
 vim.g.markdown_recommended_style = 0

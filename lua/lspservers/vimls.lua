@@ -2,12 +2,11 @@
 -- https://github.com/iamcco/vim-language-server
 -- npm install -g vim-language-server
 
-local util = require("lspconfig.util")
-
 return {
   cmd = { "vim-language-server", "--stdio" },
+  single_file_support = true,
   filetypes = { "vim" },
-  root_dir = util.find_git_ancestor,
+  root_markers = { ".git" },
   init_options = {
     isNeovim = true,
     iskeyword = "@,48-57,_,192-255,-#",
@@ -22,5 +21,4 @@ return {
     },
     suggest = { fromVimruntime = true, fromRuntimepath = true },
   },
-  single_file_support = true,
 }

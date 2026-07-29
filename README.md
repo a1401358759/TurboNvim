@@ -33,16 +33,16 @@
 
 ## ✨ Features
 
-- File explorer with [Nvim-Tree](https://github.com/nvim-tree/nvim-tree.lua)
-- Autocompletion with [Cmp](https://github.com/hrsh7th/nvim-cmp)
+- File explorer with [Neo-Tree](https://github.com/nvim-neo-tree/neo-tree.nvim)
+- Autocompletion with [Blink](https://github.com/Saghen/blink.cmp)
 - Git integration with [Gitsigns](https://github.com/lewis6991/gitsigns.nvim)
 - Statusline with [Lualine](https://github.com/nvim-lualine/lualine.nvim)
 - Winbar with [Dropbar](https://github.com/Bekaboo/dropbar.nvim)
 - Bufferline with [Bufferline](https://github.com/akinsho/bufferline.nvim)
-- Terminal with [Toggleterm](https://github.com/akinsho/toggleterm.nvim)
-- Fuzzy finding with [Telescope](https://github.com/nvim-telescope/telescope.nvim)
+- Terminal and Fuzzy finding with [Snacks](https://github.com/folke/snacks.nvim)
 - Syntax highlighting with [Treesitter](https://github.com/nvim-treesitter/nvim-treesitter)
-- Formatting and Linting with [Null-ls](https://github.com/jose-elias-alvarez/null-ls.nvim)
+- Formatting with [Conform](https://github.com/stevearc/conform.nvim)
+- Linting with [Nvim-Lint](https://github.com/mfussenegger/nvim-lint)
 - Language Server Protocol with [Native LSP](https://github.com/neovim/nvim-lspconfig)
 - Debug Adapter Protocol with [nvim-dap](https://github.com/mfussenegger/nvim-dap)
 

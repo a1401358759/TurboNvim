@@ -22,6 +22,7 @@ return {
       bg = "#202328",
       fg = "#bbc2cf",
       yellow = "#ECBE7B",
+      springYellow = "#e0af68",
       cyan = "#008080",
       darkblue = "#081633",
       green = "#98be65",
@@ -29,7 +30,9 @@ return {
       violet = "#a9a1e1",
       magenta = "#c678dd",
       blue = "#51afef",
+      springBlue = "#7FB4CA",
       red = "#ec5f67",
+      pink = "#d27e99",
     }
 
     local conditions = {
@@ -144,7 +147,7 @@ return {
       color = function()
         return { fg = mode_color[vim.fn.mode()], gui = "bold" }
       end,
-      padding = { left = 0 },
+      padding = { left = 0, right = 1 },
     })
     ins_left({
       "filesize",
@@ -193,9 +196,10 @@ return {
 
     ins_left({
       "lsp_status",
-      icon = icons.ui.Gears,
+      icon = icons.ui.Gear,
       symbols = { done = "", separator = " " },
       ignore_lsp = {},
+      show_name = true,
       color = { fg = colors.orange, gui = "bold" },
     })
 
@@ -230,16 +234,20 @@ return {
       color = { fg = colors.green, gui = "bold" },
     })
     ins_right({
+      "venv-selector",
+      color = { fg = colors.cyan, gui = "bold" },
+    })
+    ins_right({
       "o:encoding",
       cond = conditions.hide_in_width,
-      color = { fg = colors.green, gui = "bold" },
+      color = { fg = colors.violet, gui = "bold" },
     })
     ins_right({
       "fileformat",
       icons_enabled = true,
-      color = { fg = colors.green, gui = "bold" },
+      color = { fg = colors.springYellow, gui = "bold" },
     })
-    ins_right({ "location", color = { fg = colors.green, gui = "bold" } })
+    ins_right({ "location", color = { fg = colors.springBlue, gui = "bold" } })
     ins_right({
       "progress",
       color = { fg = colors.green, gui = "bold" },

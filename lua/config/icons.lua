@@ -4,7 +4,7 @@ M.icons = {
   diagnostics = {
     Error = " ",
     Warn = " ",
-    Hint = " ",
+    Hint = " ",
     Info = " ",
   },
   dap = {
@@ -139,7 +139,7 @@ M.icons = {
     Fire = " ",
     Firefox = " ",
     Game = " ",
-    Gear = " ",
+    Gear = "",
     Gears = "",
     GitHub = " ",
     Heart = " ",

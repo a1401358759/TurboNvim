@@ -1,32 +1,32 @@
 -- Done
 -- npm install -g @vtsls/language-server
 
-local util = require("lspconfig.util")
-
-local root_files = {
-  "tsconfig.json",
-  "package.json",
-  "jsconfig.json",
-  ".git",
-}
-
 return {
   cmd = { "vtsls", "--stdio" },
-  filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" },
-  root_dir = function(fname)
-    return util.root_pattern(unpack(root_files))(fname) or vim.fn.getcwd()
-  end,
   single_file_support = true,
-  settings = {
-    typescript = {
-      inlayHints = {
-        parameterNames = { enabled = "literals" },
-        parameterTypes = { enabled = true },
-        variableTypes = { enabled = true },
-        propertyDeclarationTypes = { enabled = true },
-        functionLikeReturnTypes = { enabled = true },
-        enumMemberValues = { enabled = true },
-      },
-    },
+  init_options = {
+    hostInfo = "neovim",
   },
+  filetypes = {
+    "javascript",
+    "javascriptreact",
+    "javascript.jsx",
+    "typescript",
+    "typescriptreact",
+    "typescript.tsx",
+  },
+  root_dir = function(bufnr, on_dir)
+    -- The project root is where the LSP can be started from
+    -- As stated in the documentation above, this LSP supports monorepos and simple projects.
+    -- We select then from the project root, which is identified by the presence of a package
+    -- manager lock file.
+    local root_markers = { "package-lock.json", "yarn.lock", "pnpm-lock.yaml", "bun.lockb", "bun.lock" }
+    -- Give the root markers equal priority by wrapping them in a table
+    root_markers = vim.fn.has("nvim-0.11.3") == 1 and { root_markers, { ".git" } }
+      or vim.list_extend(root_markers, { ".git" })
+    -- We fallback to the current working directory if no project root is found
+    local project_root = vim.fs.root(bufnr, root_markers) or vim.fn.getcwd()
+
+    on_dir(project_root)
+  end,
 }

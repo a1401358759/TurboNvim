@@ -18,10 +18,10 @@ return {
     set({ "n", "v" }, "<c-s-n>", function()
       mc.matchAddCursor(-1)
     end)
-    set({ "n", "v" }, "<c-j>", function()
+    set({ "n", "v" }, "<c-s-j>", function()
       mc.matchSkipCursor(1)
     end, { desc = "Skip Cursor Down" })
-    set({ "n", "v" }, "<c-k>", function()
+    set({ "n", "v" }, "<c-s-k>", function()
       mc.matchSkipCursor(-1)
     end, { desc = "Skip Cursor Up" })
     -- 使用 Control + 左键单击添加和删除光标。

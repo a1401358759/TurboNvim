@@ -6,6 +6,7 @@ return {
     lazy = true,
     priority = 1000,
     config = function()
+      ---@diagnostic disable-next-line: missing-fields
       require("gruvbox").setup({
         transparent_mode = options.transparent,
         terminal_colors = true, -- add neovim terminal colors
@@ -56,6 +57,16 @@ return {
         sidebars = "transparent",
         floats = "transparent",
       },
+      on_colors = function(c)
+        -- Because lualine broke stuff with the latest commit
+        c.bg_statusline = c.none
+      end,
+      on_highlights = function(hl, c)
+        -- TabLineFill is currently set to black
+        hl.TabLineFill = {
+          bg = c.none,
+        }
+      end,
     },
     config = function(_, opts)
       require("tokyonight").setup(opts)

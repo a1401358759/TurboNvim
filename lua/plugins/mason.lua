@@ -1,76 +1,41 @@
+-- mason.nvim 负责安装除 lsp server 之外的其他工具
+-- mason-lspconfig 负责安装 lsp server
+
 return {
-  "williamboman/mason.nvim",
+  "mason-org/mason.nvim",
   event = "TurboLoad",
   cmd = "Mason",
   keys = { { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" } },
   build = ":MasonUpdate",
-  opts_extend = { "ensure_installed" },
   opts = {
     ensure_installed = {
       -- python
-      "basedpyright",
-      "pyright",
       "ruff",
       "isort",
       "black",
-
       -- go
-      "impl",
-      "gopls",
-      "gofumpt",
-      "gomodifytags",
-      "goimports-reviser",
-
-      -- java
-      "jdtls",
-      "java-debug-adapter",
-      "java-test",
-
+      "golangci-lint",
       -- frontend
-      "html-lsp",
-      "css-lsp",
-      "emmet-ls",
-      "vetur-vls",
-      "tailwindcss-language-server",
-      "eslint_d",
-      "vtsls",
-      "prettier",
-      "prettierd",
-
+      "biome",
       -- lua
-      "lua-language-server",
       "stylua",
-
       -- shell & bash
-      "bash-language-server",
       "shfmt",
       "shellcheck",
-
       -- sql
       "sql-formatter",
-
-      -- vim
-      "vim-language-server",
-
       -- json
-      "json-lsp",
       "fixjson",
-
       -- dap
       "delve",
       "debugpy",
-
-      -- docker
-      "dockerfile-language-server",
-      "docker-compose-language-service",
-
+      -- dockerfile
+      "hadolint",
       -- markdown
       "markdownlint",
       "markdown-toc",
       "marksman",
-      "hadolint",
     },
-    max_concurrent_installers = 20,
     pip = {
       upgrade_pip = true,
     },
@@ -79,7 +44,7 @@ return {
       width = 0.8,
       height = 0.8,
       icons = {
-        package_installed = "",
+        package_installed = "",
         package_pending = "",
         package_uninstalled = "",
       },
@@ -87,6 +52,38 @@ return {
   },
   config = function(_, opts)
     require("mason").setup(opts)
+    require("mason-lspconfig").setup({
+      automatic_enable = false,
+      ensure_installed = {
+        -- python
+        "pyright",
+        "ty",
+        -- go
+        "gopls",
+        -- frontend
+        "html",
+        "cssls",
+        "emmet_ls",
+        "vue_ls",
+        "vtsls",
+        "tailwindcss",
+        -- lua
+        "lua_ls",
+        -- shell & bash
+        "bashls",
+        -- vim
+        "vimls",
+        -- json
+        "jsonls",
+        -- docker
+        "dockerls",
+        "docker_compose_language_service",
+        -- yamal
+        "yamlls",
+        -- latex
+        "ltex_plus",
+      },
+    })
     local mr = require("mason-registry")
     mr:on("package:install:success", function()
       vim.defer_fn(function()

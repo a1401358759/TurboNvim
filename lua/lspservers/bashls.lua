@@ -1,27 +1,21 @@
 -- Done
 -- https://github.com/mads-hartmann/bash-language-server
 
-local util = require("lspconfig.util")
-
-local bin_name = "bash-language-server"
-local cmd = { bin_name, "start" }
-
-if vim.fn.has("win32") == 1 then
-  cmd = { "cmd.exe", "/C", bin_name, "start" }
-end
-
 return {
+  enabled = true,
+  cmd = { "bash-language-server", "start" },
   settings = {
-    cmd = cmd,
-    cmd_env = {
+    bashIde = {
+      -- Glob pattern for finding and parsing shell script files in the workspace.
+      -- Used by the background analysis features across files.
+
       -- Prevent recursive scanning which will cause issues when opening a file
       -- directly in the home directory (e.g. ~/foo.sh).
       --
       -- Default upstream pattern is "**/*@(.sh|.inc|.bash|.command)".
-      GLOB_PATTERN = vim.env.GLOB_PATTERN or "*@(.sh|.inc|.bash|.command)",
+      globPattern = vim.env.GLOB_PATTERN or "*@(.sh|.inc|.bash|.command)",
     },
-    filetypes = { "sh", "zsh" },
-    single_file_support = true,
-    root_dir = [[util.find_git_ancestor]],
   },
+  filetypes = { "bash", "sh" },
+  root_markers = { ".git" },
 }

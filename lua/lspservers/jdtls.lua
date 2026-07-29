@@ -1,4 +1,3 @@
-local util = require("lspconfig.util")
 local handlers = require("vim.lsp.handlers")
 
 local env = {
@@ -8,19 +7,19 @@ local env = {
 }
 
 local function get_cache_dir()
-  return env.XDG_CACHE_HOME and env.XDG_CACHE_HOME or util.path.join(env.HOME, ".cache")
+  return env.XDG_CACHE_HOME and env.XDG_CACHE_HOME or env.HOME .. "/.cache"
 end
 
 local function get_jdtls_cache_dir()
-  return util.path.join(get_cache_dir(), "jdtls")
+  return get_cache_dir() .. "/jdtls"
 end
 
 local function get_jdtls_config_dir()
-  return util.path.join(get_jdtls_cache_dir(), "config")
+  return get_jdtls_cache_dir() .. "/config"
 end
 
 local function get_jdtls_workspace_dir()
-  return util.path.join(get_jdtls_cache_dir(), "workspace")
+  return get_jdtls_cache_dir() .. "/workspace"
 end
 
 local function get_jdtls_jvm_args()
@@ -76,9 +75,23 @@ local function on_language_status(_, result)
   command("echohl None")
 end
 
+local root_markers1 = {
+  -- Multi-module projects
+  "build.gradle",
+  "build.gradle.kts",
+  -- Single-module projects
+  "build.xml", -- Ant
+  "pom.xml", -- Maven
+  "settings.gradle", -- Gradle
+  "settings.gradle.kts", -- Gradle
+}
+local root_markers2 = {
+  ".git",
+}
+
 return {
-  enabled = false,
-  filetypes = { "java" },
+  enabled = true,
+  single_file_support = true,
   cmd = {
     "jdtls",
     "-configuration",
@@ -87,27 +100,9 @@ return {
     get_jdtls_workspace_dir(),
     get_jdtls_jvm_args(),
   },
-  ---@diagnostic disable-next-line: deprecated
-  root_dir = function(fname)
-    local root_files = {
-      -- Multi-module projects
-      { ".git", "build.gradle", "build.gradle.kts" },
-      -- Single-module projects
-      {
-        "build.xml", -- Ant
-        "pom.xml", -- Maven
-        "settings.gradle", -- Gradle
-        "settings.gradle.kts", -- Gradle
-      },
-    }
-    for _, patterns in ipairs(root_files) do
-      local root = util.root_pattern(unpack(patterns))(fname)
-      if root then
-        return root
-      end
-    end
-  end,
-  single_file_support = false,
+  filetypes = { "java" },
+  root_markers = vim.fn.has("nvim-0.11.3") == 1 and { root_markers1, root_markers2 }
+    or vim.list_extend(root_markers1, root_markers2),
   init_options = {
     workspace = get_jdtls_workspace_dir(),
     jvm_args = {},
@@ -120,5 +115,6 @@ return {
     ["textDocument/rename"] = on_textdocument_rename,
     ["workspace/applyEdit"] = on_workspace_applyedit,
     ["language/status"] = vim.schedule_wrap(on_language_status),
+    ["$/progress"] = function(_, _, _) end,
   },
 }

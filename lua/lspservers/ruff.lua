@@ -8,9 +8,9 @@ return {
     filetypes = { "python" },
     single_file_support = true,
     cmd = { "ruff", "server", "--preview" },
+    root_markers = { "pyproject.toml", "ruff.toml", ".ruff.toml", ".git" },
     settings = {
       configuration = conf_path,
-      lineLength = 120,
       organizeImports = true,
       lint = {
         enable = true,

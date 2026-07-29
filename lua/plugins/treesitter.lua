@@ -1,34 +1,11 @@
----@type string
-local xdg_config = vim.env.XDG_CONFIG_HOME or vim.env.HOME .. "/.config"
-
----@param path string
-local function have(path)
-  return vim.uv.fs_stat(xdg_config .. "/" .. path) ~= nil
-end
-
 return {
   "nvim-treesitter/nvim-treesitter",
+  lazy = vim.fn.argc(-1) == 0,
+  branch = "main",
   build = ":TSUpdate",
-  event = { "VeryLazy" },
-  cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
+  event = { "TurboLoad", "VeryLazy" },
+  cmd = { "TSUpdate", "TSInstall", "TSLog", "TSUninstall" },
   opts = {
-    auto_install = true,
-    highlight = {
-      enable = true,
-      additional_vim_regex_highlighting = false,
-    },
-    indent = { enable = true },
-    -- incremental selection
-    incremental_selection = {
-      enable = true,
-      keymaps = {
-        init_selection = "<C-cr>",
-        node_incremental = "<C-cr>",
-        scope_incremental = false,
-        node_decremental = "<bs>",
-      },
-    },
-    textobjects = { enable = true },
     ensure_installed = {
       "bash",
       "blueprint",
@@ -57,7 +34,6 @@ return {
       "jsdoc",
       "json",
       "json5",
-      "jsonc",
       "lua",
       "make",
       "markdown",
@@ -77,44 +53,41 @@ return {
     },
   },
   config = function(_, opts)
-    local function add(lang)
-      if type(opts.ensure_installed) == "table" then
-        table.insert(opts.ensure_installed, lang)
+    local nvim_treesitter = require("nvim-treesitter")
+    nvim_treesitter.setup()
+
+    local pattern = {}
+    for _, parser in ipairs(opts.ensure_installed) do
+      local has_parser, _ = pcall(vim.treesitter.language.inspect, parser)
+
+      if not has_parser then
+        -- 需要通过系统的包管理器安装 tree-sitter-cli
+        nvim_treesitter.install(parser)
+      else
+        vim.list_extend(pattern, vim.treesitter.language.get_filetypes(parser))
       end
     end
 
-    vim.filetype.add({
-      extension = { rasi = "rasi", rofi = "rasi", wofi = "rasi" },
-      filename = {
-        ["vifmrc"] = "vim",
-      },
-      pattern = {
-        [".*/waybar/config"] = "jsonc",
-        [".*/mako/config"] = "dosini",
-        [".*/kitty/.+%.conf"] = "kitty",
-        [".*/hypr/.+%.conf"] = "hyprlang",
-        ["%.env%.[%w_.-]+"] = "sh",
-      },
+    local group = vim.api.nvim_create_augroup("NvimTreesitterFt", { clear = true })
+    vim.api.nvim_create_autocmd("FileType", {
+      group = group,
+      pattern = pattern,
+      callback = function(ev)
+        local max_filesize = 100 * 1024
+        local ok, stats = pcall(vim.uv.fs_stat, vim.api.nvim_buf_get_name(ev.buf))
+        if not (ok and stats and stats.size > max_filesize) then
+          vim.treesitter.start()
+          vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+          -- vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+        end
+      end,
     })
-    vim.treesitter.language.register("bash", "kitty")
-    add("git_config")
 
-    if have("hypr") then
-      add("hyprlang")
-    end
+    -- In markdown files, the rendered output would only display the correct highlight if the code is set to scheme
+    -- However, this would result in incorrect highlight in neovim
+    -- Therefore, the scheme language should be linked to query
+    vim.treesitter.language.register("query", "scheme")
 
-    if have("fish") then
-      add("fish")
-    end
-
-    if have("rofi") or have("wofi") then
-      add("rasi")
-    end
-    -- set up treesitter
-    require("nvim-treesitter.configs").setup(opts)
+    vim.api.nvim_exec_autocmds("FileType", { group = "NvimTreesitterFt" })
   end,
-  keys = {
-    { "<c-cr>", desc = "Increment selection" },
-    { "<bs>", desc = "Schrink selection", mode = "x" },
-  },
 }

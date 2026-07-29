@@ -63,6 +63,7 @@ vim.api.nvim_create_autocmd("FileType", {
     "tsplayground",
     "neotest-output",
     "checkhealth",
+    "dap-float",
     "neotest-summary",
     "neotest-output-panel",
     "dbout",
@@ -238,5 +239,28 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
   callback = function()
     vim.opt.shiftwidth = 4 -- Size of an indent
     vim.opt.tabstop = 4 -- Number of spaces tabs count for
+  end,
+})
+
+-- regiseter lsp keymaps
+vim.api.nvim_create_autocmd("LspAttach", {
+  group = vim.api.nvim_create_augroup("UserLspConfig", {}),
+  callback = function(ev)
+    -- Enable completion triggered by <c-x><c-o>
+    vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
+
+    vim.keymap.set("n", "gk", vim.lsp.buf.signature_help, { desc = "Signature Help" })
+    vim.keymap.set("i", "<c-k>", vim.lsp.buf.signature_help, { desc = "Signature Help" })
+    vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, { desc = "Rename" })
+    vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code Action" })
+  end,
+})
+
+-- 移除 markdown 文件的拼写检查，避免显示波浪线
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "markdown", "json" },
+  callback = function()
+    vim.opt_local.spell = false
+    vim.diagnostic.enable(false)
   end,
 })

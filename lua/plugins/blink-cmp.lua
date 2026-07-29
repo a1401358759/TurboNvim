@@ -5,13 +5,28 @@ return {
     "rafamadriz/friendly-snippets",
     "mikavilpas/blink-ripgrep.nvim",
     "bydlw98/blink-cmp-env",
+    "archie-judd/blink-cmp-words",
   },
-  event = { "InsertEnter" },
+  event = { "InsertEnter", "CmdlineEnter" },
 
   version = "*",
   opts = {
+    snippets = {
+      preset = "default",
+    },
     cmdline = {
       enabled = true,
+      keymap = { preset = "cmdline" },
+      completion = {
+        list = { selection = { preselect = false } },
+        menu = {
+          auto_show = function()
+            local valid_types = { [":"] = true, ["/"] = true, ["?"] = true }
+            return valid_types[vim.fn.getcmdtype()]
+          end,
+        },
+        ghost_text = { enabled = true },
+      },
     },
     keymap = {
       preset = "enter",
@@ -33,14 +48,18 @@ return {
     },
 
     sources = {
-      default = { "lazydev", "lsp", "path", "snippets", "buffer", "ripgrep", "env" },
+      default = { "lazydev", "lsp", "path", "snippets", "buffer", "ripgrep", "dictionary", "thesaurus", "env" },
       providers = {
         ripgrep = {
           module = "blink-ripgrep",
           name = "Ripgrep",
           opts = {
             prefix_min_len = 5,
-            ignore_paths = { ".gitignore", ".git/info/exclude", ".ignore", "node_modules" },
+            backend = {
+              ripgrep = {
+                ignore_paths = { ".gitignore", ".git/info/exclude", ".ignore", "node_modules" },
+              },
+            },
           },
         },
         lazydev = {
@@ -57,6 +76,28 @@ return {
             show_documentation_window = true,
           },
         },
+        -- Use the thesaurus source
+        thesaurus = {
+          name = "blink-cmp-words",
+          module = "blink-cmp-words.thesaurus",
+          opts = {
+            score_offset = 0,
+          },
+        },
+        -- Use the dictionary source
+        dictionary = {
+          name = "blink-cmp-words",
+          module = "blink-cmp-words.dictionary",
+          opts = {
+            dictionary_search_threshold = 3,
+            score_offset = 0,
+          },
+        },
+      },
+      per_filetype = {
+        text = { "dictionary" },
+        markdown = { "thesaurus" },
+        lua = { inherit_defaults = true, "lazydev" },
       },
     },
     completion = {
@@ -84,7 +125,7 @@ return {
       },
     },
     signature = {
-      enabled = true,
+      enabled = false,
       window = {
         border = "rounded",
         winblend = 0,
@@ -92,5 +133,9 @@ return {
       },
     },
   },
-  opts_extend = { "sources.default" },
+  opts_extend = {
+    "sources.completion.enabled_providers",
+    "sources.compat",
+    "sources.default",
+  },
 }
