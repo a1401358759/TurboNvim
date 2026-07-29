@@ -10,10 +10,10 @@ return {
       diagnosticMode = "off", -- "off" | "workspace" | "openFilesOnly"
       inlayHints = {
         variableTypes = false,
-        callArgumentNames = true,
+        callArgumentNames = false,
       },
       completions = {
-        autoImport = true,
+        autoImport = false,
       },
       configuration = {
         rules = {
