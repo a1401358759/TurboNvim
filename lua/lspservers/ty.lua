@@ -1,4 +1,5 @@
 return {
+  enabled = true,
   single_file_support = true,
   cmd = { "ty", "server" },
   filetypes = { "python" },

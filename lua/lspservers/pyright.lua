@@ -35,6 +35,7 @@ return {
   handlers = {
     -- If you want to disable pyright's diagnostic prompt, open the code below
     ["textDocument/publishDiagnostics"] = function(...) end,
+    ["$/progress"] = function(_, _, _) end,
   },
   settings = {
     pyright = {
