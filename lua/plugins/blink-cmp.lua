@@ -49,7 +49,7 @@ return {
       },
 
       sources = {
-        default = { "lazydev", "lsp", "path", "snippets", "buffer", "ripgrep", "dictionary", "thesaurus", "env" },
+        default = { "lsp", "path", "snippets", "buffer", "ripgrep", "dictionary", "thesaurus", "env" },
         providers = {
           ripgrep = {
             module = "blink-ripgrep",
