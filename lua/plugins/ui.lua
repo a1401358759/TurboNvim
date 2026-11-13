@@ -97,6 +97,18 @@ return {
 
       require("snacks").setup(opts)
 
+      -- snacks.dashboard.have_plugin only looks at lazy.nvim. Session restore
+      -- (dashboard "s", and opening a project) stays hidden without this.
+      local dashboard = require("snacks.dashboard")
+      local have_plugin = dashboard.have_plugin
+      function dashboard.have_plugin(name)
+        if have_plugin(name) then
+          return true
+        end
+        local root = vim.fn.stdpath("data") .. "/site/pack/core/"
+        return vim.uv.fs_stat(root .. "opt/" .. name) ~= nil or vim.uv.fs_stat(root .. "start/" .. name) ~= nil
+      end
+
       local function map(mode, lhs, rhs, desc, extra)
         vim.keymap.set(mode, lhs, rhs, vim.tbl_extend("force", { desc = desc, silent = true }, extra or {}))
       end
