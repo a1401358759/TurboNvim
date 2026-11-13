@@ -1,15 +1,42 @@
-local options = require("config.options")
+-- 配色。只加载当前主题，其余在 :colorscheme 时加载。
 
 return {
   {
-    "ellisonleao/gruvbox.nvim",
-    lazy = true,
-    priority = 1000,
+    name = "tokyonight",
+    "https://github.com/folke/tokyonight.nvim",
+    colorscheme = { "tokyonight", "tokyonight-moon", "tokyonight-night", "tokyonight-day", "tokyonight-storm" },
     config = function()
-      ---@diagnostic disable-next-line: missing-fields
+      local options = require("config.options")
+      require("tokyonight").setup({
+        transparent = options.transparent,
+        style = "moon",
+        styles = {
+          sidebars = "transparent",
+          floats = "transparent",
+        },
+        on_colors = function(colors)
+          -- Because lualine broke stuff with the latest commit
+          colors.bg_statusline = colors.none
+        end,
+        on_highlights = function(hl, colors)
+          -- TabLineFill is currently set to black
+          hl.TabLineFill = {
+            bg = colors.none,
+          }
+        end,
+      })
+    end,
+  },
+
+  {
+    name = "gruvbox",
+    "https://github.com/ellisonleao/gruvbox.nvim",
+    colorscheme = "gruvbox",
+    config = function()
+      local options = require("config.options")
       require("gruvbox").setup({
         transparent_mode = options.transparent,
-        terminal_colors = true, -- add neovim terminal colors
+        terminal_colors = true,
         undercurl = false,
         underline = false,
         bold = false,
@@ -23,87 +50,63 @@ return {
       })
     end,
   },
-  {
-    "luisiacc/gruvbox-baby",
-    lazy = true,
-    priority = 1000,
-    config = function()
-      local config = require("gruvbox-baby.config")
-      local colors = require("gruvbox-baby.colors")
-      local c = colors.config(config)
 
+  {
+    name = "gruvbox-baby",
+    "https://github.com/luisiacc/gruvbox-baby",
+    colorscheme = "gruvbox-baby",
+    config = function()
+      local options = require("config.options")
+      local config = require("gruvbox-baby.config")
+      local colors = require("gruvbox-baby.colors").config(config)
       vim.g.gruvbox_baby_use_original_palette = false
       vim.g.gruvbox_baby_function_style = "NONE"
       vim.g.gruvbox_baby_background_color = "medium"
       vim.g.gruvbox_baby_transparent_mode = options.transparent
       vim.g.gruvbox_baby_highlights = {
-        MatchParen = { bg = "#665c54", style = c.none },
-        Search = { bg = c.bright_yellow, fg = "#ffffff" },
-        IncSearch = { bg = c.orange, fg = "#ffffff" },
+        MatchParen = { bg = "#665c54", style = colors.none },
+        Search = { bg = colors.bright_yellow, fg = "#ffffff" },
+        IncSearch = { bg = colors.orange, fg = "#ffffff" },
         CurSearch = { link = "IncSearch" },
         Visual = { bg = "#665c54" },
-        FloatBorder = { bg = c.none },
+        FloatBorder = { bg = colors.none },
       }
     end,
   },
+
   {
-    "folke/tokyonight.nvim",
-    lazy = true,
-    priority = 1000,
-    opts = {
-      transparent = options.transparent,
-      style = "moon",
-      styles = {
-        sidebars = "transparent",
-        floats = "transparent",
-      },
-      on_colors = function(c)
-        -- Because lualine broke stuff with the latest commit
-        c.bg_statusline = c.none
-      end,
-      on_highlights = function(hl, c)
-        -- TabLineFill is currently set to black
-        hl.TabLineFill = {
-          bg = c.none,
-        }
-      end,
-    },
-    config = function(_, opts)
-      require("tokyonight").setup(opts)
+    name = "onedarkpro",
+    "https://github.com/olimorris/onedarkpro.nvim",
+    colorscheme = { "onedark", "onedark_dark", "onedark_vivid", "onelight", "vaporwave" },
+    config = function()
+      local options = require("config.options")
+      require("onedarkpro").setup({
+        cursorline = options.show_cursorline,
+        transparency = options.transparent,
+        terminal_colors = true,
+        lualine_transparency = true,
+        highlight_inactive_windows = false,
+      })
     end,
   },
+
   {
-    "olimorris/onedarkpro.nvim",
-    lazy = true,
-    priority = 1000, -- Ensure it loads first
-    opts = {
-      cursorline = options.show_cursorline, -- Use cursorline highlighting?
-      transparency = options.transparent, -- Use a transparent background?
-      terminal_colors = true, -- Use the theme's colors for Neovim's :terminal?
-      lualine_transparency = true, -- Center bar transparency?
-      highlight_inactive_windows = false, -- When the window is out of focus, change the normal background?
-    },
-  },
-  {
-    "polirritmico/monokai-nightasty.nvim",
-    priority = 1000,
-    opts = {
-      dark_style_background = "transparent", -- default, dark, transparent, #color
-      markdown_header_marks = "true",
-      -- Style to be applied to different syntax groups. See `:help nvim_set_hl`
-      hl_styles = {
-        keywords = { italic = true },
-        comments = { italic = true },
-        floats = "transparent",
-        sidebars = "transparent",
-      },
-      color_headers = true,
-      dim_inactive = true,
-      hide_inactive_statusline = true,
-    },
-    config = function(_, opts)
-      vim.opt.cursorline = options.show_cursorline
-      require("monokai-nightasty").load(opts)
+    name = "monokai",
+    "https://github.com/polirritmico/monokai-nightasty.nvim",
+    colorscheme = "monokai-nightasty",
+    config = function()
+      require("monokai-nightasty").setup({
+        dark_style_background = "transparent",
+        hl_styles = {
+          keywords = { italic = true },
+          comments = { italic = true },
+          floats = "transparent",
+          sidebars = "transparent",
+        },
+        color_headers = true,
+        dim_inactive = true,
+        hide_inactive_statusline = true,
+      })
     end,
   },
 }

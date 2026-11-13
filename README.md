@@ -17,7 +17,7 @@
 </p>
 
 <p align="center">
-  TurboNvim is an excellent Neovim configuration with lazy.nvim , which is as powerful as Vscode, is lightning fast ⚡
+  TurboNvim is an excellent Neovim configuration with vim.pack, which is as powerful as Vscode, is lightning fast ⚡
 </p>
 
 ## 🌟 Preview
@@ -49,7 +49,7 @@
 ## ⚡ Requirements
 
 - [Nerd Fonts](https://www.nerdfonts.com/font-downloads)
-- [Neovim 0.8+ (Including nightly)](https://github.com/neovim/neovim/releases/tag/stable)
+- [Neovim 0.12+](https://github.com/neovim/neovim/releases/tag/stable) (`vim.pack`)
 - [Tree-sitter CLI](https://github.com/tree-sitter/tree-sitter/blob/master/cli/README.md) (_Note:_ This is only necessary if you want to use `auto_install` feature with Treesitter)
 - A clipboard tool is necessary for the integration with the system clipboard (see [`:help clipboard-tool`](https://neovim.io/doc/user/provider.html#clipboard-tool) for supported solutions)
 - Terminal with true color support (for the default theme, otherwise it is dependent on the theme you are using) <sup>[[2]](#2)</sup>
@@ -114,13 +114,13 @@ Example: `:DapInstall python`
 
 #### Manage plugins
 
-Run `:Lazy check` to check for plugin updates
+Plugins are grouped by kind in `lua/plugins/` (`lib`, `colorscheme`, `ui`, `edit`, `lang`, `debug`, `blink-cmp`, `ai`). `lua/config/pack.lua` installs that list with `vim.pack` and loads each spec from its fields: `on = "start"` at startup, `on = "ui"` on `UIEnter`, `on = "file"` when a buffer opens, and anything else on its `keys`, `cmd`, `ft`, or `event`. Pinned revisions live in `nvim-pack-lock.json`.
 
-Run `:Lazy update` to apply any pending plugin updates
+The list UI is [pack-ui.nvim](https://github.com/jtprogru/pack-ui.nvim). Run `:PackStatus` or press `<leader>ps` to open it. `<leader>pU` updates every plugin that has changes.
 
-Run `:Lazy clean` to remove any disabled or unused plugins
+Inside the window, `<Space>` marks a row, `u` updates the marked rows, `U` updates every available update, `r` checks remotes, and `q` closes the window.
 
-Run `:Lazy sync` to update and clean plugins
+`:PackUpdate` updates from the command line. `:PackClean` deletes installed plugins that are not declared in `lua/plugins/`.
 
 
 ## ⭐ Credits

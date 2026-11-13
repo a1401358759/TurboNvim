@@ -167,17 +167,18 @@ function M.on_rename(from, to)
 end
 
 function M.has(plugin)
-  return require("lazy.core.config").spec.plugins[plugin] ~= nil
+  return require("config.pack").is_loaded(plugin)
 end
 
 function M.formatexpr()
-  if M.has("conform.nvim") then
+  require("config.pack").load("conform")
+  if package.loaded.conform then
     return require("conform").formatexpr()
   end
   return vim.lsp.formatexpr({ timeout_ms = 3000 })
 end
 
----@param opts? {count?: number}|LazyCmdOptions
+---@param opts? {count?: number, filetype?: string, size?: {width?: number, height?: number}, border?: string}
 function M.blame_line(opts)
   opts = vim.tbl_deep_extend("force", {
     count = 3,
@@ -191,8 +192,35 @@ function M.blame_line(opts)
   local cursor = vim.api.nvim_win_get_cursor(0)
   local line = cursor[1] - 1
   local file = vim.api.nvim_buf_get_name(0)
-  local cmd = { "git", "log", "-n", opts.count, "-u", "-L", line .. ",+1:" .. file }
-  return require("lazy.util").float_cmd(cmd, opts)
+  local cmd = { "git", "log", "-n", tostring(opts.count), "-u", "-L", line .. ",+1:" .. file }
+  local result = vim.system(cmd, { text = true }):wait()
+  if result.code ~= 0 then
+    vim.notify(result.stderr ~= "" and result.stderr or result.stdout, vim.log.levels.ERROR, { title = "Git blame" })
+    return
+  end
+  local lines = vim.split(result.stdout or "", "\n", { trimempty = true })
+  local buf = vim.api.nvim_create_buf(false, true)
+  vim.api.nvim_buf_set_lines(buf, 0, -1, false, lines)
+  vim.bo[buf].filetype = opts.filetype
+  vim.bo[buf].modifiable = false
+  vim.bo[buf].bufhidden = "wipe"
+  local width = math.max(20, math.floor(vim.o.columns * opts.size.width))
+  local height = math.max(5, math.floor(vim.o.lines * opts.size.height))
+  local win = vim.api.nvim_open_win(buf, true, {
+    relative = "editor",
+    width = width,
+    height = height,
+    row = math.floor((vim.o.lines - height) / 2),
+    col = math.floor((vim.o.columns - width) / 2),
+    border = opts.border,
+    style = "minimal",
+  })
+  vim.keymap.set("n", "q", function()
+    if vim.api.nvim_win_is_valid(win) then
+      vim.api.nvim_win_close(win, true)
+    end
+  end, { buffer = buf, nowait = true, desc = "Close blame" })
+  return win
 end
 
 ---@alias Placeholder {n:number, text:string}
